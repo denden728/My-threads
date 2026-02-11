@@ -1629,58 +1629,79 @@ textarea {
     pointer-events: auto;
 }
 
-/* ===== Responsive Adjustments ===== */
 @media (max-width: 1024px) {
+    .app-container {
+        display: block !important;
+        position: relative;
+    }
+
     .sidebar {
-        position: fixed;
+        position: fixed !important;
         top: 0;
-        left: 0;
-        width: 280px;
-        /* 固定幅を強制 */
-        height: 100vh;
-        background: #111827 !important;
-        /* より濃い背景 */
-        transform: translateX(-100%);
-        visibility: hidden;
-        pointer-events: none;
-        transition: transform 0.3s ease, visibility 0.3s ease;
-        z-index: 2000;
+        left: -280px !important;
+        /* 初期位置を画面外に */
+        width: 280px !important;
+        min-width: 280px !important;
+        height: 100vh !important;
+        background: #0f172a !important;
+        /* 完全に不透明な深い紺 */
+        transform: none !important;
+        /* transform不具合回避 */
+        transition: left 0.3s ease-out;
+        z-index: 5000 !important;
         display: flex !important;
         flex-direction: column;
-        box-shadow: 10px 0 50px rgba(0, 0, 0, 0.8);
+        visibility: visible !important;
+        pointer-events: auto !important;
+        box-shadow: 10px 0 30px rgba(0, 0, 0, 0.5);
     }
 
     .sidebar.active {
-        transform: translateX(0);
-        visibility: visible;
-        pointer-events: auto;
+        left: 0 !important;
     }
 
     .nav-menu {
-        padding: 2rem 0;
+        padding-top: 5rem !important;
+        /* 上部のトグルボタン領域を確保 */
+        height: 100%;
+        overflow-y: auto;
     }
 
     .nav-item {
-        padding: 1.5rem 2rem;
-        width: 100%;
-        display: flex;
-        font-size: 1.1rem;
-        background: transparent;
+        padding: 1.25rem 1.5rem !important;
+        display: flex !important;
+        align-items: center !important;
+        gap: 1rem !important;
+        width: 100% !important;
+        color: #fff !important;
+        font-size: 1.1rem !important;
         border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .nav-item span {
+        display: inline !important;
+        visibility: visible !important;
+        opacity: 1 !important;
     }
 
     .main-content {
         margin-left: 0 !important;
-        padding-top: 5rem;
-        width: 100%;
+        padding-top: 5rem !important;
+        width: 100% !important;
+        min-height: 100vh;
+        position: relative;
+        z-index: 1;
     }
 
     .menu-toggle {
         display: flex !important;
-        background: #1e293b;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        z-index: 2100;
-        /* Sidebarより上に */
+        position: fixed !important;
+        top: 1rem;
+        left: 1rem;
+        z-index: 6000 !important;
+        /* サイドバーより常に上に */
+        background: #1e293b !important;
+        border: 1px solid #334155 !important;
     }
 }
 
