@@ -77,6 +77,15 @@ body {
     animation: float 30s ease-in-out infinite;
 }
 
+@media (max-width: 768px) {
+
+    .bg-orb-1,
+    .bg-orb-2,
+    .bg-orb-3 {
+        display: none !important;
+    }
+}
+
 @keyframes float {
 
     0%,
@@ -1617,22 +1626,25 @@ textarea {
 @media (max-width: 1024px) {
     .sidebar {
         transform: translateX(-100%);
-        display: none;
-        transition: transform 0.3s ease;
+        display: flex;
+        visibility: hidden;
+        pointer-events: none;
+        transition: transform 0.3s ease, visibility 0.3s ease;
         background: #0f172a;
-        /* 完全な不透明背景（ボケ・透過なし） */
-        backdrop-filter: none !important;
-        -webkit-backdrop-filter: none !important;
         z-index: 2000;
-        /* 最前面に */
         box-shadow: 10px 0 30px rgba(0, 0, 0, 0.5);
     }
 
     .sidebar.active {
-        display: flex;
         transform: translateX(0);
-        backdrop-filter: none !important;
-        -webkit-backdrop-filter: none !important;
+        visibility: visible;
+        pointer-events: auto;
+    }
+
+    .nav-item {
+        padding: 1.25rem 2rem;
+        margin: 0.25rem 0;
+        font-size: 1.05rem;
     }
 
     .main-content {
