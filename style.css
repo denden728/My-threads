@@ -1600,39 +1600,34 @@ textarea {
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
     z-index: 95;
     opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-    transition: all 0.3s ease;
+    display: none;
+    transition: opacity 0.3s ease;
 }
 
 .sidebar-overlay.active {
+    display: block;
     opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
 }
 
 /* ===== Responsive Adjustments ===== */
 @media (max-width: 1024px) {
     .sidebar {
         transform: translateX(-100%);
-        visibility: hidden;
-        pointer-events: none;
-        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.4s;
-        backdrop-filter: blur(10px);
-        /* スマホでは負荷を下げ、視認性を上げる */
-        -webkit-backdrop-filter: blur(10px);
-        background: rgba(10, 14, 26, 0.95);
-        /* 少し濃くして文字を読みやすく */
+        display: none;
+        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        background: rgba(10, 14, 26, 0.98);
+        /* ぼかしを止め、背景を濃くして確実に表示 */
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
     }
 
     .sidebar.active {
+        display: flex;
         transform: translateX(0);
-        visibility: visible;
-        pointer-events: auto;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
     }
 
     .main-content {
