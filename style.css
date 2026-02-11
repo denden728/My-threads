@@ -77,12 +77,15 @@ body {
     animation: float 30s ease-in-out infinite;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
 
+    .bg-orb,
     .bg-orb-1,
     .bg-orb-2,
     .bg-orb-3 {
         display: none !important;
+        opacity: 0 !important;
+        visibility: hidden !important;
     }
 }
 
@@ -1608,31 +1611,43 @@ textarea {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.7);
-    /* 少し濃いめにして背景を隠す */
-    z-index: 1500;
-    /* Sidebar(2000)より低く、コンテンツより高く */
+    background: rgba(0, 0, 0, 0.85);
+    /* 濃くして確実に隠す */
+    z-index: 1900;
+    /* Sidebar(2000)の直下 */
     opacity: 0;
-    display: none;
-    transition: opacity 0.3s ease;
+    visibility: hidden;
+    pointer-events: none;
+    display: block !important;
+    /* display制御を止めてopacity/visibilityで一貫させる */
+    transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
 .sidebar-overlay.active {
-    display: block;
     opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
 }
 
 /* ===== Responsive Adjustments ===== */
 @media (max-width: 1024px) {
     .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 280px;
+        /* 固定幅を強制 */
+        height: 100vh;
+        background: #111827 !important;
+        /* より濃い背景 */
         transform: translateX(-100%);
-        display: flex;
         visibility: hidden;
         pointer-events: none;
         transition: transform 0.3s ease, visibility 0.3s ease;
-        background: #0f172a;
         z-index: 2000;
-        box-shadow: 10px 0 30px rgba(0, 0, 0, 0.5);
+        display: flex !important;
+        flex-direction: column;
+        box-shadow: 10px 0 50px rgba(0, 0, 0, 0.8);
     }
 
     .sidebar.active {
@@ -1641,23 +1656,31 @@ textarea {
         pointer-events: auto;
     }
 
+    .nav-menu {
+        padding: 2rem 0;
+    }
+
     .nav-item {
-        padding: 1.25rem 2rem;
-        margin: 0.25rem 0;
-        font-size: 1.05rem;
+        padding: 1.5rem 2rem;
+        width: 100%;
+        display: flex;
+        font-size: 1.1rem;
+        background: transparent;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     }
 
     .main-content {
-        margin-left: 0;
+        margin-left: 0 !important;
         padding-top: 5rem;
+        width: 100%;
     }
 
     .menu-toggle {
-        display: flex;
-    }
-
-    .hero h1 {
-        font-size: 2.5rem;
+        display: flex !important;
+        background: #1e293b;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        z-index: 2100;
+        /* Sidebarより上に */
     }
 }
 
