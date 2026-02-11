@@ -140,6 +140,7 @@ body {
     font-size: 1.1rem;
     font-weight: 700;
     background: var(--gradient-1);
+    background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     line-height: 1.2;
@@ -1507,11 +1508,13 @@ textarea {
     height: 100%;
     background: rgba(10, 14, 26, 0.95);
     backdrop-filter: blur(40px);
+    -webkit-backdrop-filter: blur(40px);
     z-index: 2000;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 1.5rem;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
 .login-card {
@@ -1556,6 +1559,7 @@ textarea {
     height: 44px;
     background: var(--glass-bg);
     backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     border: 1px solid var(--glass-border);
     border-radius: 12px;
     z-index: 1000;
@@ -1597,14 +1601,17 @@ textarea {
     height: 100%;
     background: rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
     z-index: 95;
     opacity: 0;
+    visibility: hidden;
     pointer-events: none;
     transition: all 0.3s ease;
 }
 
 .sidebar-overlay.active {
     opacity: 1;
+    visibility: visible;
     pointer-events: auto;
 }
 
@@ -1612,11 +1619,20 @@ textarea {
 @media (max-width: 1024px) {
     .sidebar {
         transform: translateX(-100%);
-        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        visibility: hidden;
+        pointer-events: none;
+        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.4s;
+        backdrop-filter: blur(10px);
+        /* スマホでは負荷を下げ、視認性を上げる */
+        -webkit-backdrop-filter: blur(10px);
+        background: rgba(10, 14, 26, 0.95);
+        /* 少し濃くして文字を読みやすく */
     }
 
     .sidebar.active {
         transform: translateX(0);
+        visibility: visible;
+        pointer-events: auto;
     }
 
     .main-content {

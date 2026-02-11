@@ -22,7 +22,8 @@ function checkAuth() {
 loginBtn.addEventListener('click', () => {
     if (passwordInput.value === CORRECT_PASSWORD) {
         localStorage.setItem('isAuth', 'true');
-        loginOverlay.style.fadeOut = '0.3s';
+        loginOverlay.style.opacity = '0';
+        loginOverlay.style.pointerEvents = 'none';
         setTimeout(() => {
             loginOverlay.style.display = 'none';
             document.body.style.overflow = 'auto';
