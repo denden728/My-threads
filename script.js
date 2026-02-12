@@ -1,6 +1,6 @@
 // ===== script.js =====
-// ナビゲーション・ログインはindex.html側で処理済み
-// このファイルは投稿生成・分析など機能部分のみ
+// ナビゲーション・ログインは index.html のインラインスクリプトで処理済み
+// このファイルでは showToast, copyText, 各タブの機能のみを担当
 
 function showToast(msg) {
     var t = document.getElementById('toast');
