@@ -1534,35 +1534,29 @@ textarea {
     }
 }
 
-/* ==============================================================
-   MOBILE – 1024px以下: サイドバーをスライドイン式に変更
-   PC(1024px超)のスタイルは一切影響しない
-   ============================================================== */
+/* ========================================
+   モバイル用 (1024px以下)
+   ======================================== */
 @media screen and (max-width: 1024px) {
 
-    /* --- Layout Reset --- */
     .app-container {
         display: block !important;
-        position: relative;
         overflow-x: hidden;
     }
 
     .main-content {
         margin-left: 0 !important;
-        padding: 4.5rem 1rem 2rem 1rem !important;
+        padding: 4.5rem 1rem 2rem !important;
         width: 100% !important;
-        min-height: 100vh;
+        position: relative;
+        z-index: 1 !important;
     }
 
-    /* --- Hide decorative orbs for performance --- */
-    .bg-orb,
-    .bg-orb-1,
-    .bg-orb-2,
-    .bg-orb-3 {
+    .bg-orb, .bg-orb-1, .bg-orb-2, .bg-orb-3 {
         display: none !important;
     }
 
-    /* --- Sidebar: 常時非表示、.activeで左からスライドイン --- */
+    /* ===== サイドバー本体 ===== */
     .sidebar {
         position: fixed !important;
         top: 0 !important;
@@ -1571,15 +1565,11 @@ textarea {
         height: 100vh !important;
         background: rgba(10, 14, 26, 0.98) !important;
         backdrop-filter: blur(20px) !important;
-        -webkit-backdrop-filter: blur(20px) !important;
-        z-index: 10000 !important;
-        display: flex !important;
-        flex-direction: column !important;
-        padding: 1.5rem 0 !important;
         transform: translateX(-100%) !important;
         transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
         box-shadow: 4px 0 30px rgba(0, 0, 0, 0.5) !important;
-        border-right: 1px solid var(--glass-border) !important;
+        z-index: 10002 !important;       /* ← overlay より上 */
+        pointer-events: auto !important;  /* ← タッチ有効を明示 */
         overflow-y: auto !important;
     }
 
@@ -1587,66 +1577,28 @@ textarea {
         transform: translateX(0) !important;
     }
 
-    /* --- Sidebar内の要素を全て表示 --- */
-    .sidebar-header {
-        display: block !important;
-        padding: 0 1.25rem 1.25rem !important;
-    }
-
-    .logo div {
-        display: block !important;
-    }
-
-    .nav-menu {
-        padding: 0.5rem 0 !important;
-        flex: 1 !important;
-        overflow-y: auto !important;
-    }
-
-    .nav-item {
+    /* ===== サイドバー内のナビ項目 ===== */
+    .sidebar .nav-item {
         display: flex !important;
-        align-items: center !important;
-        gap: 0.75rem !important;
-        padding: 0.85rem 1.25rem !important;
-        font-size: 0.95rem !important;
-        color: var(--text-secondary) !important;
-        border-left: 3px solid transparent !important;
-        border-bottom: none !important;
+        pointer-events: auto !important;  /* ← 各項目もタッチ有効 */
+        opacity: 1 !important;
+        visibility: visible !important;
+        position: relative;
+        z-index: 10003 !important;        /* ← サイドバーの中で最前面 */
+        cursor: pointer;
+        padding: 12px 16px !important;
+        width: 100% !important;
     }
 
-    .nav-item span {
-        display: inline-block !important;
+    .sidebar .nav-item span,
+    .sidebar .nav-item .nav-text {
+        display: inline !important;       /* ← テキストを表示 */
+        opacity: 1 !important;
+        visibility: visible !important;
+        pointer-events: auto !important;
     }
 
-    .nav-item.active {
-        color: var(--primary) !important;
-        background: rgba(129, 140, 248, 0.08) !important;
-        border-left-color: var(--primary) !important;
-    }
-
-    .sidebar-footer {
-        display: block !important;
-        padding: 1rem 1.25rem !important;
-        border-top: 1px solid var(--glass-border) !important;
-    }
-
-    /* --- Hamburger Toggle Button --- */
-    .menu-toggle {
-        display: flex !important;
-        position: fixed !important;
-        top: 0.75rem !important;
-        left: 0.75rem !important;
-        width: 44px !important;
-        height: 44px !important;
-        z-index: 10001 !important;
-        background: rgba(30, 41, 59, 0.9) !important;
-        backdrop-filter: blur(10px) !important;
-        -webkit-backdrop-filter: blur(10px) !important;
-        border: 1px solid rgba(255, 255, 255, 0.15) !important;
-        border-radius: 10px !important;
-    }
-
-    /* --- Sidebar Overlay --- */
+    /* ===== 半透明オーバーレイ（サイドバーの後ろ） ===== */
     .sidebar-overlay {
         position: fixed !important;
         top: 0 !important;
@@ -1654,34 +1606,34 @@ textarea {
         width: 100% !important;
         height: 100% !important;
         background: rgba(0, 0, 0, 0.7) !important;
-        z-index: 9999 !important;
+        z-index: 10001 !important;        /* ← サイドバーより低い */
         opacity: 0;
         visibility: hidden;
+        transition: opacity 0.3s ease;
         pointer-events: none;
-        transition: opacity 0.3s ease, visibility 0.3s ease;
     }
 
     .sidebar-overlay.active {
         opacity: 1;
         visibility: visible;
-        pointer-events: auto;
+        pointer-events: auto;             /* ← タップで閉じるため */
     }
 
-    /* --- Grid adjustments for small screens --- */
+    /* ===== ハンバーガーボタン ===== */
+    .menu-toggle {
+        display: flex !important;
+        position: fixed !important;
+        top: 0.75rem !important;
+        left: 0.75rem !important;
+        z-index: 10004 !important;        /* ← 全要素の最前面 */
+        pointer-events: auto !important;
+    }
+
+    /* ===== グリッド系の1カラム化 ===== */
     .form-row,
-    .form-row-3 {
-        grid-template-columns: 1fr !important;
-    }
-
-    .toolguide-grid {
-        grid-template-columns: 1fr !important;
-    }
-
+    .form-row-3,
+    .toolguide-grid,
     .guide-grid {
         grid-template-columns: 1fr !important;
-    }
-
-    .output-section {
-        max-height: none !important;
     }
 }
