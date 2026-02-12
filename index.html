@@ -71,11 +71,10 @@
 
     <div class="app-container">
         <main class="main-content">
-
             <section class="tab-panel active" id="tab-generator">
                 <div class="panel-header">
                     <h2>⚡ ポスト一括生成</h2>
-                    <p class="panel-desc">商品情報を入力するだけで、アフィ投稿 × 非アフィ投稿を自動生成</p>
+                    <p class="panel-desc">商品情報を入力するだけで、アフィ投稿 × 非アフィ投稿を自動生成（デスクワーカー×体型管理 特化）</p>
                 </div>
                 <div class="generator-layout">
                     <div class="input-section">
@@ -83,37 +82,43 @@
                             <h3><span>📦</span> 商品情報</h3>
                             <div class="form-group">
                                 <label for="productName">商品名</label>
-                                <input type="text" id="productName" placeholder="例: ヒツジのいらない枕">
+                                <input type="text" id="productName" placeholder="例: SIXPAD パワースーツライト / VALX ホエイプロテイン">
                             </div>
                             <div class="form-row">
                                 <div class="form-group">
                                     <label for="price">価格</label>
-                                    <input type="text" id="price" placeholder="例: 15,800円">
+                                    <input type="text" id="price" placeholder="例: 5,480円">
                                 </div>
                                 <div class="form-group">
                                     <label for="category">カテゴリ</label>
                                     <select id="category">
                                         <option value="">選択してください</option>
-                                        <option value="美容・コスメ">美容・コスメ</option>
-                                        <option value="寝具・睡眠">寝具・睡眠</option>
-                                        <option value="家電・ガジェット">家電・ガジェット</option>
-                                        <option value="ファッション">ファッション</option>
-                                        <option value="食品・健康">食品・健康</option>
-                                        <option value="育児・ベビー">育児・ベビー</option>
-                                        <option value="日用品・暮らし">日用品・暮らし</option>
-                                        <option value="ダイエット">ダイエット</option>
-                                        <option value="キッチン・料理">キッチン・料理</option>
-                                        <option value="その他">その他</option>
+                                        <optgroup label="💪 ダイエットグッズ（高単価）">
+                                            <option value="EMSパッド・ベルト">EMSパッド・ベルト</option>
+                                            <option value="マッサージガン・筋膜リリース">マッサージガン・筋膜リリース</option>
+                                            <option value="体組成計・スマート体重計">体組成計・スマート体重計</option>
+                                            <option value="姿勢矯正クッション・チェア">姿勢矯正クッション・チェア</option>
+                                            <option value="ストレッチポール・フォームローラー">ストレッチポール・フォームローラー</option>
+                                            <option value="その他ダイエットグッズ">その他ダイエットグッズ</option>
+                                        </optgroup>
+                                        <optgroup label="🍽️ 食品・サプリ（件数稼ぎ）">
+                                            <option value="プロテイン">プロテイン</option>
+                                            <option value="オートミール・シリアル">オートミール・シリアル</option>
+                                            <option value="低糖質パン・麺">低糖質パン・麺</option>
+                                            <option value="冷凍弁当・宅食">冷凍弁当・宅食</option>
+                                            <option value="ダイエットサプリ・MCTオイル">ダイエットサプリ・MCTオイル</option>
+                                            <option value="ナッツ・ヘルシーおやつ">ナッツ・ヘルシーおやつ</option>
+                                        </optgroup>
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="target">ターゲット層</label>
-                                <input type="text" id="target" placeholder="例: 朝起きた時に首が痛い30代ワーママ">
+                                <input type="text" id="target" placeholder="例: 1日8時間座りっぱなしで腹が出てきた32歳男性">
                             </div>
                             <div class="form-group">
                                 <label for="benefits">具体的な変化（1行1つ。数字を入れると効果UP）</label>
-                                <textarea id="benefits" rows="4" placeholder="例:&#10;入眠まで20分→7分に短縮&#10;夜中に起きる回数2回→0回&#10;朝の首の重さが3割減"></textarea>
+                                <textarea id="benefits" rows="4" placeholder="例:&#10;ウエスト85cm→81cmに（3週間）&#10;午後の間食がゼロになった&#10;夕方の脚のむくみが消えた"></textarea>
                             </div>
                             <div class="form-group">
                                 <label for="affiliateUrl">アフィリエイトURL（任意）</label>
@@ -140,6 +145,7 @@
                     <h2>🔥 バズ職人</h2>
                     <p class="panel-desc">6つの心理トリガーで拡散されるアフィ投稿を自動生成</p>
                 </div>
+
                 <div class="generator-layout">
                     <div class="input-section">
                         <div class="card glass-card">

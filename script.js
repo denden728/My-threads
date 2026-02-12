@@ -55,58 +55,6 @@ function getGeneratorInputs() {
     };
 }
 
-function generateAllPosts(d, sf) {
-    var out = document.getElementById('generatorOutput');
-    out.innerHTML = '';
-    var bt = d.benefits.map(function(b){return '・'+b;}).join('\n');
-    var b1=d.benefits[0]||'とにかく便利', b2=d.benefits[1]||'使い心地が最高', b3=d.benefits[2]||'毎日が楽になった';
-    var ul = d.url ? '\nこちら↓ #PR\n'+d.url : '\nこちら↓ #PR\n(URLはこちら)';
-    var cu = d.url ? 'こちら↓\n'+d.url : 'こちら↓\n(URLはこちら)';
-
-    var h = document.createElement('div');
-    h.style.cssText='margin-bottom:1.5rem;padding:1rem;background:rgba(129,140,248,0.05);border-radius:12px;border:1px solid rgba(129,140,248,0.15);';
-    h.innerHTML='<p style="font-size:0.85rem;color:#94a3b8;">📦 <strong style="color:#f1f5f9;">'+escapeHtml(d.name)+'</strong> | '+escapeHtml(d.category)+' | '+escapeHtml(d.price)+'<br>🎯 ターゲット: '+escapeHtml(d.target)+'</p>';
-    out.appendChild(h);
-
-    out.appendChild(createPostCard(sf?'【売上特化】意外性系':'① 悩み→共感→変化型', sf ? d.category+'変えるだけでこんなに違うんだって、ちょっと衝撃だった。\n'+d.target+'ってさ、地味に毎日引きずるじゃん。\nでも'+d.name+'使い始めてから明らかに変わった。\n\n使ってから変わったのが\n'+bt+'\n\nこれは概念変わるやつ。\n→\nコメント欄\n'+cu : d.target+'で悩んでる人多いよね...😭\n私もずっとそうだった。でも'+d.name+'使ってみたらマジで変わった。\n\n使ってから変わったこと：\n'+bt+'\n\n今では毎日がめっちゃ楽。同じ悩みがある人、これマジでおすすめ✨'+ul, 'affiliate', sf?'売上特化':'アフィ'));
-
-    out.appendChild(createPostCard(sf?'【売上特化】共感系':'② Before→Afterストーリー型', sf ? d.target+'ってさ、地味に1日引きずるじゃん。\n'+d.category+'が合わないと余計しんどいよね。\n'+d.name+'使い始めた日、いつもより早く効果感じてびびった。\n\n使ってから変わったのが\n'+bt+'\n\n同じ悩みの人ほど刺さる。\n→\nコメント欄\n'+cu : '昔の自分に教えたい。'+d.category+'で迷走してた頃の私へ。\n'+d.name+'、これに出会ってから世界変わった。\n\nBefore: 悩みだらけの毎日\nAfter: '+b1+' で超快適✨\n\nもっと早く買えばよかった。迷ってる時間もったいないよ！'+ul, 'affiliate', sf?'売上特化':'アフィ'));
-
-    out.appendChild(createPostCard(sf?'【売上特化】数字系':'③ 比較型', sf ? '「口コミ多いやつ」って半信半疑だったけど、\n使ったら理由わかるタイプだった。\n'+d.name+'、マジで'+b1+'。\n\n使ってから変わったのが\n'+bt+'\n\n数字の意味、使って初めてわかるやつ。\n→\nコメント欄\n'+cu : '今までいろんな'+d.category+'試してきたけど、結局これが正解だった。\n他のは微妙だったけど、'+d.name+'は別格。\n\n【ここが違う】\n'+bt+'\n\nこれ以上のもの、今のところ見つからない。ガチです。'+ul, 'affiliate', sf?'売上特化':'アフィ'));
-
-    out.appendChild(createPostCard(sf?'【売上特化】ひとこと系':'④ 会話・口コミ型', sf ? 'これ、'+d.target+'ほど合うと思う。\n'+d.name+'の使い心地が絶妙なんよ。\n\n使ってから変わったのが\n'+bt+'\n\n'+d.target+'は試す価値ある。\n→\nコメント欄\n'+cu : '友達に「'+d.category+'何使ってる？」って聞かれたから'+d.name+'教えたら、\n翌日「マジで良かった！」ってLINEきた笑\n\n'+b1+'で感動してた。\n\nそういう反応もらえると嬉しいよね☺️'+ul, 'affiliate', sf?'売上特化':'アフィ'));
-
-    out.appendChild(createPostCard(sf?'【売上特化】ストーリー系':'⑤ バズ・断言型', sf ? '先週ね、'+d.target+'がきつすぎて限界だったんよ。\nその日から'+d.name+'使い始めたら、翌日の感覚が違った。\n\n使ってから変わったのが\n'+bt+'\n\n同じ悩みの人ほど救われるやつ。\n→\nコメント欄\n'+cu : d.category+'、変えるなら'+d.name+'一択。\n'+b1+'だけで、毎日の快適さが全然違う。\n\nたかが'+d.category+'、されど'+d.category+'。\nこれは"整う暮らし"の入口かも💤'+ul, 'affiliate', sf?'売上特化':'アフィ'));
-
-    if (sf) {
-        out.appendChild(createPostCard('【売上特化】2行フック①', b1+'で、毎日のストレスがほぼ消えた。\n'+(b2!==b1?b2:b3)+'も実感して、生活の質が上がった。', 'affiliate', '2行フック'));
-        out.appendChild(createPostCard('【売上特化】2行フック②', (b3!==b1?b3:'日々の習慣が変わって、準備がスムーズになった')+'。\n'+d.name+'に変えてから、もう前のには戻れない。', 'affiliate', '2行フック'));
-    }
-
-    var sep = document.createElement('div');
-    sep.style.cssText='margin:1.5rem 0;padding:0.5rem;text-align:center;color:#94a3b8;font-size:0.8rem;border-top:1px solid rgba(255,255,255,0.06);';
-    sep.textContent='━━ 非アフィリエイト投稿（ファン化用） ━━';
-    out.appendChild(sep);
-
-    out.appendChild(createPostCard('① 有益情報型', d.category+'の質を上げるだけで、人生の快適さってマジで変わるよね🌙\n最近意識してるのは「無理して頑張るより、環境を整える」こと。\n\n例えば、'+d.target+'に気をつけるだけで毎日の感覚が全然違う。\n地味だけど、これが最強の自己投資かも。みんなはどうしてる？', 'non-affiliate', '有益'));
-    out.appendChild(createPostCard('② 挨拶・自己紹介型', '最近、'+d.category+'に全振りしてます。日々の快適さが人生の快適さだと思ってる🌙\n\n昔は気にしなかったけど、今はちゃんと環境を整えることの方がうれしい。\n無理して頑張るより、ちゃんと休むほうが結果が出る。そんな過ごし方をしたいなと思う。', 'non-affiliate', '自己紹介'));
-    out.appendChild(createPostCard('③ 読者への問いかけ型', d.target+'って、地味にショックじゃない？\nちゃんとケアしてるはずなのに変わらない。あの感覚、ずっと嫌だった。\n\nでも原因は努力不足じゃなくて"選び方"だったのかも。\nみんなの'+d.category+'選び、合ってる？', 'non-affiliate', '問いかけ'));
-    out.appendChild(createPostCard('④ 共感ストーリー型', '昔は'+d.category+'なんて何でもいいと思ってた。\nだけど、ちゃんと向き合ったら日々の快適さが全然違うって気づいた。\n\nしっかり環境を整えるって、最強の自己投資かもしれない🌙', 'non-affiliate', '共感'));
-    out.appendChild(createPostCard('⑤ バズ型', '永久保存版！！！\n知らなきゃ損する'+d.category+'攻略リスト！！！\n\n・疲れた時 → まずは環境を見直す\n・'+d.target+' → 適切なアイテムを選ぶ\n・継続できない → ハードルを極限まで下げる\n・迷った時 → レビューの数字だけ見る\n\nこれ自然にできてる人は強い✨', 'non-affiliate', 'バズ'));
-
-    var sep2 = document.createElement('div');
-    sep2.style.cssText='margin:1.5rem 0;padding:0.5rem;text-align:center;color:#94a3b8;font-size:0.8rem;border-top:1px solid rgba(255,255,255,0.06);';
-    sep2.textContent='━━ 一言投稿（画像に重ねる用） ━━';
-    out.appendChild(sep2);
-
-    [b1.replace(/→.*$/,'').replace(/が.*$/,'')+'が消えた','寝るのが下手だった私へ','もう普通の'+d.category+'には戻れない',d.category+'、変えるならまずこれ','努力より、'+d.category+'の質で人生変わる'].forEach(function(line,i){
-        out.appendChild(createPostCard('一言投稿 '+(i+1), line, 'affiliate', '一言'));
-    });
-
-    showToast((sf?'売上特化':'全パターン')+'で '+out.children.length+' 件生成しました！');
-    incrementPostCount(sf?7:10);
-}
-
 // ================================================================
 // TAB 2: バズ職人
 // ================================================================
