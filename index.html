@@ -143,42 +143,41 @@
             <section class="tab-panel" id="tab-buzz">
                 <div class="panel-header">
                     <h2>🔥 バズ職人</h2>
-                    <p class="panel-desc">6つの心理トリガーで拡散されるアフィ投稿を自動生成</p>
+                    <p class="panel-desc">6つの心理トリガーで「座りっぱなし×体型管理」のバズ投稿を自動生成</p>
                 </div>
-
                 <div class="generator-layout">
                     <div class="input-section">
                         <div class="card glass-card">
                             <h3><span>🎯</span> バズ用商品情報</h3>
                             <div class="form-group">
                                 <label for="buzzProduct">商品名</label>
-                                <input type="text" id="buzzProduct" placeholder="例: オニツカタイガー スニーカー">
+                                <input type="text" id="buzzProduct" placeholder="例: MYTREX REBIVE マッサージガン">
                             </div>
                             <div class="form-row">
                                 <div class="form-group">
                                     <label for="buzzPrice">価格</label>
-                                    <input type="text" id="buzzPrice" placeholder="例: 26,800円">
+                                    <input type="text" id="buzzPrice" placeholder="例: 23,980円">
                                 </div>
                                 <div class="form-group">
                                     <label for="buzzTarget">ターゲット</label>
-                                    <input type="text" id="buzzTarget" placeholder="例: 淡色コーデ好き20〜40代">
+                                    <input type="text" id="buzzTarget" placeholder="例: 座りっぱなしで肩腰バキバキの30代">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="buzzFeatures">商品の特徴・魅力ポイント</label>
-                                <textarea id="buzzFeatures" rows="3" placeholder="例: クリーム×ライトブルーの配色が可愛い&#10;軽くて歩きやすい&#10;どのコーデにも合う"></textarea>
+                                <textarea id="buzzFeatures" rows="3" placeholder="例: デスクワーク中に使える静音設計&#10;腰・肩・ふくらはぎに使える&#10;充電1回で2週間もつ"></textarea>
                             </div>
                             <button id="generateBuzzBtn" class="btn btn-primary btn-glow"><span>🔥</span> 6パターン生成</button>
                         </div>
                         <div class="card glass-card buzz-guide">
                             <h3><span>💡</span> バズの入口選び方</h3>
                             <div class="guide-grid">
-                                <div class="guide-item"><span>👀</span> 目撃系 → デザイン性高い商品</div>
-                                <div class="guide-item"><span>😮</span> 進化系 → ギャップが大きい商品</div>
-                                <div class="guide-item"><span>💸</span> 価格バグ → 値段以上の価値</div>
-                                <div class="guide-item"><span>✨</span> センス系 → ファッション・雑貨</div>
-                                <div class="guide-item"><span>📣</span> 情報ラッシュ → 写真映え商品</div>
-                                <div class="guide-item"><span>🤝</span> 共感系 → 悩み解決商品</div>
+                                <div class="guide-item"><span>👀</span> 目撃系 → オフィスで見かけたグッズ</div>
+                                <div class="guide-item"><span>😮</span> 進化系 → Before/After体型変化</div>
+                                <div class="guide-item"><span>💸</span> 価格バグ → ジム代と比較して安い</div>
+                                <div class="guide-item"><span>✨</span> ながら系 → 座ったまま使えるグッズ</div>
+                                <div class="guide-item"><span>📣</span> まとめ系 → デスクワーカー必需品リスト</div>
+                                <div class="guide-item"><span>🤝</span> 共感系 → 座りっぱなしの悩み代弁</div>
                             </div>
                         </div>
                     </div>
@@ -251,64 +250,87 @@
             <section class="tab-panel" id="tab-hooks">
                 <div class="panel-header">
                     <h2>🎣 バズフック & CTA ライブラリ</h2>
-                    <p class="panel-desc">投稿の最初で目を止め、最後で行動させるフレーズ集</p>
+                    <p class="panel-desc">デスクワーカー×体型管理に特化。冒頭で目を止め、最後で行動させる</p>
                 </div>
                 <div class="hooks-layout">
                     <div class="hooks-column">
                         <h3>🎣 バズフック集（冒頭の1行）</h3>
-                        <div class="hook-category"><h4>💸 コスパ神型</h4>
-                            <div class="hook-item" data-hook="この値段でこのクオリティはバグ">この値段でこのクオリティはバグ</div>
-                            <div class="hook-item" data-hook="1,000円以下で買える神アイテム">1,000円以下で買える神アイテム</div>
-                            <div class="hook-item" data-hook="高いやつと品質変わらない件">高いやつと品質変わらない件</div>
-                            <div class="hook-item" data-hook="セール価格じゃなくて定価がこれ">セール価格じゃなくて定価がこれ</div>
-                            <div class="hook-item" data-hook="ここまで安くていいの？レベル">ここまで安くていいの？レベル</div>
+
+                        <div class="hook-category"><h4>💸 コスパ・価格バグ型</h4>
+                            <div class="hook-item" data-hook="この値段で腹回り-3cmはバグ">この値段で腹回り-3cmはバグ</div>
+                            <div class="hook-item" data-hook="ジム代月1万、これなら買い切りで3,000円">ジム代月1万、これなら買い切りで3,000円</div>
+                            <div class="hook-item" data-hook="1日50円で午後の間食が消える方法">1日50円で午後の間食が消える方法</div>
+                            <div class="hook-item" data-hook="パーソナル1回分の値段で一生使えるやつ">パーソナル1回分の値段で一生使えるやつ</div>
                         </div>
-                        <div class="hook-category"><h4>📊 データ訴求型</h4>
-                            <div class="hook-item" data-hook="1日30円で○○が手に入る計算">1日30円で○○が手に入る計算</div>
-                            <div class="hook-item" data-hook="2ヶ月で-5kg痩せた方法がこれ">2ヶ月で-5kg痩せた方法がこれ</div>
-                            <div class="hook-item" data-hook="3日でほうれい線が薄くなった">3日でほうれい線が薄くなった</div>
+
+                        <div class="hook-category"><h4>📊 数字・Before/After型</h4>
+                            <div class="hook-item" data-hook="3週間でウエスト-4cm記録した">3週間でウエスト-4cm記録した</div>
+                            <div class="hook-item" data-hook="座り時間8時間→代謝50%低下って知ってた？">座り時間8時間→代謝50%低下って知ってた？</div>
+                            <div class="hook-item" data-hook="午後の間食カロリー、月換算したら震えた">午後の間食カロリー、月換算したら震えた</div>
+                            <div class="hook-item" data-hook="体脂肪率25%→20%、変えたのは食事だけ">体脂肪率25%→20%、変えたのは食事だけ</div>
                         </div>
-                        <div class="hook-category"><h4>🔥 今すぐ型</h4>
-                            <div class="hook-item" data-hook="今日だけ40%オフとかヤバい">今日だけ40%オフとかヤバい</div>
-                            <div class="hook-item" data-hook="在庫なくなる前に見て">在庫なくなる前に見て</div>
-                            <div class="hook-item" data-hook="バズる前に教えとく">バズる前に教えとく</div>
+
+                        <div class="hook-category"><h4>🤝 共感・あるある型</h4>
+                            <div class="hook-item" data-hook="気づいたら腹に肉が乗ってた同志へ">気づいたら腹に肉が乗ってた同志へ</div>
+                            <div class="hook-item" data-hook="デスクワーク5年、ズボンのボタン限界の人">デスクワーク5年、ズボンのボタン限界の人</div>
+                            <div class="hook-item" data-hook="健康診断の腹囲でC判定もらった人、集合">健康診断の腹囲でC判定もらった人、集合</div>
+                            <div class="hook-item" data-hook="夕方、靴がきつくなる人だけ見て">夕方、靴がきつくなる人だけ見て</div>
+                            <div class="hook-item" data-hook="「運動しなきゃ」と思って3年経った人へ">「運動しなきゃ」と思って3年経った人へ</div>
                         </div>
-                        <div class="hook-category"><h4>🤝 共感獲得型</h4>
-                            <div class="hook-item" data-hook="乾燥肌で悩んでたけど、これで人生変わった">乾燥肌で悩んでたけど、これで人生変わった</div>
-                            <div class="hook-item" data-hook="朝起きたときの首の重さ、消えた">朝起きたときの首の重さ、消えた</div>
+
+                        <div class="hook-category"><h4>🔥 緊急・限定型</h4>
+                            <div class="hook-item" data-hook="楽天スーパーセールでプロテイン40%OFF">楽天スーパーセールでプロテイン40%OFF</div>
+                            <div class="hook-item" data-hook="在庫切れ前に見て。このEMSパッド">在庫切れ前に見て。このEMSパッド</div>
+                            <div class="hook-item" data-hook="健康診断まであと1ヶ月の人、まだ間に合う">健康診断まであと1ヶ月の人、まだ間に合う</div>
                         </div>
-                        <div class="hook-category"><h4>🆕 新発見報告型</h4>
-                            <div class="hook-item" data-hook="え、これ知ってた？">え、これ知ってた？</div>
-                            <div class="hook-item" data-hook="誰も教えてくれなかったけど">誰も教えてくれなかったけど</div>
+
+                        <div class="hook-category"><h4>💡 発見・意外性型</h4>
+                            <div class="hook-item" data-hook="座りっぱなしで太る本当の理由、カロリーじゃなかった">座りっぱなしで太る本当の理由、カロリーじゃなかった</div>
+                            <div class="hook-item" data-hook="昼飯を○○に変えただけで午後の眠気が消えた">昼飯を○○に変えただけで午後の眠気が消えた</div>
+                            <div class="hook-item" data-hook="デスクワーカーの消費カロリー、想像以上に低い件">デスクワーカーの消費カロリー、想像以上に低い件</div>
                         </div>
-                        <div class="hook-category"><h4>🏆 比較検証型</h4>
-                            <div class="hook-item" data-hook="デパコスと比べてみたら衝撃だった">デパコスと比べてみたら衝撃だった</div>
-                            <div class="hook-item" data-hook="100均 vs 3,000円、勝ったのは…">100均 vs 3,000円、勝ったのは…</div>
+
+                        <div class="hook-category"><h4>🏆 比較・検証型</h4>
+                            <div class="hook-item" data-hook="ジム vs 座ったままEMS、1ヶ月後の差がこれ">ジム vs 座ったままEMS、1ヶ月後の差がこれ</div>
+                            <div class="hook-item" data-hook="プロテイン5種飲み比べた結論がこれ">プロテイン5種飲み比べた結論がこれ</div>
+                            <div class="hook-item" data-hook="冷凍弁当3社を2週間ずつ試した結果">冷凍弁当3社を2週間ずつ試した結果</div>
                         </div>
                     </div>
+
                     <div class="hooks-column">
                         <h3>🎯 CTA集（最後の誘導文）</h3>
+
                         <div class="hook-category"><h4>💬 カジュアル誘導型</h4>
-                            <div class="hook-item cta" data-hook="気になったら見てみて">気になったら見てみて</div>
+                            <div class="hook-item cta" data-hook="座り仕事の人は見てみて">座り仕事の人は見てみて</div>
                             <div class="hook-item cta" data-hook="リンク貼っとくね">リンク貼っとくね</div>
-                            <div class="hook-item cta" data-hook="ちょっと覗いてみて">ちょっと覗いてみて</div>
+                            <div class="hook-item cta" data-hook="気になったらチェックしてみて">気になったらチェックしてみて</div>
+                            <div class="hook-item cta" data-hook="デスクの引き出しに1つ入れとくといい">デスクの引き出しに1つ入れとくといい</div>
                         </div>
-                        <div class="hook-category"><h4>💰 お得感訴求型</h4>
-                            <div class="hook-item cta" data-hook="コスパやばすぎて笑った↓">コスパやばすぎて笑った↓</div>
+
+                        <div class="hook-category"><h4>💰 コスパ訴求型</h4>
+                            <div class="hook-item cta" data-hook="ジム行くよりコスパ良すぎて笑った↓">ジム行くよりコスパ良すぎて笑った↓</div>
                             <div class="hook-item cta" data-hook="この値段で買えるの今だけかも">この値段で買えるの今だけかも</div>
+                            <div class="hook-item cta" data-hook="1日換算したら缶コーヒーより安い">1日換算したら缶コーヒーより安い</div>
                         </div>
-                        <div class="hook-category"><h4>⚡ 緊急性訴求型</h4>
+
+                        <div class="hook-category"><h4>⚡ 緊急性型</h4>
                             <div class="hook-item cta" data-hook="セール終わる前に見て">セール終わる前に見て</div>
                             <div class="hook-item cta" data-hook="在庫あるうちに見て">在庫あるうちに見て</div>
+                            <div class="hook-item cta" data-hook="健康診断の前に知っておいて">健康診断の前に知っておいて</div>
                         </div>
-                        <div class="hook-category"><h4>🤝 問題解決型</h4>
-                            <div class="hook-item cta" data-hook="同じ悩みの人は見て">同じ悩みの人は見て</div>
+
+                        <div class="hook-category"><h4>🤝 同志型</h4>
+                            <div class="hook-item cta" data-hook="同じ悩みの人はリンク見てみて">同じ悩みの人はリンク見てみて</div>
+                            <div class="hook-item cta" data-hook="座りっぱなしの人ほど刺さるやつ→">座りっぱなしの人ほど刺さるやつ→</div>
                             <div class="hook-item cta" data-hook="これ買わない理由が見つからない">これ買わない理由が見つからない</div>
                         </div>
-                        <div class="hook-category"><h4>👑 比較優位型</h4>
-                            <div class="hook-item cta" data-hook="私は3個目リピートしてる">私は3個目リピートしてる</div>
-                            <div class="hook-item cta" data-hook="1,000円以下だし試す価値あり">1,000円以下だし試す価値あり</div>
+
+                        <div class="hook-category"><h4>👑 体験・リピート型</h4>
+                            <div class="hook-item cta" data-hook="私は3袋目リピートしてる">私は3袋目リピートしてる</div>
+                            <div class="hook-item cta" data-hook="もう普通の昼飯には戻れない">もう普通の昼飯には戻れない</div>
+                            <div class="hook-item cta" data-hook="試す価値はある。断言する">試す価値はある。断言する</div>
                         </div>
+
                         <div class="selected-combo" id="selectedCombo">
                             <h4>📌 選択中の組み合わせ</h4>
                             <div class="combo-display">
@@ -491,7 +513,16 @@
                     <div class="research-grid">
                         <div class="card glass-card"><h3><span>💡</span> 投稿ネタジェネレーター</h3>
                             <div class="form-group"><label for="netaGenre">ジャンル</label>
-                                <select id="netaGenre"><option value="美容・コスメ">美容・コスメ</option><option value="寝具・睡眠">寝具・睡眠</option><option value="ダイエット">ダイエット</option><option value="家電・ガジェット">家電・ガジェット</option><option value="ファッション">ファッション</option><option value="食品・健康">食品・健康</option><option value="育児・ベビー">育児・ベビー</option><option value="日用品・暮らし">日用品・暮らし</option><option value="副業・お金">副業・お金</option><option value="料理・時短">料理・時短</option></select>
+                                <select id="netaGenre">
+                                    <option value="座りっぱなし対策">座りっぱなし対策</option>
+                                    <option value="食事・プロテイン">食事・プロテイン</option>
+                                    <option value="ながらダイエット">ながらダイエット</option>
+                                    <option value="むくみ・血流改善">むくみ・血流改善</option>
+                                    <option value="間食・食欲コントロール">間食・食欲コントロール</option>
+                                    <option value="体型記録・数字管理">体型記録・数字管理</option>
+                                    <option value="デスク環境改善">デスク環境改善</option>
+                                    <option value="メンタル・モチベ">メンタル・モチベ</option>
+                                </select>
                             </div>
                             <button id="generateNetaBtn" class="btn btn-primary"><span>💡</span> ネタを30個生成</button>
                             <div id="netaOutput" class="neta-output"></div>
