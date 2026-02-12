@@ -1568,7 +1568,7 @@ textarea {
         transform: translateX(-100%) !important;
         transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
         box-shadow: 4px 0 30px rgba(0, 0, 0, 0.5) !important;
-        z-index: 10002 !important;       /* ← overlay より上 */
+        z-index: 99998 !important;       /* ← overlay より上 */
         pointer-events: auto !important;  /* ← タッチ有効を明示 */
         overflow-y: auto !important;
     }
@@ -1584,7 +1584,7 @@ textarea {
         opacity: 1 !important;
         visibility: visible !important;
         position: relative;
-        z-index: 10003 !important;        /* ← サイドバーの中で最前面 */
+        z-index: 99999 !important;        /* ← サイドバーの中で最前面 */
         cursor: pointer;
         padding: 12px 16px !important;
         width: 100% !important;
@@ -1606,7 +1606,7 @@ textarea {
         width: 100% !important;
         height: 100% !important;
         background: rgba(0, 0, 0, 0.7) !important;
-        z-index: 10001 !important;        /* ← サイドバーより低い */
+        z-index: 99990 !important;        /* ← サイドバーより低い */
         opacity: 0;
         visibility: hidden;
         transition: opacity 0.3s ease;
@@ -1625,7 +1625,7 @@ textarea {
         position: fixed !important;
         top: 0.75rem !important;
         left: 0.75rem !important;
-        z-index: 10004 !important;        /* ← 全要素の最前面 */
+        z-index: 100000 !important;        /* ← 全要素の最前面 */
         pointer-events: auto !important;
     }
 
