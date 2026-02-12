@@ -27,10 +27,10 @@
         <span></span>
     </button>
 
-    <!-- Sidebar Overlay (mobile) -->
+    <!-- Sidebar Overlay (mobile) ※1つだけ -->
     <div id="sidebarOverlay" class="sidebar-overlay"></div>
 
-    <!-- Login/Password Protection Overlay -->
+    <!-- Login Overlay ※1つだけ -->
     <div id="loginOverlay" class="login-overlay">
         <div class="glass-card login-card">
             <div class="logo">
@@ -47,27 +47,7 @@
         </div>
     </div>
 
-    <!-- Sidebar Overlay (mobile) -->
-    <div id="sidebarOverlay" class="sidebar-overlay"></div>
-
-    <!-- Login/Password Protection Overlay -->
-    <div id="loginOverlay" class="login-overlay">
-        <div class="glass-card login-card">
-            <div class="logo">
-                <span class="logo-icon">🔒</span>
-                <h2>Threads Conquest</h2>
-            </div>
-            <p>このツールはパスワード保護されています</p>
-            <div class="form-group">
-                <input type="password" id="accessPassword" placeholder="パスワードを入力">
-            </div>
-            <button id="loginBtn" class="btn btn-primary">ログイン</button>
-            <p id="loginError" class="error-msg"
-                style="display:none; color:#f87171; margin-top:1rem; font-size:0.8rem;">パスワードが違います</p>
-        </div>
-    </div>
-
-    <!-- ★ サイドバー（app-containerの外） ★ -->
+    <!-- サイドバー（app-containerの外） -->
     <nav class="sidebar">
         <div class="sidebar-header">
             <div class="logo">
@@ -1143,31 +1123,34 @@
         var ov = document.getElementById('sidebarOverlay');
         var navItems = document.querySelectorAll('.nav-item');
         var tabPanels = document.querySelectorAll('.tab-panel');
+        var isLoggedIn = localStorage.getItem('isAuth') === 'true';
 
         /* ===== ログイン ===== */
+        function showApp(){
+            lo.style.display = 'none';
+            document.body.style.overflow = 'auto';
+            if(tb && window.innerWidth <= 1024) tb.style.display = 'flex';
+            if(sb && window.innerWidth > 1024) sb.style.display = 'flex';
+        }
+
         function doLogin(){
             if(pinp.value === 'threads-conquest'){
                 localStorage.setItem('isAuth','true');
-                lo.style.display = 'none';
-                lo.style.pointerEvents = 'none';
-                document.body.style.overflow = 'auto';
-                if(tb && window.innerWidth <= 1024) tb.style.display = 'flex';
+                isLoggedIn = true;
+                showApp();
             } else {
                 lerr.style.display = 'block';
                 pinp.style.border = '1px solid #f87171';
             }
         }
 
-        if(localStorage.getItem('isAuth') === 'true'){
-            lo.style.display = 'none';
-            lo.style.pointerEvents = 'none';
-            document.body.style.overflow = 'auto';
+        /* 初期状態 */
+        if(isLoggedIn){
+            showApp();
         } else {
             lo.style.display = 'flex';
-            lo.style.pointerEvents = 'auto';
+            document.body.style.overflow = 'hidden';
             if(tb) tb.style.display = 'none';
-            if(sb) sb.style.display = 'none';
-            if(ov) ov.style.display = 'none';
         }
 
         if(lbtn) lbtn.addEventListener('click', doLogin);
@@ -1175,16 +1158,16 @@
 
         /* ===== サイドバー開閉 ===== */
         function openSidebar(){
-            sb.style.display = 'flex';
+            if(!isLoggedIn) return;
             sb.classList.add('active');
             if(tb) tb.classList.add('active');
-            if(ov){ ov.style.display = 'block'; ov.classList.add('active'); }
+            if(ov) ov.classList.add('active');
             document.body.style.overflow = 'hidden';
         }
         function closeSidebar(){
             sb.classList.remove('active');
             if(tb) tb.classList.remove('active');
-            if(ov){ ov.classList.remove('active'); }
+            if(ov) ov.classList.remove('active');
             document.body.style.overflow = 'auto';
         }
 
@@ -1230,7 +1213,6 @@
             })(navItems[n]);
         }
 
-        /* 初期表示 */
         for(var p = 0; p < tabPanels.length; p++){
             if(tabPanels[p].classList.contains('active')){
                 tabPanels[p].style.display = 'block';
@@ -1241,6 +1223,6 @@
     })();
     </script>
 
-    <script src="script.js?v=5.0"></script>
+    <script src="script.js?v=5.1"></script>
 </body>
 </html>
