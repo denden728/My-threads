@@ -77,17 +77,7 @@ body {
     animation: float 30s ease-in-out infinite;
 }
 
-@media (max-width: 1024px) {
-
-    .bg-orb,
-    .bg-orb-1,
-    .bg-orb-2,
-    .bg-orb-3 {
-        display: none !important;
-        opacity: 0 !important;
-        visibility: hidden !important;
-    }
-}
+/* Old media query removed */
 
 @keyframes float {
 
@@ -1629,59 +1619,14 @@ textarea {
     pointer-events: auto;
 }
 
-@media (max-width: 1024px) {
+/* Consolidated Mobile Styles */
+@media screen and (max-width: 1024px) {
+
+    /* 1. Reset & Layout */
     .app-container {
         display: block !important;
         position: relative;
-    }
-
-    .sidebar {
-        position: fixed !important;
-        top: 0;
-        left: -280px !important;
-        /* 初期位置を画面外に */
-        width: 280px !important;
-        min-width: 280px !important;
-        height: 100vh !important;
-        background: #0f172a !important;
-        /* 完全に不透明な深い紺 */
-        transform: none !important;
-        /* transform不具合回避 */
-        transition: left 0.3s ease-out;
-        z-index: 5000 !important;
-        display: flex !important;
-        flex-direction: column;
-        visibility: visible !important;
-        pointer-events: auto !important;
-        box-shadow: 10px 0 30px rgba(0, 0, 0, 0.5);
-    }
-
-    .sidebar.active {
-        left: 0 !important;
-    }
-
-    .nav-menu {
-        padding-top: 5rem !important;
-        /* 上部のトグルボタン領域を確保 */
-        height: 100%;
-        overflow-y: auto;
-    }
-
-    .nav-item {
-        padding: 1.25rem 1.5rem !important;
-        display: flex !important;
-        align-items: center !important;
-        gap: 1rem !important;
-        width: 100% !important;
-        color: #fff !important;
-        font-size: 1.1rem !important;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    }
-
-    .nav-item span {
-        display: inline !important;
-        visibility: visible !important;
-        opacity: 1 !important;
+        overflow-x: hidden;
     }
 
     .main-content {
@@ -1689,75 +1634,114 @@ textarea {
         padding-top: 5rem !important;
         width: 100% !important;
         min-height: 100vh;
-        position: relative;
-        z-index: 1;
     }
 
+    /* 2. Hide Decorative Elements */
+    .bg-orb,
+    .bg-orb-1,
+    .bg-orb-2,
+    .bg-orb-3 {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+    }
+
+    /* 3. Mobile Sidebar (Nuclear Option) */
+    .sidebar {
+        position: fixed !important;
+        top: 0;
+        left: 0;
+        width: 280px !important;
+        min-width: 280px !important;
+        height: 100vh !important;
+        background: #0f172a !important;
+        z-index: 9999 !important;
+        display: flex !important;
+        flex-direction: column;
+
+        /* State Control */
+        transform: translateX(-100%) !important;
+        transition: transform 0.3s ease-out !important;
+        box-shadow: 10px 0 40px rgba(0, 0, 0, 0.5) !important;
+
+        /* Ensure Clickability */
+        pointer-events: auto !important;
+        visibility: visible !important;
+    }
+
+    .sidebar.active {
+        transform: translateX(0) !important;
+    }
+
+    /* 4. Nav Items */
+    .nav-menu {
+        padding-top: 5rem !important;
+        overflow-y: auto;
+    }
+
+    .nav-item {
+        padding: 1.25rem 1.5rem !important;
+        width: 100% !important;
+        display: flex !important;
+        align-items: center !important;
+        font-size: 1.1rem !important;
+        color: #fff !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        opacity: 1 !important;
+        visibility: visible !important;
+    }
+
+    .nav-item span {
+        display: inline-block !important;
+    }
+
+    /* 5. Toggle Button */
     .menu-toggle {
         display: flex !important;
         position: fixed !important;
         top: 1rem;
         left: 1rem;
-        z-index: 6000 !important;
-        /* サイドバーより常に上に */
+        width: 44px;
+        height: 44px;
+        z-index: 10000 !important;
+        /* Sidebarの上 */
         background: #1e293b !important;
-        border: 1px solid #334155 !important;
+        border: 1px solid rgba(255, 255, 255, 0.2) !important;
+        border-radius: 8px;
     }
-}
 
-@media (max-width: 768px) {
+    /* 6. Overlay */
+    .sidebar-overlay {
+        position: fixed !important;
+        top: 0;
+        left: 0;
+        width: 100% !important;
+        height: 100% !important;
+        background: rgba(0, 0, 0, 0.8) !important;
+        z-index: 9000 !important;
+        /* Sidebarの下 */
+        visibility: hidden;
+        opacity: 0;
+        transition: opacity 0.3s;
+    }
 
+    .sidebar-overlay.active {
+        visibility: visible;
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    /* 7. Adjustments */
     .form-row,
-    .form-row-3 {
-        grid-template-columns: 1fr;
-    }
-
-    .card {
-        padding: 1.5rem;
-    }
-
-    .generator-layout {
-        gap: 1.5rem;
-    }
-
-    .ana-stats {
-        grid-template-columns: 1fr;
-    }
-
-    .guide-layout {
-        grid-template-columns: 1fr;
-    }
-}
-
-@media (max-width: 480px) {
-    .logo h1 {
-        font-size: 1rem;
+    .form-row-3,
+    .ana-stats,
+    .guide-layout,
+    .roadmap {
+        grid-template-columns: 1fr !important;
     }
 
     .hero h1 {
-        font-size: 2rem;
-    }
-
-    .btn {
-        width: 100%;
-        justify-content: center;
-    }
-
-    .post-actions {
-        flex-direction: column;
-    }
-
-    .login-card {
-        padding: 1.5rem;
-    }
-
-    .panel-header h2 {
-        font-size: 1.25rem;
-    }
-
-    .ratio-bar {
-        flex-direction: column;
-        height: auto;
-        gap: 0.5rem;
+        font-size: 2rem !important;
     }
 }
