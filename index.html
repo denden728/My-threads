@@ -6,31 +6,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Threads アフィリエイト完全攻略ダッシュボード</title>
     <meta name="description" content="Threadsアフィリエイトを完全自動化する統合ダッシュボード">
-    <link rel="stylesheet" href="style.css?v=1.6">
+    <link rel="stylesheet" href="style.css?v=2.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+JP:wght@300;400;500;700&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
-    <!-- Background animated orbs -->
     <div class="bg-orb bg-orb-1"></div>
     <div class="bg-orb bg-orb-2"></div>
     <div class="bg-orb bg-orb-3"></div>
 
-    <!-- Mobile Menu Toggle Button -->
     <button id="menuToggle" class="menu-toggle" aria-label="Menu">
-        <span></span>
-        <span></span>
-        <span></span>
+        <span></span><span></span><span></span>
     </button>
 
-    <!-- Sidebar Overlay (mobile) ※1つだけ -->
     <div id="sidebarOverlay" class="sidebar-overlay"></div>
 
-    <!-- Login Overlay ※1つだけ -->
     <div id="loginOverlay" class="login-overlay">
         <div class="glass-card login-card">
             <div class="logo">
@@ -42,13 +34,11 @@
                 <input type="password" id="accessPassword" placeholder="パスワードを入力">
             </div>
             <button id="loginBtn" class="btn btn-primary">ログイン</button>
-            <p id="loginError" class="error-msg"
-                style="display:none; color:#f87171; margin-top:1rem; font-size:0.8rem;">パスワードが違います</p>
+            <p id="loginError" style="display:none; color:#f87171; margin-top:1rem; font-size:0.8rem;">パスワードが違います</p>
         </div>
     </div>
 
-    <!-- サイドバー（app-containerの外） -->
-    <nav class="sidebar">
+    <nav class="sidebar" id="sidebarNav">
         <div class="sidebar-header">
             <div class="logo">
                 <span class="logo-icon">🧵</span>
@@ -59,62 +49,29 @@
             </div>
         </div>
         <ul class="nav-menu">
-            <li class="nav-item active" data-tab="generator">
-                <span class="nav-icon">⚡</span>
-                <span>ポスト生成</span>
-            </li>
-            <li class="nav-item" data-tab="buzz">
-                <span class="nav-icon">🔥</span>
-                <span>バズ職人</span>
-            </li>
-            <li class="nav-item" data-tab="longform">
-                <span class="nav-icon">📝</span>
-                <span>長文生成</span>
-            </li>
-            <li class="nav-item" data-tab="hooks">
-                <span class="nav-icon">🎣</span>
-                <span>フック & CTA</span>
-            </li>
-            <li class="nav-item" data-tab="analytics">
-                <span class="nav-icon">📊</span>
-                <span>分析・記録</span>
-            </li>
-            <li class="nav-item" data-tab="structure">
-                <span class="nav-icon">🧬</span>
-                <span>バズ設計</span>
-            </li>
-            <li class="nav-item" data-tab="research">
-                <span class="nav-icon">🔍</span>
-                <span>リサーチ</span>
-            </li>
-            <li class="nav-item" data-tab="guide">
-                <span class="nav-icon">📖</span>
-                <span>攻略ガイド</span>
-            </li>
-            <li class="nav-item" data-tab="komattara">
-                <span class="nav-icon">🆘</span>
-                <span>困ったら</span>
-            </li>
-            <li class="nav-item" data-tab="toolguide">
-                <span class="nav-icon">📘</span>
-                <span>使い方</span>
-            </li>
+            <li class="nav-item active" data-tab="generator"><span class="nav-icon">⚡</span><span>ポスト生成</span></li>
+            <li class="nav-item" data-tab="buzz"><span class="nav-icon">🔥</span><span>バズ職人</span></li>
+            <li class="nav-item" data-tab="longform"><span class="nav-icon">📝</span><span>長文生成</span></li>
+            <li class="nav-item" data-tab="hooks"><span class="nav-icon">🎣</span><span>フック & CTA</span></li>
+            <li class="nav-item" data-tab="analytics"><span class="nav-icon">📊</span><span>分析・記録</span></li>
+            <li class="nav-item" data-tab="structure"><span class="nav-icon">🧬</span><span>バズ設計</span></li>
+            <li class="nav-item" data-tab="research"><span class="nav-icon">🔍</span><span>リサーチ</span></li>
+            <li class="nav-item" data-tab="guide"><span class="nav-icon">📖</span><span>攻略ガイド</span></li>
+            <li class="nav-item" data-tab="komattara"><span class="nav-icon">🆘</span><span>困ったら</span></li>
+            <li class="nav-item" data-tab="toolguide"><span class="nav-icon">📘</span><span>使い方</span></li>
         </ul>
         <div class="sidebar-footer">
             <div class="daily-quota">
                 <p class="quota-label">今日の投稿</p>
-                <div class="quota-bar">
-                    <div class="quota-fill" id="quotaFill"></div>
-                </div>
+                <div class="quota-bar"><div class="quota-fill" id="quotaFill"></div></div>
                 <p class="quota-text" id="quotaText">0 / 6 投稿</p>
             </div>
         </div>
     </nav>
 
     <div class="app-container">
-        <!-- Main Content Area -->
         <main class="main-content">
-            <!-- Tab 1: ポスト生成（爆速メーカー + 売上特化） -->
+
             <section class="tab-panel active" id="tab-generator">
                 <div class="panel-header">
                     <h2>⚡ ポスト一括生成</h2>
@@ -156,20 +113,15 @@
                             </div>
                             <div class="form-group">
                                 <label for="benefits">具体的な変化（1行1つ。数字を入れると効果UP）</label>
-                                <textarea id="benefits" rows="4"
-                                    placeholder="例:&#10;入眠まで20分→7分に短縮&#10;夜中に起きる回数2回→0回&#10;朝の首の重さが3割減"></textarea>
+                                <textarea id="benefits" rows="4" placeholder="例:&#10;入眠まで20分→7分に短縮&#10;夜中に起きる回数2回→0回&#10;朝の首の重さが3割減"></textarea>
                             </div>
                             <div class="form-group">
                                 <label for="affiliateUrl">アフィリエイトURL（任意）</label>
                                 <input type="text" id="affiliateUrl" placeholder="https://...">
                             </div>
                             <div class="btn-group">
-                                <button id="generateAllBtn" class="btn btn-primary btn-glow">
-                                    <span>⚡</span> 全パターン一括生成
-                                </button>
-                                <button id="generateSalesBtn" class="btn btn-accent">
-                                    <span>💰</span> 売上特化で生成
-                                </button>
+                                <button id="generateAllBtn" class="btn btn-primary btn-glow"><span>⚡</span> 全パターン一括生成</button>
+                                <button id="generateSalesBtn" class="btn btn-accent"><span>💰</span> 売上特化で生成</button>
                             </div>
                         </div>
                     </div>
@@ -183,7 +135,6 @@
                 </div>
             </section>
 
-            <!-- Tab 2: バズ職人 -->
             <section class="tab-panel" id="tab-buzz">
                 <div class="panel-header">
                     <h2>🔥 バズ職人</h2>
@@ -209,12 +160,9 @@
                             </div>
                             <div class="form-group">
                                 <label for="buzzFeatures">商品の特徴・魅力ポイント</label>
-                                <textarea id="buzzFeatures" rows="3"
-                                    placeholder="例: クリーム×ライトブルーの配色が可愛い&#10;軽くて歩きやすい&#10;どのコーデにも合う"></textarea>
+                                <textarea id="buzzFeatures" rows="3" placeholder="例: クリーム×ライトブルーの配色が可愛い&#10;軽くて歩きやすい&#10;どのコーデにも合う"></textarea>
                             </div>
-                            <button id="generateBuzzBtn" class="btn btn-primary btn-glow">
-                                <span>🔥</span> 6パターン生成
-                            </button>
+                            <button id="generateBuzzBtn" class="btn btn-primary btn-glow"><span>🔥</span> 6パターン生成</button>
                         </div>
                         <div class="card glass-card buzz-guide">
                             <h3><span>💡</span> バズの入口選び方</h3>
@@ -238,7 +186,6 @@
                 </div>
             </section>
 
-            <!-- Tab 3: 長文生成 -->
             <section class="tab-panel" id="tab-longform">
                 <div class="panel-header">
                     <h2>📝 長文投稿プロンプト生成</h2>
@@ -273,35 +220,15 @@
                                 <label for="longTheme">発信したいテーマ（具体的なほど精度UP）</label>
                                 <input type="text" id="longTheme" placeholder="例: 0歳児の寝かしつけで30分以内に寝かせる方法">
                             </div>
-                            <button id="generateLongPromptBtn" class="btn btn-primary btn-glow">
-                                <span>📝</span> プロンプトを生成
-                            </button>
+                            <button id="generateLongPromptBtn" class="btn btn-primary btn-glow"><span>📝</span> プロンプトを生成</button>
                             <p class="hint">※ 生成されたプロンプトをClaude（推奨）またはChatGPTにコピペしてください</p>
                         </div>
                         <div class="card glass-card">
                             <h3><span>🧠</span> 長文投稿の3段構成</h3>
                             <div class="structure-flow">
-                                <div class="flow-step">
-                                    <div class="flow-num">1</div>
-                                    <div>
-                                        <strong>本文（150〜300字）</strong>
-                                        <p>フックで注意 → 核心の「入口」だけ見せる</p>
-                                    </div>
-                                </div>
-                                <div class="flow-step">
-                                    <div class="flow-num">2</div>
-                                    <div>
-                                        <strong>コメント欄1（400〜500字）</strong>
-                                        <p>続きを一部明かす → 全ては明かさない</p>
-                                    </div>
-                                </div>
-                                <div class="flow-step">
-                                    <div class="flow-num">3</div>
-                                    <div>
-                                        <strong>コメント欄2（400〜500字）</strong>
-                                        <p>残りを全て明かす → 行動提案で締める</p>
-                                    </div>
-                                </div>
+                                <div class="flow-step"><div class="flow-num">1</div><div><strong>本文（150〜300字）</strong><p>フックで注意 → 核心の「入口」だけ見せる</p></div></div>
+                                <div class="flow-step"><div class="flow-num">2</div><div><strong>コメント欄1（400〜500字）</strong><p>続きを一部明かす → 全ては明かさない</p></div></div>
+                                <div class="flow-step"><div class="flow-num">3</div><div><strong>コメント欄2（400〜500字）</strong><p>残りを全て明かす → 行動提案で締める</p></div></div>
                             </div>
                         </div>
                     </div>
@@ -315,7 +242,6 @@
                 </div>
             </section>
 
-            <!-- Tab 4: フック & CTA ライブラリ -->
             <section class="tab-panel" id="tab-hooks">
                 <div class="panel-header">
                     <h2>🎣 バズフック & CTA ライブラリ</h2>
@@ -324,71 +250,59 @@
                 <div class="hooks-layout">
                     <div class="hooks-column">
                         <h3>🎣 バズフック集（冒頭の1行）</h3>
-                        <div class="hook-category">
-                            <h4>💸 コスパ神型</h4>
+                        <div class="hook-category"><h4>💸 コスパ神型</h4>
                             <div class="hook-item" data-hook="この値段でこのクオリティはバグ">この値段でこのクオリティはバグ</div>
                             <div class="hook-item" data-hook="1,000円以下で買える神アイテム">1,000円以下で買える神アイテム</div>
                             <div class="hook-item" data-hook="高いやつと品質変わらない件">高いやつと品質変わらない件</div>
                             <div class="hook-item" data-hook="セール価格じゃなくて定価がこれ">セール価格じゃなくて定価がこれ</div>
                             <div class="hook-item" data-hook="ここまで安くていいの？レベル">ここまで安くていいの？レベル</div>
                         </div>
-                        <div class="hook-category">
-                            <h4>📊 データ訴求型</h4>
+                        <div class="hook-category"><h4>📊 データ訴求型</h4>
                             <div class="hook-item" data-hook="1日30円で○○が手に入る計算">1日30円で○○が手に入る計算</div>
                             <div class="hook-item" data-hook="2ヶ月で-5kg痩せた方法がこれ">2ヶ月で-5kg痩せた方法がこれ</div>
                             <div class="hook-item" data-hook="3日でほうれい線が薄くなった">3日でほうれい線が薄くなった</div>
                         </div>
-                        <div class="hook-category">
-                            <h4>🔥 今すぐ型</h4>
+                        <div class="hook-category"><h4>🔥 今すぐ型</h4>
                             <div class="hook-item" data-hook="今日だけ40%オフとかヤバい">今日だけ40%オフとかヤバい</div>
                             <div class="hook-item" data-hook="在庫なくなる前に見て">在庫なくなる前に見て</div>
                             <div class="hook-item" data-hook="バズる前に教えとく">バズる前に教えとく</div>
                         </div>
-                        <div class="hook-category">
-                            <h4>🤝 共感獲得型</h4>
+                        <div class="hook-category"><h4>🤝 共感獲得型</h4>
                             <div class="hook-item" data-hook="乾燥肌で悩んでたけど、これで人生変わった">乾燥肌で悩んでたけど、これで人生変わった</div>
                             <div class="hook-item" data-hook="朝起きたときの首の重さ、消えた">朝起きたときの首の重さ、消えた</div>
                         </div>
-                        <div class="hook-category">
-                            <h4>🆕 新発見報告型</h4>
+                        <div class="hook-category"><h4>🆕 新発見報告型</h4>
                             <div class="hook-item" data-hook="え、これ知ってた？">え、これ知ってた？</div>
                             <div class="hook-item" data-hook="誰も教えてくれなかったけど">誰も教えてくれなかったけど</div>
                         </div>
-                        <div class="hook-category">
-                            <h4>🏆 比較検証型</h4>
+                        <div class="hook-category"><h4>🏆 比較検証型</h4>
                             <div class="hook-item" data-hook="デパコスと比べてみたら衝撃だった">デパコスと比べてみたら衝撃だった</div>
                             <div class="hook-item" data-hook="100均 vs 3,000円、勝ったのは…">100均 vs 3,000円、勝ったのは…</div>
                         </div>
                     </div>
                     <div class="hooks-column">
                         <h3>🎯 CTA集（最後の誘導文）</h3>
-                        <div class="hook-category">
-                            <h4>💬 カジュアル誘導型</h4>
+                        <div class="hook-category"><h4>💬 カジュアル誘導型</h4>
                             <div class="hook-item cta" data-hook="気になったら見てみて">気になったら見てみて</div>
                             <div class="hook-item cta" data-hook="リンク貼っとくね">リンク貼っとくね</div>
                             <div class="hook-item cta" data-hook="ちょっと覗いてみて">ちょっと覗いてみて</div>
                         </div>
-                        <div class="hook-category">
-                            <h4>💰 お得感訴求型</h4>
+                        <div class="hook-category"><h4>💰 お得感訴求型</h4>
                             <div class="hook-item cta" data-hook="コスパやばすぎて笑った↓">コスパやばすぎて笑った↓</div>
                             <div class="hook-item cta" data-hook="この値段で買えるの今だけかも">この値段で買えるの今だけかも</div>
                         </div>
-                        <div class="hook-category">
-                            <h4>⚡ 緊急性訴求型</h4>
+                        <div class="hook-category"><h4>⚡ 緊急性訴求型</h4>
                             <div class="hook-item cta" data-hook="セール終わる前に見て">セール終わる前に見て</div>
                             <div class="hook-item cta" data-hook="在庫あるうちに見て">在庫あるうちに見て</div>
                         </div>
-                        <div class="hook-category">
-                            <h4>🤝 問題解決型</h4>
+                        <div class="hook-category"><h4>🤝 問題解決型</h4>
                             <div class="hook-item cta" data-hook="同じ悩みの人は見て">同じ悩みの人は見て</div>
                             <div class="hook-item cta" data-hook="これ買わない理由が見つからない">これ買わない理由が見つからない</div>
                         </div>
-                        <div class="hook-category">
-                            <h4>👑 比較優位型</h4>
+                        <div class="hook-category"><h4>👑 比較優位型</h4>
                             <div class="hook-item cta" data-hook="私は3個目リピートしてる">私は3個目リピートしてる</div>
                             <div class="hook-item cta" data-hook="1,000円以下だし試す価値あり">1,000円以下だし試す価値あり</div>
                         </div>
-
                         <div class="selected-combo" id="selectedCombo">
                             <h4>📌 選択中の組み合わせ</h4>
                             <div class="combo-display">
@@ -401,7 +315,6 @@
                 </div>
             </section>
 
-            <!-- Tab 5: 分析・記録 -->
             <section class="tab-panel" id="tab-analytics">
                 <div class="panel-header">
                     <h2>📊 投稿分析 & 記録管理</h2>
@@ -411,18 +324,11 @@
                     <div class="card glass-card">
                         <h3><span>📝</span> 投稿記録を追加</h3>
                         <div class="form-row">
-                            <div class="form-group">
-                                <label for="recordDate">日付</label>
-                                <input type="date" id="recordDate">
-                            </div>
-                            <div class="form-group">
-                                <label for="recordProduct">商品名</label>
-                                <input type="text" id="recordProduct" placeholder="商品名">
-                            </div>
+                            <div class="form-group"><label for="recordDate">日付</label><input type="date" id="recordDate"></div>
+                            <div class="form-group"><label for="recordProduct">商品名</label><input type="text" id="recordProduct" placeholder="商品名"></div>
                         </div>
                         <div class="form-row">
-                            <div class="form-group">
-                                <label for="recordHookType">フックタイプ</label>
+                            <div class="form-group"><label for="recordHookType">フックタイプ</label>
                                 <select id="recordHookType">
                                     <option value="コスパ神型">コスパ神型</option>
                                     <option value="データ訴求型">データ訴求型</option>
@@ -433,8 +339,7 @@
                                     <option value="ビフォーアフター型">ビフォーアフター型</option>
                                 </select>
                             </div>
-                            <div class="form-group">
-                                <label for="recordPostType">投稿タイプ</label>
+                            <div class="form-group"><label for="recordPostType">投稿タイプ</label>
                                 <select id="recordPostType">
                                     <option value="アフィ投稿">アフィ投稿</option>
                                     <option value="有益投稿">有益投稿</option>
@@ -444,49 +349,22 @@
                             </div>
                         </div>
                         <div class="form-row form-row-3">
-                            <div class="form-group">
-                                <label for="recordViews">表示回数</label>
-                                <input type="number" id="recordViews" placeholder="0">
-                            </div>
-                            <div class="form-group">
-                                <label for="recordLikes">いいね数</label>
-                                <input type="number" id="recordLikes" placeholder="0">
-                            </div>
-                            <div class="form-group">
-                                <label for="recordClicks">クリック数</label>
-                                <input type="number" id="recordClicks" placeholder="0">
-                            </div>
+                            <div class="form-group"><label for="recordViews">表示回数</label><input type="number" id="recordViews" placeholder="0"></div>
+                            <div class="form-group"><label for="recordLikes">いいね数</label><input type="number" id="recordLikes" placeholder="0"></div>
+                            <div class="form-group"><label for="recordClicks">クリック数</label><input type="number" id="recordClicks" placeholder="0"></div>
                         </div>
-                        <button id="addRecordBtn" class="btn btn-primary">
-                            <span>➕</span> 記録を追加
-                        </button>
+                        <button id="addRecordBtn" class="btn btn-primary"><span>➕</span> 記録を追加</button>
                     </div>
-
                     <div class="card glass-card">
                         <h3><span>🏆</span> 勝ちパターン分析</h3>
-                        <div id="winningPatterns" class="winning-patterns">
-                            <p class="hint">データが3件以上蓄積されると、勝ちパターンが自動表示されます</p>
-                        </div>
+                        <div id="winningPatterns" class="winning-patterns"><p class="hint">データが3件以上蓄積されると、勝ちパターンが自動表示されます</p></div>
                     </div>
-
                     <div class="card glass-card">
                         <h3><span>📋</span> 記録一覧</h3>
                         <div class="records-table-wrapper">
                             <table class="records-table" id="recordsTable">
-                                <thead>
-                                    <tr>
-                                        <th>日付</th>
-                                        <th>商品</th>
-                                        <th>タイプ</th>
-                                        <th>フック</th>
-                                        <th>表示</th>
-                                        <th>いいね</th>
-                                        <th>クリック</th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody id="recordsBody">
-                                </tbody>
+                                <thead><tr><th>日付</th><th>商品</th><th>タイプ</th><th>フック</th><th>表示</th><th>いいね</th><th>クリック</th><th></th></tr></thead>
+                                <tbody id="recordsBody"></tbody>
                             </table>
                             <p class="hint" id="noRecordsHint">まだ記録がありません。投稿データを追加してください。</p>
                         </div>
@@ -494,7 +372,6 @@
                 </div>
             </section>
 
-            <!-- Tab 6: 攻略ガイド -->
             <section class="tab-panel" id="tab-guide">
                 <div class="panel-header">
                     <h2>📖 攻略ガイド & チェックリスト</h2>
@@ -504,9 +381,7 @@
                     <div class="card glass-card">
                         <h3><span>🗓️</span> 30日間ロードマップ</h3>
                         <div class="roadmap">
-                            <div class="roadmap-week">
-                                <div class="week-badge week-1">Week 1</div>
-                                <h4>準備期間</h4>
+                            <div class="roadmap-week"><div class="week-badge week-1">Week 1</div><h4>準備期間</h4>
                                 <ul class="checklist" id="week1Checklist">
                                     <li><label><input type="checkbox" data-week="1"> 楽天アフィリエイトに登録</label></li>
                                     <li><label><input type="checkbox" data-week="1"> Threadsアカウント作成</label></li>
@@ -515,9 +390,7 @@
                                     <li><label><input type="checkbox" data-week="1"> ホーム画面を最適化（いいね）</label></li>
                                 </ul>
                             </div>
-                            <div class="roadmap-week">
-                                <div class="week-badge week-2">Week 2-3</div>
-                                <h4>投稿テスト期間</h4>
+                            <div class="roadmap-week"><div class="week-badge week-2">Week 2-3</div><h4>投稿テスト期間</h4>
                                 <ul class="checklist" id="week2Checklist">
                                     <li><label><input type="checkbox" data-week="2"> 毎日1投稿を継続</label></li>
                                     <li><label><input type="checkbox" data-week="2"> 色々なパターンの投稿をテスト</label></li>
@@ -525,9 +398,7 @@
                                     <li><label><input type="checkbox" data-week="2"> コメントには必ず返信</label></li>
                                 </ul>
                             </div>
-                            <div class="roadmap-week">
-                                <div class="week-badge week-4">Week 4</div>
-                                <h4>改善 & 量産期間</h4>
+                            <div class="roadmap-week"><div class="week-badge week-4">Week 4</div><h4>改善 & 量産期間</h4>
                                 <ul class="checklist" id="week4Checklist">
                                     <li><label><input type="checkbox" data-week="4"> 勝ちパターンを特定</label></li>
                                     <li><label><input type="checkbox" data-week="4"> 勝ちパターンで量産</label></li>
@@ -537,10 +408,8 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="guide-cards-row">
-                        <div class="card glass-card card-danger">
-                            <h3><span>🚫</span> NG行動チェック</h3>
+                        <div class="card glass-card card-danger"><h3><span>🚫</span> NG行動チェック</h3>
                             <ul class="ng-list">
                                 <li>❌ 「いいねして！」「コメントして！」の呼びかけ</li>
                                 <li>❌ 1時間以内にアフィリンク3回投稿</li>
@@ -550,8 +419,7 @@
                                 <li>❌ AI臭い投稿のコピペ投稿</li>
                             </ul>
                         </div>
-                        <div class="card glass-card card-success">
-                            <h3><span>✅</span> 投稿前チェック</h3>
+                        <div class="card glass-card card-success"><h3><span>✅</span> 投稿前チェック</h3>
                             <ul class="ok-list">
                                 <li>✅ 友達口調になっているか（ですます禁止）</li>
                                 <li>✅ 具体的な数字が入っているか</li>
@@ -561,46 +429,24 @@
                                 <li>✅ 投稿間隔2〜3時間以上空いてるか</li>
                             </ul>
                         </div>
-                        <div class="card glass-card">
-                            <h3><span>⏰</span> 最適投稿時間</h3>
+                        <div class="card glass-card"><h3><span>⏰</span> 最適投稿時間</h3>
                             <div class="time-slots">
-                                <div class="time-slot">
-                                    <span class="time">☀️ 7:00〜8:30</span>
-                                    <span class="desc">通勤</span>
-                                </div>
-                                <div class="time-slot">
-                                    <span class="time">🍱 12:00〜13:00</span>
-                                    <span class="desc">ランチ</span>
-                                </div>
-                                <div class="time-slot best">
-                                    <span class="time">🌙 20:00〜22:00</span>
-                                    <span class="desc">ゴールデン</span>
-                                </div>
+                                <div class="time-slot"><span class="time">☀️ 7:00〜8:30</span><span class="desc">通勤</span></div>
+                                <div class="time-slot"><span class="time">🍱 12:00〜13:00</span><span class="desc">ランチ</span></div>
+                                <div class="time-slot best"><span class="time">🌙 20:00〜22:00</span><span class="desc">ゴールデン</span></div>
                             </div>
                         </div>
                     </div>
-
-                    <div class="card glass-card">
-                        <h3><span>📐</span> 1日の投稿配分（黄金比）</h3>
+                    <div class="card glass-card"><h3><span>📐</span> 1日の投稿配分（黄金比）</h3>
                         <div class="ratio-bar">
-                            <div class="ratio-segment ratio-affi" style="flex: 2.5">
-                                <span>💰 アフィ投稿</span>
-                                <small>2〜3件</small>
-                            </div>
-                            <div class="ratio-segment ratio-useful" style="flex: 2.5">
-                                <span>📚 有益投稿</span>
-                                <small>2〜3件</small>
-                            </div>
-                            <div class="ratio-segment ratio-intro" style="flex: 1">
-                                <span>🙋 自己紹介</span>
-                                <small>1件</small>
-                            </div>
+                            <div class="ratio-segment ratio-affi" style="flex:2.5"><span>💰 アフィ投稿</span><small>2〜3件</small></div>
+                            <div class="ratio-segment ratio-useful" style="flex:2.5"><span>📚 有益投稿</span><small>2〜3件</small></div>
+                            <div class="ratio-segment ratio-intro" style="flex:1"><span>🙋 自己紹介</span><small>1件</small></div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- Tab 7: バズ設計GPT（構造分析＆横展開） -->
             <section class="tab-panel" id="tab-structure">
                 <div class="panel-header">
                     <h2>🧬 バズ設計GPT</h2>
@@ -610,61 +456,26 @@
                     <div class="input-section">
                         <div class="card glass-card">
                             <h3><span>📋</span> バズ投稿を貼り付け</h3>
-                            <div class="form-group">
-                                <label for="buzzSample">分析したいバズ投稿を貼り付けてください</label>
-                                <textarea id="buzzSample" rows="8"
-                                    placeholder="例: 他ジャンルでバズっている投稿をコピペ&#10;&#10;「え、これ知ってた？実はコンビニの〇〇、朝に食べるだけで..."></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label for="myGenre">あなたのジャンル</label>
-                                <input type="text" id="myGenre" placeholder="例: 美容 / 寝具 / ダイエット">
-                            </div>
-                            <div class="form-group">
-                                <label for="myProduct">あなたの商品名（任意）</label>
-                                <input type="text" id="myProduct" placeholder="例: ヒツジのいらない枕">
-                            </div>
-                            <button id="analyzeStructureBtn" class="btn btn-primary btn-glow">
-                                <span>🧬</span> 構造を分析 & 横展開
-                            </button>
+                            <div class="form-group"><label for="buzzSample">分析したいバズ投稿を貼り付けてください</label><textarea id="buzzSample" rows="8" placeholder="例: 他ジャンルでバズっている投稿をコピペ"></textarea></div>
+                            <div class="form-group"><label for="myGenre">あなたのジャンル</label><input type="text" id="myGenre" placeholder="例: 美容 / 寝具 / ダイエット"></div>
+                            <div class="form-group"><label for="myProduct">あなたの商品名（任意）</label><input type="text" id="myProduct" placeholder="例: ヒツジのいらない枕"></div>
+                            <button id="analyzeStructureBtn" class="btn btn-primary btn-glow"><span>🧬</span> 構造を分析 & 横展開</button>
                         </div>
                         <div class="card glass-card">
                             <h3><span>💡</span> バズ設計の使い方</h3>
                             <div class="structure-flow">
-                                <div class="flow-step">
-                                    <div class="flow-num">1</div>
-                                    <div>
-                                        <strong>バズ投稿を見つける</strong>
-                                        <p>Threads/X/Instagramでバズってる投稿をコピペ</p>
-                                    </div>
-                                </div>
-                                <div class="flow-step">
-                                    <div class="flow-num">2</div>
-                                    <div>
-                                        <strong>構造を抽出</strong>
-                                        <p>フック・展開・落としのパターンを自動分析</p>
-                                    </div>
-                                </div>
-                                <div class="flow-step">
-                                    <div class="flow-num">3</div>
-                                    <div>
-                                        <strong>自分のジャンルで再構築</strong>
-                                        <p>同じ「型」であなたの商品の投稿を自動生成</p>
-                                    </div>
-                                </div>
+                                <div class="flow-step"><div class="flow-num">1</div><div><strong>バズ投稿を見つける</strong><p>Threads/X/Instagramでバズってる投稿をコピペ</p></div></div>
+                                <div class="flow-step"><div class="flow-num">2</div><div><strong>構造を抽出</strong><p>フック・展開・落としのパターンを自動分析</p></div></div>
+                                <div class="flow-step"><div class="flow-num">3</div><div><strong>自分のジャンルで再構築</strong><p>同じ「型」であなたの商品の投稿を自動生成</p></div></div>
                             </div>
                         </div>
                     </div>
                     <div class="output-section" id="structureOutput">
-                        <div class="empty-state">
-                            <div class="empty-icon">🧬</div>
-                            <h3>構造分析待ち</h3>
-                            <p>バズ投稿を貼り付けて分析ボタンを押してください</p>
-                        </div>
+                        <div class="empty-state"><div class="empty-icon">🧬</div><h3>構造分析待ち</h3><p>バズ投稿を貼り付けて分析ボタンを押してください</p></div>
                     </div>
                 </div>
             </section>
 
-            <!-- Tab 8: リサーチアシスタント -->
             <section class="tab-panel" id="tab-research">
                 <div class="panel-header">
                     <h2>🔍 リサーチアシスタント</h2>
@@ -672,231 +483,72 @@
                 </div>
                 <div class="research-layout">
                     <div class="research-grid">
-                        <div class="card glass-card">
-                            <h3><span>💡</span> 投稿ネタジェネレーター</h3>
-                            <div class="form-group">
-                                <label for="netaGenre">ジャンル</label>
-                                <select id="netaGenre">
-                                    <option value="美容・コスメ">美容・コスメ</option>
-                                    <option value="寝具・睡眠">寝具・睡眠</option>
-                                    <option value="ダイエット">ダイエット</option>
-                                    <option value="家電・ガジェット">家電・ガジェット</option>
-                                    <option value="ファッション">ファッション</option>
-                                    <option value="食品・健康">食品・健康</option>
-                                    <option value="育児・ベビー">育児・ベビー</option>
-                                    <option value="日用品・暮らし">日用品・暮らし</option>
-                                    <option value="副業・お金">副業・お金</option>
-                                    <option value="料理・時短">料理・時短</option>
-                                </select>
+                        <div class="card glass-card"><h3><span>💡</span> 投稿ネタジェネレーター</h3>
+                            <div class="form-group"><label for="netaGenre">ジャンル</label>
+                                <select id="netaGenre"><option value="美容・コスメ">美容・コスメ</option><option value="寝具・睡眠">寝具・睡眠</option><option value="ダイエット">ダイエット</option><option value="家電・ガジェット">家電・ガジェット</option><option value="ファッション">ファッション</option><option value="食品・健康">食品・健康</option><option value="育児・ベビー">育児・ベビー</option><option value="日用品・暮らし">日用品・暮らし</option><option value="副業・お金">副業・お金</option><option value="料理・時短">料理・時短</option></select>
                             </div>
-                            <button id="generateNetaBtn" class="btn btn-primary">
-                                <span>💡</span> ネタを30個生成
-                            </button>
+                            <button id="generateNetaBtn" class="btn btn-primary"><span>💡</span> ネタを30個生成</button>
                             <div id="netaOutput" class="neta-output"></div>
                         </div>
-
-                        <div class="card glass-card">
-                            <h3><span>🔑</span> パワーワード辞典</h3>
-                            <div class="form-group">
-                                <label for="pwCategory">カテゴリ</label>
-                                <select id="pwCategory">
-                                    <option value="urgency">緊急性ワード</option>
-                                    <option value="social">社会的証明ワード</option>
-                                    <option value="curiosity">好奇心ワード</option>
-                                    <option value="emotion">感情ワード</option>
-                                    <option value="number">数字系ワード</option>
-                                    <option value="contrast">対比ワード</option>
-                                </select>
+                        <div class="card glass-card"><h3><span>🔑</span> パワーワード辞典</h3>
+                            <div class="form-group"><label for="pwCategory">カテゴリ</label>
+                                <select id="pwCategory"><option value="urgency">緊急性ワード</option><option value="social">社会的証明ワード</option><option value="curiosity">好奇心ワード</option><option value="emotion">感情ワード</option><option value="number">数字系ワード</option><option value="contrast">対比ワード</option></select>
                             </div>
-                            <button id="showPowerWordsBtn" class="btn btn-accent">
-                                <span>🔑</span> 表示
-                            </button>
+                            <button id="showPowerWordsBtn" class="btn btn-accent"><span>🔑</span> 表示</button>
                             <div id="powerWordsOutput" class="neta-output"></div>
                         </div>
                     </div>
-
-                    <div class="card glass-card">
-                        <h3><span>📅</span> 季節・イベントカレンダー（今月のアフィ狙い目）</h3>
-                        <div id="seasonalCalendar" class="seasonal-calendar"></div>
-                    </div>
-
-                    <div class="card glass-card">
-                        <h3><span>🏷️</span> 推奨ハッシュタグ生成</h3>
+                    <div class="card glass-card"><h3><span>📅</span> 季節・イベントカレンダー（今月のアフィ狙い目）</h3><div id="seasonalCalendar" class="seasonal-calendar"></div></div>
+                    <div class="card glass-card"><h3><span>🏷️</span> 推奨ハッシュタグ生成</h3>
                         <div class="form-row">
-                            <div class="form-group">
-                                <label for="hashGenre">ジャンル</label>
-                                <input type="text" id="hashGenre" placeholder="例: 美容">
-                            </div>
-                            <div class="form-group">
-                                <label for="hashProduct">商品名</label>
-                                <input type="text" id="hashProduct" placeholder="例: 美容液">
-                            </div>
+                            <div class="form-group"><label for="hashGenre">ジャンル</label><input type="text" id="hashGenre" placeholder="例: 美容"></div>
+                            <div class="form-group"><label for="hashProduct">商品名</label><input type="text" id="hashProduct" placeholder="例: 美容液"></div>
                         </div>
-                        <button id="generateHashBtn" class="btn btn-primary btn-sm">
-                            <span>#️⃣</span> ハッシュタグ生成
-                        </button>
+                        <button id="generateHashBtn" class="btn btn-primary btn-sm"><span>#️⃣</span> ハッシュタグ生成</button>
                         <div id="hashOutput" class="neta-output"></div>
                     </div>
                 </div>
             </section>
 
-            <!-- Tab 9: 困ったら -->
             <section class="tab-panel" id="tab-komattara">
                 <div class="panel-header">
                     <h2>🆘 困ったら</h2>
                     <p class="panel-desc">迷った時・不安な時はここを見返そう</p>
                 </div>
                 <div class="guide-layout">
-
                     <div class="card glass-card" style="border-left:3px solid var(--primary);">
                         <h3><span>🧠</span> アフィリエイトの核心マインド</h3>
                         <div class="mindset-grid">
-                            <div class="mindset-item">
-                                <div class="mindset-icon">💬</div>
-                                <strong>売るな、教えろ</strong>
-                                <p>「買って！」じゃなく「これ良かったよ」。友達にLINEで教える感覚が正解。営業マンになった瞬間、人は離れる。</p>
-                            </div>
-                            <div class="mindset-item">
-                                <div class="mindset-icon">📊</div>
-                                <strong>数字で語れ</strong>
-                                <p>「良い」「最高」は誰でも言える。「入眠20分→7分」「電気代が月3,000円減」が刺さる。体験を数値化せよ。</p>
-                            </div>
-                            <div class="mindset-item">
-                                <div class="mindset-icon">🔄</div>
-                                <strong>量→改善→質</strong>
-                                <p>最初から完璧は不可能。まず30投稿してデータを取る。データが勝ちパターンを教えてくれる。</p>
-                            </div>
-                            <div class="mindset-item">
-                                <div class="mindset-icon">🎯</div>
-                                <strong>1人に届ける</strong>
-                                <p>「みなさん」ではなく「朝起きると首が痛い30代のあなた」。たった1人に向けて書くから刺さる。</p>
-                            </div>
-                            <div class="mindset-item">
-                                <div class="mindset-icon">⏰</div>
-                                <strong>継続が最強の戦略</strong>
-                                <p>1ヶ月で辞める人が9割。3ヶ月続けるだけで上位10%に入る。才能じゃない、続けた者が勝つ。</p>
-                            </div>
-                            <div class="mindset-item">
-                                <div class="mindset-icon">🚫</div>
-                                <strong>AI臭を消せ</strong>
-                                <p>「です・ます」「〜になります」「おすすめです」→全部NG。「まじでこれ良い」「使ってみて」が正解。</p>
-                            </div>
+                            <div class="mindset-item"><div class="mindset-icon">💬</div><strong>売るな、教えろ</strong><p>「買って！」じゃなく「これ良かったよ」。友達にLINEで教える感覚が正解。営業マンになった瞬間、人は離れる。</p></div>
+                            <div class="mindset-item"><div class="mindset-icon">📊</div><strong>数字で語れ</strong><p>「良い」「最高」は誰でも言える。「入眠20分→7分」「電気代が月3,000円減」が刺さる。体験を数値化せよ。</p></div>
+                            <div class="mindset-item"><div class="mindset-icon">🔄</div><strong>量→改善→質</strong><p>最初から完璧は不可能。まず30投稿してデータを取る。データが勝ちパターンを教えてくれる。</p></div>
+                            <div class="mindset-item"><div class="mindset-icon">🎯</div><strong>1人に届ける</strong><p>「みなさん」ではなく「朝起きると首が痛い30代のあなた」。たった1人に向けて書くから刺さる。</p></div>
+                            <div class="mindset-item"><div class="mindset-icon">⏰</div><strong>継続が最強の戦略</strong><p>1ヶ月で辞める人が9割。3ヶ月続けるだけで上位10%に入る。才能じゃない、続けた者が勝つ。</p></div>
+                            <div class="mindset-item"><div class="mindset-icon">🚫</div><strong>AI臭を消せ</strong><p>「です・ます」「〜になります」「おすすめです」→全部NG。「まじでこれ良い」「使ってみて」が正解。</p></div>
                         </div>
                     </div>
-
                     <div class="card glass-card">
                         <h3><span>🔥</span> こんな時どうする？（シチュエーション別）</h3>
                         <div class="faq-list">
-                            <div class="faq-item">
-                                <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
-                                    <span>😰 投稿しても全然見られない（表示回数が少ない）</span>
-                                    <span class="faq-toggle">▼</span>
-                                </div>
-                                <div class="faq-a">
-                                    <strong>原因と対策：</strong>
-                                    <ul>
-                                        <li>🎣 <strong>フックが弱い</strong> → 「フック&CTA」タブで強いフックに差し替え</li>
-                                        <li>⏰ <strong>投稿時間がズレてる</strong> → 20:00〜22:00のゴールデンタイムに投稿</li>
-                                        <li>🏷️ <strong>ハッシュタグが足りない</strong> → 「リサーチ」タブでハッシュタグ生成</li>
-                                        <li>👥 <strong>フォロワーとの交流が少ない</strong> → 他人の投稿に1日5件はコメント</li>
-                                        <li>📝 <strong>投稿が短すぎる</strong> → 「長文生成」タブで滞在時間を伸ばす投稿を作る</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="faq-item">
-                                <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
-                                    <span>😭 見られるけどクリックされない（リンクが踏まれない）</span>
-                                    <span class="faq-toggle">▼</span>
-                                </div>
-                                <div class="faq-a">
-                                    <ul>
-                                        <li>🎯 <strong>CTAが弱い</strong> → 「フック&CTA」タブで自然なCTAに変更</li>
-                                        <li>📊 <strong>ベネフィットが曖昧</strong> → 「ポスト生成」の売上特化モードで数字訴求</li>
-                                        <li>🤝 <strong>信頼感がない</strong> → 体験談を入れる「3日使ったけど」「1週間経ったけど」</li>
-                                        <li>🔗 <strong>リンクの位置</strong> → コメント欄にリンクを貼る方がクリック率UP</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="faq-item">
-                                <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
-                                    <span>💀 アカウントがシャドウバンされた気がする</span>
-                                    <span class="faq-toggle">▼</span>
-                                </div>
-                                <div class="faq-a">
-                                    <ul>
-                                        <li>⏸️ <strong>2〜3日投稿を休む</strong>（アカウントを休ませる）</li>
-                                        <li>🚫 <strong>NGチェックリストを全確認</strong>（攻略ガイドタブ参照）</li>
-                                        <li>📉 <strong>アフィ投稿の比率を下げる</strong>（有益投稿を増やす）</li>
-                                        <li>⏰ <strong>投稿間隔を広げる</strong>（最低3時間以上空ける）</li>
-                                        <li>🔄 <strong>復帰時は有益投稿から始める</strong>（いきなりアフィはNG）</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="faq-item">
-                                <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
-                                    <span>🤔 何を投稿したらいいかわからない（ネタ切れ）</span>
-                                    <span class="faq-toggle">▼</span>
-                                </div>
-                                <div class="faq-a">
-                                    <ul>
-                                        <li>💡 <strong>「リサーチ」タブ</strong> → ネタジェネレーターで30個のアイデアを取得</li>
-                                        <li>🧬 <strong>「バズ設計」タブ</strong> → 他ジャンルのバズ投稿を横展開</li>
-                                        <li>📅 <strong>季節カレンダー</strong> → 今月の狙い目イベントで書く</li>
-                                        <li>📊 <strong>「分析・記録」タブ</strong> → 過去の勝ちパターンを横展開</li>
-                                        <li>🎯 日常の「これいいな」を投稿にする習慣をつける</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="faq-item">
-                                <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
-                                    <span>😓 フォロワーが増えない</span>
-                                    <span class="faq-toggle">▼</span>
-                                </div>
-                                <div class="faq-a">
-                                    <ul>
-                                        <li>📚 <strong>有益投稿の比率を上げる</strong>（アフィ2：有益3：自己紹介1）</li>
-                                        <li>🎣 <strong>バズ職人タブ</strong>で拡散型の投稿を作る</li>
-                                        <li>📝 <strong>長文投稿</strong>で滞在時間を伸ばす→アルゴリズムに好まれる</li>
-                                        <li>💬 他人の投稿に<strong>価値あるコメント</strong>を残す（「いいね！」だけはNG）</li>
-                                        <li>👤 プロフィールに「フォローするメリット」を明記する</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="faq-item">
-                                <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
-                                    <span>💸 収益が出ない（0円のまま）</span>
-                                    <span class="faq-toggle">▼</span>
-                                </div>
-                                <div class="faq-a">
-                                    <ul>
-                                        <li>🎯 <strong>商品選びを見直す</strong>：楽天で「報酬率8%以上」＋「レビュー高評価」の商品を選ぶ</li>
-                                        <li>💰 <strong>単価の高い商品</strong>に切り替える（5,000円以上がおすすめ）</li>
-                                        <li>📊 <strong>分析タブ</strong>でクリック率の高い投稿パターンを特定→量産</li>
-                                        <li>🔥 <strong>セール期間に集中投稿</strong>（楽天マラソン・スーパーSALE）</li>
-                                        <li>📐 <strong>投稿の黄金比を守る</strong>：アフィだけ連投は逆効果</li>
-                                    </ul>
-                                </div>
-                            </div>
+                            <div class="faq-item"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')"><span>😰 投稿しても全然見られない</span><span class="faq-toggle">▼</span></div><div class="faq-a"><ul><li>🎣 フックが弱い → フック&CTAタブで強化</li><li>⏰ 投稿時間がズレてる → 20:00〜22:00に投稿</li><li>🏷️ ハッシュタグが足りない → リサーチタブで生成</li><li>👥 フォロワーとの交流が少ない → 1日5件コメント</li><li>📝 投稿が短すぎる → 長文生成タブを活用</li></ul></div></div>
+                            <div class="faq-item"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')"><span>😭 見られるけどクリックされない</span><span class="faq-toggle">▼</span></div><div class="faq-a"><ul><li>🎯 CTAが弱い → フック&CTAタブで変更</li><li>📊 ベネフィットが曖昧 → 売上特化モードで数字訴求</li><li>🤝 信頼感がない → 体験談を入れる</li><li>🔗 リンクの位置 → コメント欄に貼る</li></ul></div></div>
+                            <div class="faq-item"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')"><span>💀 シャドウバンされた気がする</span><span class="faq-toggle">▼</span></div><div class="faq-a"><ul><li>⏸️ 2〜3日投稿を休む</li><li>🚫 NGチェックリストを確認</li><li>📉 アフィ投稿の比率を下げる</li><li>⏰ 投稿間隔を最低3時間以上空ける</li><li>🔄 復帰時は有益投稿から</li></ul></div></div>
+                            <div class="faq-item"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')"><span>🤔 ネタ切れ</span><span class="faq-toggle">▼</span></div><div class="faq-a"><ul><li>💡 リサーチタブでネタ30個生成</li><li>🧬 バズ設計タブで横展開</li><li>📅 季節カレンダーを活用</li><li>📊 分析タブで勝ちパターン横展開</li></ul></div></div>
+                            <div class="faq-item"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')"><span>😓 フォロワーが増えない</span><span class="faq-toggle">▼</span></div><div class="faq-a"><ul><li>📚 有益投稿の比率を上げる</li><li>🎣 バズ職人タブで拡散型投稿</li><li>📝 長文投稿で滞在時間UP</li><li>💬 価値あるコメントを残す</li></ul></div></div>
+                            <div class="faq-item"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')"><span>💸 収益が出ない</span><span class="faq-toggle">▼</span></div><div class="faq-a"><ul><li>🎯 報酬率8%以上の商品を選ぶ</li><li>💰 単価5,000円以上に切り替え</li><li>📊 クリック率の高いパターンを量産</li><li>🔥 セール期間に集中投稿</li></ul></div></div>
                         </div>
                     </div>
-
                     <div class="card glass-card" style="border-left:3px solid var(--success);">
                         <h3><span>📈</span> 収益アップの方程式</h3>
-                        <div class="formula-box">
-                            <div class="formula">収益 = <span class="f-highlight">表示回数</span> × <span
-                                    class="f-highlight">クリック率</span> × <span class="f-highlight">購入率</span> × <span
-                                    class="f-highlight">報酬単価</span></div>
-                        </div>
+                        <div class="formula-box"><div class="formula">収益 = <span class="f-highlight">表示回数</span> × <span class="f-highlight">クリック率</span> × <span class="f-highlight">購入率</span> × <span class="f-highlight">報酬単価</span></div></div>
                         <div class="formula-tips">
                             <div class="ftip"><strong>表示回数↑</strong> → バズ職人 / 長文投稿 / 最適時間帯</div>
                             <div class="ftip"><strong>クリック率↑</strong> → フック&CTA / 体験ベース / 数字訴求</div>
-                            <div class="ftip"><strong>購入率↑</strong> → 高レビュー商品を選ぶ / セール期間を狙う</div>
-                            <div class="ftip"><strong>報酬単価↑</strong> → 高単価商品 / 報酬率8%以上の商品</div>
+                            <div class="ftip"><strong>購入率↑</strong> → 高レビュー商品 / セール期間</div>
+                            <div class="ftip"><strong>報酬単価↑</strong> → 高単価商品 / 報酬率8%以上</div>
                         </div>
                     </div>
-
-                    <div class="card glass-card">
-                        <h3><span>💎</span> 忘れちゃいけない鉄則10</h3>
+                    <div class="card glass-card"><h3><span>💎</span> 忘れちゃいけない鉄則10</h3>
                         <div class="rules-grid">
                             <div class="rule-item"><span class="rule-num">1</span>投稿間隔は最低2〜3時間空ける</div>
                             <div class="rule-item"><span class="rule-num">2</span>PR表記は絶対忘れるな（#PR #広告）</div>
@@ -913,7 +565,6 @@
                 </div>
             </section>
 
-            <!-- Tab 10: ツール徹底解説 -->
             <section class="tab-panel" id="tab-toolguide">
                 <div class="panel-header">
                     <h2>📘 ツール徹底解説</h2>
@@ -923,190 +574,36 @@
                     <div class="card glass-card" style="border-left:3px solid var(--primary);">
                         <h3><span>🗺️</span> 全体の使い方フロー</h3>
                         <div class="structure-flow">
-                            <div class="flow-step">
-                                <div class="flow-num">1</div>
-                                <div><strong>商品を決める</strong>
-                                    <p>楽天で報酬率8%以上・レビュー高評価の商品を選ぶ</p>
-                                </div>
-                            </div>
-                            <div class="flow-step">
-                                <div class="flow-num">2</div>
-                                <div><strong>⚡ ポスト生成でドラフト作成</strong>
-                                    <p>商品情報を入力→最大17パターンを一括生成</p>
-                                </div>
-                            </div>
-                            <div class="flow-step">
-                                <div class="flow-num">3</div>
-                                <div><strong>🎣 フック&CTAで味付け</strong>
-                                    <p>生成された投稿のフックを強化、CTAを差し替え</p>
-                                </div>
-                            </div>
-                            <div class="flow-step">
-                                <div class="flow-num">4</div>
-                                <div><strong>🔍 リサーチで仕上げ</strong>
-                                    <p>ハッシュタグとパワーワードで最終調整</p>
-                                </div>
-                            </div>
-                            <div class="flow-step">
-                                <div class="flow-num">5</div>
-                                <div><strong>📊 投稿後に記録</strong>
-                                    <p>分析タブに記録→勝ちパターンを蓄積</p>
-                                </div>
-                            </div>
+                            <div class="flow-step"><div class="flow-num">1</div><div><strong>商品を決める</strong><p>楽天で報酬率8%以上・レビュー高評価の商品を選ぶ</p></div></div>
+                            <div class="flow-step"><div class="flow-num">2</div><div><strong>⚡ ポスト生成でドラフト作成</strong><p>商品情報を入力→最大17パターンを一括生成</p></div></div>
+                            <div class="flow-step"><div class="flow-num">3</div><div><strong>🎣 フック&CTAで味付け</strong><p>生成された投稿のフックを強化、CTAを差し替え</p></div></div>
+                            <div class="flow-step"><div class="flow-num">4</div><div><strong>🔍 リサーチで仕上げ</strong><p>ハッシュタグとパワーワードで最終調整</p></div></div>
+                            <div class="flow-step"><div class="flow-num">5</div><div><strong>📊 投稿後に記録</strong><p>分析タブに記録→勝ちパターンを蓄積</p></div></div>
                         </div>
                     </div>
-
                     <div class="toolguide-grid">
-                        <div class="card glass-card tg-card">
-                            <h3><span>⚡</span> ポスト一括生成</h3>
-                            <div class="tg-purpose">商品1つから最大17パターンの投稿を一括生成</div>
-                            <div class="tg-section">
-                                <div class="tg-label">入力するもの</div>
-                                <ul>
-                                    <li>商品名・価格・カテゴリ</li>
-                                    <li>ターゲット層（「30代・朝起きると首が痛い人」のように具体的に）</li>
-                                    <li>具体的な変化（数字で書く。「入眠20分→7分」など）</li>
-                                </ul>
-                            </div>
-                            <div class="tg-section">
-                                <div class="tg-label">使い分け</div>
-                                <ul>
-                                    <li><strong>「全パターン一括生成」</strong>：アフィ5種×非アフィ5種＋一言投稿5種＋売上特化2種を一気に作る</li>
-                                    <li><strong>「売上特化のみ」</strong>：数字とBefore/Afterに特化した投稿だけ欲しい時に</li>
-                                </ul>
-                            </div>
-                            <div class="tg-tip">💡 「具体的な変化」欄は改行で複数書くほど投稿の質が上がる</div>
-                        </div>
-
-                        <div class="card glass-card tg-card">
-                            <h3><span>🔥</span> バズ職人</h3>
-                            <div class="tg-purpose">6つの心理トリガーでバズ型アフィ投稿を生成</div>
-                            <div class="tg-section">
-                                <div class="tg-label">6つのバズ入口</div>
-                                <ul>
-                                    <li><strong>目撃</strong>：「見てこれ」→発見を共有した驚き</li>
-                                    <li><strong>進化</strong>：「変わった！」→Before/After</li>
-                                    <li><strong>価格バグ</strong>：「この値段バグ」→コスパ訴求</li>
-                                    <li><strong>センス</strong>：「わかる人にはわかる」→共感</li>
-                                    <li><strong>情報ラッシュ</strong>：「保存推奨」→リスト系</li>
-                                    <li><strong>共感</strong>：「それな」→悩みの代弁</li>
-                                </ul>
-                            </div>
-                            <div class="tg-tip">💡 「商品の特徴」欄にUSP（ユニーク売りポイント）を書くと精度UP</div>
-                        </div>
-
-                        <div class="card glass-card tg-card">
-                            <h3><span>📝</span> 長文投稿</h3>
-                            <div class="tg-purpose">Claude/ChatGPT用の長文プロンプトを生成</div>
-                            <div class="tg-section">
-                                <div class="tg-label">なぜ長文が大事か</div>
-                                <p>Threadsのアルゴリズムは「滞在時間」を重視。長文投稿で読む時間が増える→リーチが増える→フォロワーが増える。</p>
-                            </div>
-                            <div class="tg-section">
-                                <div class="tg-label">使い方</div>
-                                <ul>
-                                    <li>ジャンル・ターゲット・テーマを入力</li>
-                                    <li>生成されたプロンプトをClaude/ChatGPTに貼る</li>
-                                    <li>3つのパート（本文・コメント1・コメント2）に分けて投稿</li>
-                                </ul>
-                            </div>
-                            <div class="tg-tip">💡 Claude推奨。長文の自然さはClaudeが一段上。</div>
-                        </div>
-
-                        <div class="card glass-card tg-card">
-                            <h3><span>🎣</span> フック & CTA</h3>
-                            <div class="tg-purpose">注目を集めるフレーズとCTAをワンクリック組み合わせ</div>
-                            <div class="tg-section">
-                                <div class="tg-label">使い方</div>
-                                <ul>
-                                    <li>左のフック一覧から1つ選択</li>
-                                    <li>右のCTA一覧から1つ選択</li>
-                                    <li>「組み合わせをコピー」でテンプレをコピー</li>
-                                    <li>中間の本文を自分で書いて完成</li>
-                                </ul>
-                            </div>
-                            <div class="tg-tip">💡 他の生成タブで作った投稿のフック部分だけ差し替えるのも効果的</div>
-                        </div>
-
-                        <div class="card glass-card tg-card">
-                            <h3><span>🧬</span> バズ設計GPT</h3>
-                            <div class="tg-purpose">バズ投稿の構造を分析し、自分のジャンルで再構築</div>
-                            <div class="tg-section">
-                                <div class="tg-label">最強の使い方</div>
-                                <ul>
-                                    <li>Threads/X/Instagramで反応が多い投稿を見つける</li>
-                                    <li>テキストをそのまま貼り付ける（他ジャンルでもOK）</li>
-                                    <li>自分のジャンルと商品名を入力</li>
-                                    <li>3パターンの横展開＋AIプロンプトが自動生成される</li>
-                                </ul>
-                            </div>
-                            <div class="tg-tip">💡 Claude用プロンプトを使えば、さらに5パターン追加で横展開可能</div>
-                        </div>
-
-                        <div class="card glass-card tg-card">
-                            <h3><span>🔍</span> リサーチ</h3>
-                            <div class="tg-purpose">投稿ネタ・パワーワード・イベント・ハッシュタグを支援</div>
-                            <div class="tg-section">
-                                <div class="tg-label">4つの機能</div>
-                                <ul>
-                                    <li><strong>ネタジェネ</strong>：ジャンル選択→30個のネタ候補をランダム生成</li>
-                                    <li><strong>パワーワード辞典</strong>：6カテゴリの刺さるワードをワンクリックコピー</li>
-                                    <li><strong>季節カレンダー</strong>：今月+2ヶ月先のアフィ狙い目を自動表示</li>
-                                    <li><strong>ハッシュタグ生成</strong>：ジャンル+商品名で最適セット自動生成</li>
-                                </ul>
-                            </div>
-                            <div class="tg-tip">💡 パワーワードを投稿のフック部分に1つ入れるだけで反応率が変わる</div>
-                        </div>
-
-                        <div class="card glass-card tg-card">
-                            <h3><span>📊</span> 分析・記録</h3>
-                            <div class="tg-purpose">投稿データを蓄積し勝ちパターンを自動分析</div>
-                            <div class="tg-section">
-                                <div class="tg-label">記録すべきデータ</div>
-                                <ul>
-                                    <li>日付・商品名・投稿タイプ・使ったフック</li>
-                                    <li>表示回数・いいね数・クリック数</li>
-                                </ul>
-                            </div>
-                            <div class="tg-section">
-                                <div class="tg-label">分析の見方</div>
-                                <p>「フック別のパフォーマンス」欄で、どのフックパターンが最も反応が良いかわかる。反応率の高いフックで量産するのが基本戦略。</p>
-                            </div>
-                            <div class="tg-tip">💡 最低10件以上データを貯めてから分析すると精度が上がる</div>
-                        </div>
+                        <div class="card glass-card tg-card"><h3><span>⚡</span> ポスト一括生成</h3><div class="tg-purpose">商品1つから最大17パターンの投稿を一括生成</div><div class="tg-section"><div class="tg-label">入力するもの</div><ul><li>商品名・価格・カテゴリ</li><li>ターゲット層</li><li>具体的な変化（数字で書く）</li></ul></div><div class="tg-tip">💡 「具体的な変化」欄は改行で複数書くほど投稿の質が上がる</div></div>
+                        <div class="card glass-card tg-card"><h3><span>🔥</span> バズ職人</h3><div class="tg-purpose">6つの心理トリガーでバズ型アフィ投稿を生成</div><div class="tg-section"><div class="tg-label">6つのバズ入口</div><ul><li><strong>目撃</strong>：発見を共有した驚き</li><li><strong>進化</strong>：Before/After</li><li><strong>価格バグ</strong>：コスパ訴求</li><li><strong>センス</strong>：共感</li><li><strong>情報ラッシュ</strong>：リスト系</li><li><strong>共感</strong>：悩みの代弁</li></ul></div><div class="tg-tip">💡 USPを書くと精度UP</div></div>
+                        <div class="card glass-card tg-card"><h3><span>📝</span> 長文投稿</h3><div class="tg-purpose">Claude/ChatGPT用の長文プロンプトを生成</div><div class="tg-section"><div class="tg-label">使い方</div><ul><li>ジャンル・ターゲット・テーマを入力</li><li>生成されたプロンプトをAIに貼る</li><li>3パートに分けて投稿</li></ul></div><div class="tg-tip">💡 Claude推奨。長文の自然さはClaudeが一段上。</div></div>
+                        <div class="card glass-card tg-card"><h3><span>🎣</span> フック & CTA</h3><div class="tg-purpose">注目フレーズとCTAをワンクリック組み合わせ</div><div class="tg-section"><div class="tg-label">使い方</div><ul><li>フック一覧から1つ選択</li><li>CTA一覧から1つ選択</li><li>組み合わせをコピー</li><li>中間の本文を書いて完成</li></ul></div><div class="tg-tip">💡 フック部分だけ差し替えるのも効果的</div></div>
+                        <div class="card glass-card tg-card"><h3><span>🧬</span> バズ設計GPT</h3><div class="tg-purpose">バズ投稿の構造を分析し再構築</div><div class="tg-section"><div class="tg-label">最強の使い方</div><ul><li>バズ投稿を見つけて貼り付け</li><li>自分のジャンルと商品名を入力</li><li>3パターン横展開+AIプロンプト自動生成</li></ul></div><div class="tg-tip">💡 Claude用プロンプトで5パターン追加可能</div></div>
+                        <div class="card glass-card tg-card"><h3><span>🔍</span> リサーチ</h3><div class="tg-purpose">ネタ・パワーワード・イベント・ハッシュタグ支援</div><div class="tg-section"><div class="tg-label">4つの機能</div><ul><li>ネタジェネ：30個ランダム生成</li><li>パワーワード辞典：6カテゴリ</li><li>季節カレンダー：3ヶ月先まで</li><li>ハッシュタグ生成</li></ul></div><div class="tg-tip">💡 パワーワードを1つ入れるだけで反応率が変わる</div></div>
+                        <div class="card glass-card tg-card"><h3><span>📊</span> 分析・記録</h3><div class="tg-purpose">投稿データを蓄積し勝ちパターンを自動分析</div><div class="tg-section"><div class="tg-label">記録すべきデータ</div><ul><li>日付・商品名・投稿タイプ・フック</li><li>表示回数・いいね数・クリック数</li></ul></div><div class="tg-tip">💡 10件以上データを貯めてから分析すると精度UP</div></div>
                     </div>
-
                     <div class="card glass-card" style="border-left:3px solid #fbbf24;">
                         <h3><span>🏆</span> 日々のルーティン（推奨フロー）</h3>
                         <div class="routine-timeline">
-                            <div class="routine-item">
-                                <div class="routine-time">朝 7:00</div>
-                                <div class="routine-action">① 有益投稿を1つ投稿（長文推奨）</div>
-                            </div>
-                            <div class="routine-item">
-                                <div class="routine-time">昼 12:00</div>
-                                <div class="routine-action">② アフィ投稿を1つ投稿</div>
-                            </div>
-                            <div class="routine-item">
-                                <div class="routine-time">夕 17:00</div>
-                                <div class="routine-action">③ 有益投稿 or 自己紹介投稿</div>
-                            </div>
-                            <div class="routine-item">
-                                <div class="routine-time">夜 20:00</div>
-                                <div class="routine-action">④ アフィ投稿（ゴールデンタイム・最重要）</div>
-                            </div>
-                            <div class="routine-item">
-                                <div class="routine-time">夜 21:30</div>
-                                <div class="routine-action">⑤ 有益投稿 or バズ狙い投稿</div>
-                            </div>
-                            <div class="routine-item">
-                                <div class="routine-time">寝る前</div>
-                                <div class="routine-action">⑥ 翌日のネタをリサーチタブで準備</div>
-                            </div>
+                            <div class="routine-item"><div class="routine-time">朝 7:00</div><div class="routine-action">① 有益投稿を1つ投稿（長文推奨）</div></div>
+                            <div class="routine-item"><div class="routine-time">昼 12:00</div><div class="routine-action">② アフィ投稿を1つ投稿</div></div>
+                            <div class="routine-item"><div class="routine-time">夕 17:00</div><div class="routine-action">③ 有益投稿 or 自己紹介投稿</div></div>
+                            <div class="routine-item"><div class="routine-time">夜 20:00</div><div class="routine-action">④ アフィ投稿（ゴールデンタイム・最重要）</div></div>
+                            <div class="routine-item"><div class="routine-time">夜 21:30</div><div class="routine-action">⑤ 有益投稿 or バズ狙い投稿</div></div>
+                            <div class="routine-item"><div class="routine-time">寝る前</div><div class="routine-action">⑥ 翌日のネタをリサーチタブで準備</div></div>
                         </div>
                     </div>
                 </div>
             </section>
+
         </main>
     </div>
 
@@ -1114,43 +611,33 @@
 
     <script>
     (function(){
+        /* 要素取得 */
         var lo = document.getElementById('loginOverlay');
         var lbtn = document.getElementById('loginBtn');
         var pinp = document.getElementById('accessPassword');
         var lerr = document.getElementById('loginError');
-        var sb = document.querySelector('.sidebar');
+        var sb = document.getElementById('sidebarNav');
         var tb = document.getElementById('menuToggle');
         var ov = document.getElementById('sidebarOverlay');
         var navItems = document.querySelectorAll('.nav-item');
         var tabPanels = document.querySelectorAll('.tab-panel');
-        var isLoggedIn = localStorage.getItem('isAuth') === 'true';
 
         /* ===== ログイン ===== */
-        function showApp(){
-            lo.style.display = 'none';
-            document.body.style.overflow = 'auto';
-            if(tb && window.innerWidth <= 1024) tb.style.display = 'flex';
-            if(sb && window.innerWidth > 1024) sb.style.display = 'flex';
-        }
-
         function doLogin(){
+            if(!pinp || !lo) return;
             if(pinp.value === 'threads-conquest'){
                 localStorage.setItem('isAuth','true');
-                isLoggedIn = true;
-                showApp();
+                lo.style.display = 'none';
+                document.body.style.overflow = 'auto';
             } else {
-                lerr.style.display = 'block';
+                if(lerr) lerr.style.display = 'block';
                 pinp.style.border = '1px solid #f87171';
             }
         }
 
-        /* 初期状態 */
-        if(isLoggedIn){
-            showApp();
-        } else {
-            lo.style.display = 'flex';
-            document.body.style.overflow = 'hidden';
-            if(tb) tb.style.display = 'none';
+        if(localStorage.getItem('isAuth') === 'true'){
+            if(lo) lo.style.display = 'none';
+            document.body.style.overflow = 'auto';
         }
 
         if(lbtn) lbtn.addEventListener('click', doLogin);
@@ -1158,14 +645,13 @@
 
         /* ===== サイドバー開閉 ===== */
         function openSidebar(){
-            if(!isLoggedIn) return;
-            sb.classList.add('active');
+            if(sb) sb.classList.add('active');
             if(tb) tb.classList.add('active');
             if(ov) ov.classList.add('active');
             document.body.style.overflow = 'hidden';
         }
         function closeSidebar(){
-            sb.classList.remove('active');
+            if(sb) sb.classList.remove('active');
             if(tb) tb.classList.remove('active');
             if(ov) ov.classList.remove('active');
             document.body.style.overflow = 'auto';
@@ -1173,7 +659,7 @@
 
         if(tb){
             tb.addEventListener('click', function(){
-                if(sb.classList.contains('active')) closeSidebar();
+                if(sb && sb.classList.contains('active')) closeSidebar();
                 else openSidebar();
             });
         }
@@ -1213,6 +699,7 @@
             })(navItems[n]);
         }
 
+        /* 初期表示 */
         for(var p = 0; p < tabPanels.length; p++){
             if(tabPanels[p].classList.contains('active')){
                 tabPanels[p].style.display = 'block';
@@ -1223,6 +710,6 @@
     })();
     </script>
 
-    <script src="script.js?v=5.1"></script>
+    <script src="script.js?v=6.0"></script>
 </body>
 </html>
