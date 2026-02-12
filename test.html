@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>サイドバーテスト</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:#0a0e1a; color:#f1f5f9; font-family:sans-serif; min-height:100vh; }
+
+/* ハンバーガーボタン */
+#menuBtn {
+    position: fixed;
+    top: 12px;
+    left: 12px;
+    z-index: 99999;
+    width: 44px;
+    height: 44px;
+    background: #1e293b;
+    border: 1px solid #334155;
+    border-radius: 8px;
+    color: #f1f5f9;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* 半透明の背景幕（サイドバーの後ろ） */
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    z-index: 99990;
+    display: none;
+}
+
+/* サイドバー本体（幕の上） */
+#sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 280px;
+    height: 100vh;
+    background: #0f172a;
+    border-right: 1px solid #1e293b;
+    z-index: 99995;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    padding-top: 70px;
+}
+#sidebar.open {
+    transform: translateX(0);
+}
+
+/* ナビ項目 */
+.nav-btn {
+    display: block;
+    width: 100%;
+    padding: 16px 20px;
+    background: none;
+    border: none;
+    color: #94a3b8;
+    font-size: 16px;
+    text-align: left;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+}
+.nav-btn:active, .nav-btn.active {
+    background: rgba(99,102,241,0.15);
+    color: #818cf8;
+}
+
+/* メインコンテンツ */
+.main { padding: 70px 16px 20px; }
+
+/* ページ（タブ） */
+.page { display:none; }
+.page.active { display:block; }
+
+.page h2 { margin-bottom: 12px; }
+.page p { color: #94a3b8; }
+</style>
+</head>
+<body>
+
+<!-- ハンバーガーボタン -->
+<button id="menuBtn">☰</button>
+
+<!-- 半透明の背景幕 -->
+<div id="overlay"></div>
+
+<!-- サイドバー -->
+<div id="sidebar">
+    <button class="nav-btn active" data-page="generator">⚡ ポスト生成</button>
+    <button class="nav-btn" data-page="buzz">🔥 バズ職人</button>
+    <button class="nav-btn" data-page="longform">📝 長文生成</button>
+    <button class="nav-btn" data-page="hooks">🎣 フック & CTA</button>
+    <button class="nav-btn" data-page="analytics">📊 分析・記録</button>
+    <button class="nav-btn" data-page="structure">🧬 バズ設計</button>
+    <button class="nav-btn" data-page="research">🔍 リサーチ</button>
+    <button class="nav-btn" data-page="guide">📖 攻略ガイド</button>
+    <button class="nav-btn" data-page="komattara">🆘 困ったら</button>
+    <button class="nav-btn" data-page="toolguide">📘 使い方</button>
+</div>
+
+<!-- メインコンテンツ -->
+<div class="main">
+    <div class="page active" id="page-generator"><h2>⚡ ポスト生成</h2><p>ポスト生成ページの内容がここに表示されます</p></div>
+    <div class="page" id="page-buzz"><h2>🔥 バズ職人</h2><p>バズ職人ページの内容がここに表示されます</p></div>
+    <div class="page" id="page-longform"><h2>📝 長文生成</h2><p>長文生成ページの内容がここに表示されます</p></div>
+    <div class="page" id="page-hooks"><h2>🎣 フック & CTA</h2><p>フック＆CTAページの内容がここに表示されます</p></div>
+    <div class="page" id="page-analytics"><h2>📊 分析・記録</h2><p>分析・記録ページの内容がここに表示されます</p></div>
+    <div class="page" id="page-structure"><h2>🧬 バズ設計</h2><p>バズ設計ページの内容がここに表示されます</p></div>
+    <div class="page" id="page-research"><h2>🔍 リサーチ</h2><p>リサーチページの内容がここに表示されます</p></div>
+    <div class="page" id="page-guide"><h2>📖 攻略ガイド</h2><p>攻略ガイドページの内容がここに表示されます</p></div>
+    <div class="page" id="page-komattara"><h2>🆘 困ったら</h2><p>困ったらページの内容がここに表示されます</p></div>
+    <div class="page" id="page-toolguide"><h2>📘 使い方</h2><p>使い方ページの内容がここに表示されます</p></div>
+</div>
+
+<script>
+var menuBtn = document.getElementById('menuBtn');
+var sidebar = document.getElementById('sidebar');
+var overlay = document.getElementById('overlay');
+var navBtns = document.querySelectorAll('.nav-btn');
+var pages = document.querySelectorAll('.page');
+
+function openSidebar(){
+    sidebar.classList.add('open');
+    overlay.style.display = 'block';
+    menuBtn.textContent = '✕';
+}
+function closeSidebar(){
+    sidebar.classList.remove('open');
+    overlay.style.display = 'none';
+    menuBtn.textContent = '☰';
+}
+
+menuBtn.addEventListener('click', function(){
+    if(sidebar.classList.contains('open')){
+        closeSidebar();
+    } else {
+        openSidebar();
+    }
+});
+
+overlay.addEventListener('click', function(){
+    closeSidebar();
+});
+
+for(var i = 0; i < navBtns.length; i++){
+    (function(btn){
+        btn.addEventListener('click', function(){
+            var pageName = btn.getAttribute('data-page');
+
+            // ナビのactive切替
+            for(var j = 0; j < navBtns.length; j++){
+                navBtns[j].classList.remove('active');
+            }
+            btn.classList.add('active');
+
+            // ページ切替
+            for(var k = 0; k < pages.length; k++){
+                pages[k].classList.remove('active');
+                pages[k].style.display = 'none';
+            }
+            var target = document.getElementById('page-' + pageName);
+            if(target){
+                target.classList.add('active');
+                target.style.display = 'block';
+            }
+
+            closeSidebar();
+            window.scrollTo(0,0);
+        });
+    })(navBtns[i]);
+}
+</script>
+
+</body>
+</html>
