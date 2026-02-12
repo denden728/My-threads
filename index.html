@@ -1139,12 +1139,18 @@
     var lbtn = document.getElementById('loginBtn');
     var pinp = document.getElementById('accessPassword');
     var lerr = document.getElementById('loginError');
+    var tb = document.getElementById('menuToggle');
+
+    // ログイン前はハンバーガーボタンを隠す
+    function hideMenuButton(){ if(tb) tb.style.display = 'none'; }
+    function showMenuButton(){ if(tb && window.innerWidth <= 1024) tb.style.display = 'flex'; }
 
     function doLogin(){
         if(pinp.value === 'threads-conquest'){
             localStorage.setItem('isAuth','true');
             lo.style.display = 'none';
             document.body.style.overflow = 'auto';
+            showMenuButton();
         } else {
             lerr.style.display = 'block';
             pinp.style.border = '1px solid #f87171';
@@ -1153,10 +1159,12 @@
     if(localStorage.getItem('isAuth') === 'true'){
         lo.style.display = 'none';
         document.body.style.overflow = 'auto';
+        showMenuButton();
+    } else {
+        hideMenuButton();
     }
     if(lbtn) lbtn.addEventListener('click', doLogin);
     if(pinp) pinp.addEventListener('keypress', function(e){ if(e.key==='Enter') doLogin(); });
-
     // ===== サイドバー開閉 =====
     var sb = document.querySelector('.sidebar');
     var tb = document.getElementById('menuToggle');
