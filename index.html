@@ -1107,98 +1107,122 @@
                     </div>
                 </div>
             </section>
-        </main>
-    </div>
+    </main>
+</div>
 
-    <!-- Toast notification -->
-    <div class="toast" id="toast"></div>
+<div class="toast" id="toast"></div>
 
-    <!-- ナビゲーション・ログイン -->
-    <script>
-    (function(){
-        var navItems=document.querySelectorAll('.nav-item');
-        var tabPanels=document.querySelectorAll('.tab-panel');
-        var sb=document.querySelector('.sidebar');
-        var tb=document.getElementById('menuToggle');
-        var ov=document.getElementById('sidebarOverlay');
+<script>
+(function(){
+    // ===== ログイン処理 =====
+    var lo = document.getElementById('loginOverlay');
+    var lbtn = document.getElementById('loginBtn');
+    var pinp = document.getElementById('accessPassword');
+    var lerr = document.getElementById('loginError');
 
-        function switchTab(name){
-            navItems.forEach(function(n){n.classList.remove('active');});
-            tabPanels.forEach(function(p){p.classList.remove('active');});
-            var panel=document.getElementById('tab-'+name);
-            if(panel)panel.classList.add('active');
-            navItems.forEach(function(n){
-                if(n.getAttribute('data-tab')===name)n.classList.add('active');
-            });
-            if(window.innerWidth<=1024){
-                sb.classList.remove('active');
-                if(tb)tb.classList.remove('active');
-                if(ov)ov.classList.remove('active');
-                document.body.style.overflow='auto';
-            }
-            window.scrollTo(0,0);
+    function doLogin(){
+        if(pinp.value === 'threads-conquest'){
+            localStorage.setItem('isAuth','true');
+            lo.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        } else {
+            lerr.style.display = 'block';
+            pinp.style.border = '1px solid #f87171';
         }
+    }
+    if(localStorage.getItem('isAuth') === 'true'){
+        lo.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+    if(lbtn) lbtn.addEventListener('click', doLogin);
+    if(pinp) pinp.addEventListener('keypress', function(e){ if(e.key==='Enter') doLogin(); });
 
-        navItems.forEach(function(item){
-            item.addEventListener('click',function(){
-                var t=item.getAttribute('data-tab');
-                if(t)switchTab(t);
-            });
+    // ===== サイドバー開閉 =====
+    var sb = document.querySelector('.sidebar');
+    var tb = document.getElementById('menuToggle');
+    var ov = document.getElementById('sidebarOverlay');
+
+    function openSidebar(){
+        sb.classList.add('active');
+        if(tb) tb.classList.add('active');
+        if(ov) ov.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+    function closeSidebar(){
+        sb.classList.remove('active');
+        if(tb) tb.classList.remove('active');
+        if(ov) ov.classList.remove('active');
+        document.body.style.overflow = 'auto';
+    }
+    if(tb){
+        tb.addEventListener('click', function(){
+            if(sb.classList.contains('active')){ closeSidebar(); }
+            else { openSidebar(); }
         });
+    }
+    if(ov){
+        ov.addEventListener('click', function(){ closeSidebar(); });
+    }
 
-        if(tb){
-            tb.addEventListener('click',function(){
-                if(sb.classList.contains('active')){
-                    sb.classList.remove('active');
-                    tb.classList.remove('active');
-                    if(ov)ov.classList.remove('active');
-                    document.body.style.overflow='auto';
-                }else{
-                    sb.classList.add('active');
-                    tb.classList.add('active');
-                    if(ov)ov.classList.add('active');
-                    document.body.style.overflow='hidden';
+    // ===== ページ切り替え（核心） =====
+    var navItems = document.querySelectorAll('.nav-item');
+    var tabPanels = document.querySelectorAll('.tab-panel');
+
+    function switchTab(tabName){
+        // 全タブを非表示（style.displayで直接制御）
+        for(var i = 0; i < tabPanels.length; i++){
+            tabPanels[i].classList.remove('active');
+            tabPanels[i].style.display = 'none';
+        }
+        // 全ナビの active を外す
+        for(var j = 0; j < navItems.length; j++){
+            navItems[j].classList.remove('active');
+        }
+        // 対象タブを表示
+        var target = document.getElementById('tab-' + tabName);
+        if(target){
+            target.classList.add('active');
+            target.style.display = 'block';
+        }
+        // 対象ナビを active に
+        for(var k = 0; k < navItems.length; k++){
+            if(navItems[k].getAttribute('data-tab') === tabName){
+                navItems[k].classList.add('active');
+            }
+        }
+        // モバイルならサイドバーを閉じる
+        if(window.innerWidth <= 1024){
+            closeSidebar();
+        }
+        window.scrollTo(0,0);
+
+        // デバッグ用（問題が解決したら削除してOK）
+        console.log('switchTab called: ' + tabName + ', target found: ' + (target ? 'YES' : 'NO'));
+    }
+
+    // 各ナビアイテムにクリックイベント登録
+    for(var n = 0; n < navItems.length; n++){
+        (function(item){
+            item.addEventListener('click', function(){
+                var tabName = item.getAttribute('data-tab');
+                if(tabName){
+                    switchTab(tabName);
                 }
             });
+        })(navItems[n]);
+    }
+
+    // 初期表示：最初の active タブを style.display でも block に
+    for(var p = 0; p < tabPanels.length; p++){
+        if(tabPanels[p].classList.contains('active')){
+            tabPanels[p].style.display = 'block';
+        } else {
+            tabPanels[p].style.display = 'none';
         }
+    }
+})();
+</script>
 
-        if(ov){
-            ov.addEventListener('click',function(){
-                sb.classList.remove('active');
-                if(tb)tb.classList.remove('active');
-                ov.classList.remove('active');
-                document.body.style.overflow='auto';
-            });
-        }
-
-        var lo=document.getElementById('loginOverlay');
-        var lbtn=document.getElementById('loginBtn');
-        var pinp=document.getElementById('accessPassword');
-        var lerr=document.getElementById('loginError');
-
-        function doLogin(){
-            if(pinp.value==='threads-conquest'){
-                localStorage.setItem('isAuth','true');
-                lo.style.display='none';
-                document.body.style.overflow='auto';
-            }else{
-                lerr.style.display='block';
-                pinp.style.border='1px solid #f87171';
-            }
-        }
-
-        if(localStorage.getItem('isAuth')==='true'){
-            lo.style.display='none';
-            document.body.style.overflow='auto';
-        }
-
-        if(lbtn)lbtn.addEventListener('click',doLogin);
-        if(pinp)pinp.addEventListener('keypress',function(e){
-            if(e.key==='Enter')doLogin();
-        });
-    })();
-    </script>
-
-    <script src="script.js?v=3.2"></script>
+<script src="script.js?v=4.0"></script>
 </body>
 </html>
