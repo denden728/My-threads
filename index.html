@@ -47,71 +47,91 @@
         </div>
     </div>
 
-    <div class="app-container">
-        <!-- Sidebar Navigation -->
-        <nav class="sidebar">
-            <div class="sidebar-header">
-                <div class="logo">
-                    <span class="logo-icon">🧵</span>
-                    <div>
-                        <h1>Threads</h1>
-                        <p>Complete Conquest</p>
-                    </div>
-                </div>
-            </div>
-            <ul class="nav-menu">
-                <li class="nav-item active" data-tab="generator">
-                    <span class="nav-icon">⚡</span>
-                    <span>ポスト生成</span>
-                </li>
-                <li class="nav-item" data-tab="buzz">
-                    <span class="nav-icon">🔥</span>
-                    <span>バズ職人</span>
-                </li>
-                <li class="nav-item" data-tab="longform">
-                    <span class="nav-icon">📝</span>
-                    <span>長文生成</span>
-                </li>
-                <li class="nav-item" data-tab="hooks">
-                    <span class="nav-icon">🎣</span>
-                    <span>フック & CTA</span>
-                </li>
-                <li class="nav-item" data-tab="analytics">
-                    <span class="nav-icon">📊</span>
-                    <span>分析・記録</span>
-                </li>
-                <li class="nav-item" data-tab="structure">
-                    <span class="nav-icon">🧬</span>
-                    <span>バズ設計</span>
-                </li>
-                <li class="nav-item" data-tab="research">
-                    <span class="nav-icon">🔍</span>
-                    <span>リサーチ</span>
-                </li>
-                <li class="nav-item" data-tab="guide">
-                    <span class="nav-icon">📖</span>
-                    <span>攻略ガイド</span>
-                </li>
-                <li class="nav-item" data-tab="komattara">
-                    <span class="nav-icon">🆘</span>
-                    <span>困ったら</span>
-                </li>
-                <li class="nav-item" data-tab="toolguide">
-                    <span class="nav-icon">📘</span>
-                    <span>使い方</span>
-                </li>
-            </ul>
-            <div class="sidebar-footer">
-                <div class="daily-quota">
-                    <p class="quota-label">今日の投稿</p>
-                    <div class="quota-bar">
-                        <div class="quota-fill" id="quotaFill"></div>
-                    </div>
-                    <p class="quota-text" id="quotaText">0 / 6 投稿</p>
-                </div>
-            </div>
-        </nav>
+    <!-- Sidebar Overlay (mobile) -->
+    <div id="sidebarOverlay" class="sidebar-overlay"></div>
 
+    <!-- Login/Password Protection Overlay -->
+    <div id="loginOverlay" class="login-overlay">
+        <div class="glass-card login-card">
+            <div class="logo">
+                <span class="logo-icon">🔒</span>
+                <h2>Threads Conquest</h2>
+            </div>
+            <p>このツールはパスワード保護されています</p>
+            <div class="form-group">
+                <input type="password" id="accessPassword" placeholder="パスワードを入力">
+            </div>
+            <button id="loginBtn" class="btn btn-primary">ログイン</button>
+            <p id="loginError" class="error-msg"
+                style="display:none; color:#f87171; margin-top:1rem; font-size:0.8rem;">パスワードが違います</p>
+        </div>
+    </div>
+
+    <!-- ★ サイドバー（app-containerの外） ★ -->
+    <nav class="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <span class="logo-icon">🧵</span>
+                <div>
+                    <h1>Threads</h1>
+                    <p>Complete Conquest</p>
+                </div>
+            </div>
+        </div>
+        <ul class="nav-menu">
+            <li class="nav-item active" data-tab="generator">
+                <span class="nav-icon">⚡</span>
+                <span>ポスト生成</span>
+            </li>
+            <li class="nav-item" data-tab="buzz">
+                <span class="nav-icon">🔥</span>
+                <span>バズ職人</span>
+            </li>
+            <li class="nav-item" data-tab="longform">
+                <span class="nav-icon">📝</span>
+                <span>長文生成</span>
+            </li>
+            <li class="nav-item" data-tab="hooks">
+                <span class="nav-icon">🎣</span>
+                <span>フック & CTA</span>
+            </li>
+            <li class="nav-item" data-tab="analytics">
+                <span class="nav-icon">📊</span>
+                <span>分析・記録</span>
+            </li>
+            <li class="nav-item" data-tab="structure">
+                <span class="nav-icon">🧬</span>
+                <span>バズ設計</span>
+            </li>
+            <li class="nav-item" data-tab="research">
+                <span class="nav-icon">🔍</span>
+                <span>リサーチ</span>
+            </li>
+            <li class="nav-item" data-tab="guide">
+                <span class="nav-icon">📖</span>
+                <span>攻略ガイド</span>
+            </li>
+            <li class="nav-item" data-tab="komattara">
+                <span class="nav-icon">🆘</span>
+                <span>困ったら</span>
+            </li>
+            <li class="nav-item" data-tab="toolguide">
+                <span class="nav-icon">📘</span>
+                <span>使い方</span>
+            </li>
+        </ul>
+        <div class="sidebar-footer">
+            <div class="daily-quota">
+                <p class="quota-label">今日の投稿</p>
+                <div class="quota-bar">
+                    <div class="quota-fill" id="quotaFill"></div>
+                </div>
+                <p class="quota-text" id="quotaText">0 / 6 投稿</p>
+            </div>
+        </div>
+    </nav>
+
+    <div class="app-container">
         <!-- Main Content Area -->
         <main class="main-content">
             <!-- Tab 1: ポスト生成（爆速メーカー + 売上特化） -->
