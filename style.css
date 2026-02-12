@@ -1639,6 +1639,9 @@ textarea {
 }
 /* ===== モバイルサイドバー強制上書き ===== */
 @media screen and (max-width: 1024px) {
+    .login-overlay {
+        z-index: 9999999 !important;
+    }
     .sidebar-overlay {
         z-index: 90 !important;
     }
@@ -1650,6 +1653,6 @@ textarea {
         pointer-events: auto !important;
     }
     .menu-toggle {
-        z-index: 9999999 !important;
+        z-index: 9999998 !important;
     }
 }
