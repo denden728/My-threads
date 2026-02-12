@@ -902,4 +902,176 @@ const POWER_WORDS = {
     urgency: ['今日だけ', '期間限定', '在庫わずか', '残りあとわずか', '終了間近', '急いで', '今すぐ', '見逃し厳禁', '再入荷なし', 'ラストチャンス', '本日限り', '先着順', '早い者勝ち', '売り切れ必至', 'タイムセール'],
     social: ['話題の', 'SNSで大反響', '口コミ殺到', '累計100万個', 'ランキング1位', '芸能人愛用', '美容師おすすめ', 'プロ御用達', '楽天1位', 'Amazon高評価', 'インスタで話題', 'TikTokでバズった', '満足度97%', 'リピート率90%', 'モンドセレクション'],
     curiosity: ['え、知ってた？', '実は', '意外と知らない', '誰も教えてくれない', '裏ワザ', '隠れた名品', '衝撃の事実', '99%の人が知らない', '損してた', 'ヤバい', 'まだ知らないの？', 'こっそり教える', 'プロが教える', '業界の闇', '常識を覆す'],
-    emotion: 
+    emotion: ['感動', '号泣', '鳥肌', '震えた', '人生変わった', '救われた', '衝撃', '最高', '泣ける', '幸せ', 'ありがとう', '感謝', '奇跡', '運命', '一生モノ'],
+    number: ['3選', '5つの方法', 'たった1分', '30秒で', '月1万円', '年間10万', '2倍', '半分以下', '1日30円', '3日で実感', '1週間で変化', '90%の人が', 'TOP10', '100均', 'ワンコイン'],
+    contrast: ['高いけど安い', 'ズボラでもできる', '努力なしで', '我慢しないダイエット', '簡単なのにプロ級', '安いのに高品質', '小さいのに大容量', '地味だけど最強', '誰でもできるのにやらない', '面倒臭がりの', '不器用でもOK', 'センスなくても', '知識ゼロから', '初心者でも失敗しない', '放置するだけ']
+};
+
+const PW_LABELS = { urgency: '緊急性ワード', social: '社会的証明ワード', curiosity: '好奇心ワード', emotion: '感情ワード', number: '数字系ワード', contrast: '対比ワード' };
+
+document.getElementById('showPowerWordsBtn').addEventListener('click', () => {
+    const cat = document.getElementById('pwCategory').value;
+    const words = POWER_WORDS[cat] || [];
+    const out = document.getElementById('powerWordsOutput');
+    out.innerHTML = `<p style="font-size:0.8rem;color:#94a3b8;margin-bottom:0.5rem;">${PW_LABELS[cat]} (クリックでコピー)</p>`;
+
+    words.forEach(w => {
+        const span = document.createElement('span');
+        span.className = 'power-word';
+        span.textContent = w;
+        span.addEventListener('click', () => {
+            navigator.clipboard.writeText(w);
+            showToast(`📋 パワーワードをコピー: ${w}`);
+        });
+        out.appendChild(span);
+    });
+});
+
+// ----- 季節・イベントカレンダー -----
+const SEASONAL_EVENTS = {
+    1: [
+        { date: '1月1日〜7日', event: '🎍 お正月セール', tip: '福袋・時短家電・健康グッズ' },
+        { date: '1月中旬', event: '❄️ 寒さ対策ピーク', tip: '暖房グッズ・靴下・保湿ケア' },
+        { date: '1月下旬', event: '📚 新年の目標', tip: '手帳・副業・学習教材' }
+    ],
+    2: [
+        { date: '2月上旬', event: '💝 バレンタイン準備', tip: 'チョコ・ギフト・コスメ' },
+        { date: '2月14日', event: '💕 バレンタインデー', tip: '美容・自分へのご褒美' },
+        { date: '2月下旬', event: '🌸 春の準備', tip: '花粉対策・春コーデ' }
+    ],
+    3: [
+        { date: '3月上旬', event: '🌸 卒業・入学準備', tip: '文房具・バッグ・スーツ' },
+        { date: '3月14日', event: '🍫 ホワイトデー', tip: 'ギフト・アクセサリー' },
+        { date: '3月下旬', event: '🏠 新生活準備', tip: '家電・収納・引越し' }
+    ],
+    4: [
+        { date: '4月上旬', event: '🌸 新生活スタート', tip: '時短家電・弁当グッズ・通勤' },
+        { date: '4月中旬', event: '🧴 紫外線対策', tip: '日焼け止め・帽子・サングラス' },
+        { date: '4月下旬', event: '🗓️ GW準備', tip: '旅行グッズ・レジャー・BBQ' }
+    ],
+    5: [
+        { date: '5月上旬', event: '🎏 GW・母の日前', tip: '旅行・ギフト・花' },
+        { date: '5月第2日曜', event: '💐 母の日', tip: 'コスメ・家電・癒しグッズ', highlight: true },
+        { date: '5月下旬', event: '☔ 梅雨対策', tip: '除湿器・室内干し・防カビ' }
+    ],
+    6: [
+        { date: '6月上旬', event: '☔ 梅雨本番', tip: '傘・レインブーツ・部屋干し' },
+        { date: '6月中旬', event: '🎁 父の日前', tip: 'ガジェット・お酒・ファッション' },
+        { date: '6月第3日曜', event: '👔 父の日', tip: '家電・健康グッズ・趣味', highlight: true }
+    ],
+    7: [
+        { date: '7月上旬', event: '🏖️ 夏の準備', tip: '日焼け止め・ダイエット・水着' },
+        { date: '7月中旬', event: '🛒 Amazonプライムデー', tip: '家電・ガジェット・日用品', highlight: true },
+        { date: '7月下旬', event: '🌞 夏本番', tip: '冷感グッズ・虫除け・アウトドア' }
+    ],
+    8: [
+        { date: '8月上旬', event: '🍉 お盆準備', tip: '手土産・旅行グッズ・帰省' },
+        { date: '8月中旬', event: '🎐 夏休み', tip: 'レジャー・知育・自由研究' },
+        { date: '8月下旬', event: '📚 新学期準備', tip: '文房具・ランドセル・制服' }
+    ],
+    9: [
+        { date: '9月上旬', event: '🍂 秋の準備', tip: '秋コーデ・乾燥対策' },
+        { date: '9月中旬', event: '🎑 敬老の日', tip: '健康グッズ・食品ギフト' },
+        { date: '9月下旬', event: '🛍️ 楽天スーパーSALE', tip: '家電・日用品まとめ買い', highlight: true }
+    ],
+    10: [
+        { date: '10月上旬', event: '🎃 ハロウィン準備', tip: 'コスメ・仮装・パーティー' },
+        { date: '10月中旬', event: '🍁 秋の味覚', tip: '食品・キッチングッズ' },
+        { date: '10月下旬', event: '❄️ 冬の準備', tip: '暖房・冬コーデ・保湿' }
+    ],
+    11: [
+        { date: '11月上旬', event: '🛒 ブラックフライデー準備', tip: '欲しい物リスト・比較記事' },
+        { date: '11月下旬', event: '🏷️ ブラックフライデー', tip: '家電・ガジェット・コスメ', highlight: true },
+        { date: '11月下旬', event: '🎁 クリスマスギフト準備', tip: 'プレゼント・おもちゃ' }
+    ],
+    12: [
+        { date: '12月上旬', event: '🎄 クリスマス準備', tip: 'ギフト・パーティー・コスメ' },
+        { date: '12月中旬', event: '📦 楽天大感謝祭', tip: 'まとめ買い・日用品', highlight: true },
+        { date: '12月下旬', event: '🎍 年末準備', tip: '大掃除グッズ・おせち・福袋予約' }
+    ]
+};
+
+function renderSeasonalCalendar() {
+    const container = document.getElementById('seasonalCalendar');
+    if (!container) return;
+    const currentMonth = new Date().getMonth() + 1;
+    const months = [currentMonth, (currentMonth % 12) + 1, ((currentMonth + 1) % 12) + 1];
+
+    container.innerHTML = '';
+    months.forEach(m => {
+        const events = SEASONAL_EVENTS[m] || [];
+        const monthLabel = document.createElement('div');
+        monthLabel.style.cssText = 'grid-column: 1/-1; font-size:0.85rem; font-weight:600; margin-top:0.5rem; color:#f1f5f9;';
+        monthLabel.textContent = `${m}月`;
+        container.appendChild(monthLabel);
+
+        events.forEach(ev => {
+            const card = document.createElement('div');
+            card.className = `season-card ${ev.highlight ? 'highlight' : ''}`;
+            card.innerHTML = `
+                <div class="season-date">${ev.date}</div>
+                <div class="season-event">${ev.event}</div>
+                <div class="season-tip">狙い目: ${ev.tip}</div>
+            `;
+            container.appendChild(card);
+        });
+    });
+}
+
+// ----- ハッシュタグ生成 -----
+document.getElementById('generateHashBtn').addEventListener('click', () => {
+    const genre = document.getElementById('hashGenre').value.trim();
+    const product = document.getElementById('hashProduct').value.trim();
+    const out = document.getElementById('hashOutput');
+    out.innerHTML = '';
+
+    if (!genre) { showToast('⚠️ ジャンルを入力してください'); return; }
+
+    const baseTags = ['PR', '広告', 'アフィリエイト', '楽天お買い物マラソン', '楽天スーパーセール', '楽天ROOM', 'おすすめ商品'];
+    const genreTags = genre.split(/[・\/、]/).map(g => g.trim()).filter(Boolean);
+    const productTags = product ? product.split(/[\s・]/).map(p => p.trim()).filter(Boolean) : [];
+
+    const contextTags = [
+        `${genre}好きと繋がりたい`,
+        `${genre}おすすめ`,
+        `${genre}レビュー`,
+        `買ってよかった`,
+        `暮らしを整える`,
+        `QOL爆上げ`,
+        `本気でおすすめ`,
+        `愛用品`,
+        `リピ買い`,
+        `コスパ最強`
+    ];
+
+    const allTags = [...new Set([...baseTags, ...genreTags, ...productTags, ...contextTags])];
+
+    const group = document.createElement('div');
+    group.className = 'hashtag-group';
+
+    allTags.forEach(tag => {
+        const item = document.createElement('span');
+        item.className = 'hashtag-item';
+        item.textContent = `#${tag}`;
+        item.addEventListener('click', () => {
+            navigator.clipboard.writeText(`#${tag}`);
+            showToast(`📋 #${tag} をコピーしました`);
+        });
+        group.appendChild(item);
+    });
+
+    out.appendChild(group);
+
+    const copyAllBtn = document.createElement('button');
+    copyAllBtn.className = 'btn btn-sm btn-primary';
+    copyAllBtn.style.marginTop = '0.75rem';
+    copyAllBtn.innerHTML = '<span>📋</span> 全てコピー';
+    copyAllBtn.addEventListener('click', () => {
+        const allText = allTags.map(t => `#${t}`).join(' ');
+        navigator.clipboard.writeText(allText);
+        showToast('📋 全ハッシュタグをコピーしました！');
+    });
+    out.appendChild(copyAllBtn);
+
+    showToast(`#️⃣ ${allTags.length}個のハッシュタグを生成しました！`);
+});
