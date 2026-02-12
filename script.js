@@ -2,7 +2,7 @@
 // All 4 GPTs logic integrated + Analytics + Hooks/CTA Library
 
 // ===== Security / Password Protection =====
-const CORRECT_PASSWORD = 'threads-conquest'; // 簡易パスワードの設定
+const CORRECT_PASSWORD = 'threads-conquest';
 const loginOverlay = document.getElementById('loginOverlay');
 const loginBtn = document.getElementById('loginBtn');
 const passwordInput = document.getElementById('accessPassword');
@@ -12,10 +12,10 @@ function checkAuth() {
     const isAuth = localStorage.getItem('isAuth');
     if (isAuth === 'true') {
         loginOverlay.style.display = 'none';
-        document.body.style.overflow = 'auto'; // スクロール許可
+        document.body.style.overflow = 'auto';
     } else {
         loginOverlay.style.display = 'flex';
-        document.body.style.overflow = 'hidden'; // ログインまでスクロール禁止
+        document.body.style.overflow = 'hidden';
     }
 }
 
@@ -35,12 +35,10 @@ loginBtn.addEventListener('click', () => {
     }
 });
 
-// Enterキーでもログイン可能に
 passwordInput.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') loginBtn.click();
 });
 
-// 初期チェック
 checkAuth();
 
 // ===== Tab Navigation & Mobile Menu =====
@@ -48,16 +46,26 @@ const sidebar = document.querySelector('.sidebar');
 const menuToggle = document.getElementById('menuToggle');
 const sidebarOverlay = document.getElementById('sidebarOverlay');
 
+function openMenu() {
+    sidebar.classList.add('active');
+    menuToggle.classList.add('active');
+    sidebarOverlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
 function closeMenu() {
     sidebar.classList.remove('active');
     menuToggle.classList.remove('active');
     sidebarOverlay.classList.remove('active');
+    document.body.style.overflow = 'auto';
 }
 
 menuToggle.addEventListener('click', () => {
-    sidebar.classList.toggle('active');
-    menuToggle.classList.toggle('active');
-    sidebarOverlay.classList.toggle('active');
+    if (sidebar.classList.contains('active')) {
+        closeMenu();
+    } else {
+        openMenu();
+    }
 });
 
 sidebarOverlay.addEventListener('click', closeMenu);
@@ -73,6 +81,9 @@ document.querySelectorAll('.nav-item').forEach(item => {
         if (window.innerWidth <= 1024) {
             closeMenu();
         }
+
+        // ページトップにスクロール
+        window.scrollTo(0, 0);
     });
 });
 
@@ -157,15 +168,11 @@ function generateAllPosts(d, salesFocused) {
     const urlLine = d.url ? `\nこちら↓ #PR\n${d.url}` : '\nこちら↓ #PR\n(URLはこちら)';
     const commentUrl = d.url ? `こちら↓\n${d.url}` : 'こちら↓\n(URLはこちら)';
 
-    // ---- Header ----
     const header = document.createElement('div');
     header.style.cssText = 'margin-bottom:1.5rem;padding:1rem;background:rgba(129,140,248,0.05);border-radius:12px;border:1px solid rgba(129,140,248,0.15);';
     header.innerHTML = `<p style="font-size:0.85rem;color:#94a3b8;">📦 <strong style="color:#f1f5f9;">${escapeHtml(d.name)}</strong> | ${escapeHtml(d.category)} | ${escapeHtml(d.price)}<br>🎯 ターゲット: ${escapeHtml(d.target)}</p>`;
     out.appendChild(header);
 
-    // ===== アフィリエイト投稿 5パターン =====
-
-    // 1. 悩み→共感→変化型（売上特化：具体的数字重視）
     out.appendChild(createPostCard(
         salesFocused ? '【売上特化】意外性系' : '① 悩み→共感→変化型',
         salesFocused
@@ -174,7 +181,6 @@ function generateAllPosts(d, salesFocused) {
         'affiliate', salesFocused ? '売上特化' : 'アフィ'
     ));
 
-    // 2. Before→Afterストーリー型
     out.appendChild(createPostCard(
         salesFocused ? '【売上特化】共感系' : '② Before→Afterストーリー型',
         salesFocused
@@ -183,7 +189,6 @@ function generateAllPosts(d, salesFocused) {
         'affiliate', salesFocused ? '売上特化' : 'アフィ'
     ));
 
-    // 3. 比較型
     out.appendChild(createPostCard(
         salesFocused ? '【売上特化】数字系' : '③ 比較型',
         salesFocused
@@ -192,7 +197,6 @@ function generateAllPosts(d, salesFocused) {
         'affiliate', salesFocused ? '売上特化' : 'アフィ'
     ));
 
-    // 4. 会話・口コミ型
     out.appendChild(createPostCard(
         salesFocused ? '【売上特化】ひとこと系' : '④ 会話・口コミ型',
         salesFocused
@@ -201,7 +205,6 @@ function generateAllPosts(d, salesFocused) {
         'affiliate', salesFocused ? '売上特化' : 'アフィ'
     ));
 
-    // 5. バズ・断言型
     out.appendChild(createPostCard(
         salesFocused ? '【売上特化】ストーリー系' : '⑤ バズ・断言型',
         salesFocused
@@ -211,7 +214,6 @@ function generateAllPosts(d, salesFocused) {
     ));
 
     if (salesFocused) {
-        // 売上特化は2行フックも追加
         out.appendChild(createPostCard(
             '【売上特化】2行フック投稿①',
             `${b1}で、毎日のストレスがほぼ消えた。\n${b2 !== b1 ? b2 : b3}も実感して、生活の質が上がった。`,
@@ -224,7 +226,6 @@ function generateAllPosts(d, salesFocused) {
         ));
     }
 
-    // ===== 非アフィリエイト投稿 5パターン =====
     const separator = document.createElement('div');
     separator.style.cssText = 'margin:1.5rem 0;padding:0.5rem;text-align:center;color:#94a3b8;font-size:0.8rem;border-top:1px solid rgba(255,255,255,0.06);';
     separator.textContent = '━━ 非アフィリエイト投稿（ファン化用） ━━';
@@ -260,7 +261,6 @@ function generateAllPosts(d, salesFocused) {
         'non-affiliate', 'バズ'
     ));
 
-    // ===== 一言投稿（画像に重ねる用） =====
     const sep2 = document.createElement('div');
     sep2.style.cssText = 'margin:1.5rem 0;padding:0.5rem;text-align:center;color:#94a3b8;font-size:0.8rem;border-top:1px solid rgba(255,255,255,0.06);';
     sep2.textContent = '━━ 一言投稿（画像に重ねる用） ━━';
@@ -306,14 +306,13 @@ document.getElementById('generateBuzzBtn').addEventListener('click', () => {
         { title: '【3】価格バグスタイル', content: `値段見て二度見した…${price || 'この価格'}ってバグ？\n${feat}でこの値段で買えるのは普通に強い。\n長く使えるやつってこういうの。\n分かる人は絶対共感すると思う。` },
         { title: '【4】センス一致スタイル', content: `これ好きな人、確実に仲間。\n${feat}にピンときた人絶対いるよね？\nこれ持ってるだけでセンスいい人に見えるやつ。\n気になる人はチェックしてみて。` },
         { title: '【5】情報ラッシュスタイル', content: `え…${product}、良すぎない？\n${features.map(f => f.trim()).join('、しかも')}。\nしかも${price || 'コスパ'}もありがたい。\n在庫あるうちに見て。` },
-        { title: '【6】問いかけ共感スタイル', content: `聞いて、${target || d.category + 'で悩んでる人'}いない？\n正直"これだ"ってのが見つからなくて悩んでたから分かる。\n${product}、${feat}のちょうどいいやつ。\nリンク貼っとくね。` }
+        { title: '【6】問いかけ共感スタイル', content: `聞いて、${target || 'これで悩んでる人'}いない？\n正直"これだ"ってのが見つからなくて悩んでたから分かる。\n${product}、${feat}のちょうどいいやつ。\nリンク貼っとくね。` }
     ];
 
     buzzPosts.forEach(p => {
         out.appendChild(createPostCard(p.title, p.content, 'buzz', 'バズ'));
     });
 
-    // コメント欄テンプレ
     const commentNote = document.createElement('div');
     commentNote.style.cssText = 'margin-top:1rem;padding:1rem;background:rgba(244,114,182,0.05);border:1px solid rgba(244,114,182,0.1);border-radius:12px;font-size:0.8rem;color:#94a3b8;';
     commentNote.innerHTML = '💡 <strong>投稿のコツ</strong>: 本文には画像を添付し、URLはコメント欄に貼ってください。<br>最後の誘導文は毎回自分の言葉にアレンジすると伸びやすいです！';
@@ -339,7 +338,6 @@ document.getElementById('generateLongPromptBtn').addEventListener('click', () =>
     const out = document.getElementById('longformOutput');
     out.innerHTML = '';
 
-    // 長文生成プロンプト（商材のプロンプトをそのまま生成）
     const longPrompt = `あなたはThreadsで月間数百万インプレッションを獲得する投稿設計の専門家です。滞在時間60秒以上、高エンゲージメントを獲得できる投稿を3パターン作成してください。
 
 【入力情報】
@@ -393,7 +391,6 @@ document.getElementById('generateLongPromptBtn').addEventListener('click', () =>
         'Claude推奨'
     ));
 
-    // 使い方メモ
     const note = document.createElement('div');
     note.style.cssText = 'margin-top:1rem;padding:1rem;background:rgba(251,191,36,0.05);border:1px solid rgba(251,191,36,0.15);border-radius:12px;font-size:0.85rem;color:#94a3b8;line-height:1.6;';
     note.innerHTML = `
@@ -513,7 +510,6 @@ document.getElementById('addRecordBtn').addEventListener('click', () => {
     saveRecords(records);
     renderRecords();
 
-    // Reset
     document.getElementById('recordProduct').value = '';
     document.getElementById('recordViews').value = '';
     document.getElementById('recordLikes').value = '';
@@ -529,7 +525,6 @@ function analyzeWinningPatterns(records) {
         return;
     }
 
-    // Aggregate by hook type
     const hookStats = {};
     records.forEach(r => {
         if (!hookStats[r.hookType]) hookStats[r.hookType] = { views: 0, likes: 0, clicks: 0, count: 0 };
@@ -631,19 +626,14 @@ document.getElementById('analyzeStructureBtn').addEventListener('click', () => {
     const out = document.getElementById('structureOutput');
     out.innerHTML = '';
 
-    // Analyze the structure
     const lines = sample.split('\n').filter(l => l.trim());
     const totalLength = sample.length;
     const sentenceCount = lines.length;
 
-    // Detect hook (first line)
     const hookLine = lines[0] || '';
-    // Detect body (middle lines)
     const bodyLines = lines.slice(1, -1).join('\n') || lines.slice(1).join('\n');
-    // Detect closing (last line)
     const closingLine = lines[lines.length - 1] || '';
 
-    // Detect patterns
     let hookType = '不明';
     if (/知ってた|え[、？?]/.test(hookLine)) hookType = '好奇心刺激型';
     else if (/やばい|バグ|衝撃|マジ/i.test(hookLine)) hookType = '驚愕型';
@@ -658,7 +648,6 @@ document.getElementById('analyzeStructureBtn').addEventListener('click', () => {
     else if (/だよね|じゃん|笑|www|めっちゃ/.test(sample)) toneStyle = 'カジュアルタメ口（✅推奨）';
     else toneStyle = 'ニュートラル';
 
-    // Structure analysis card
     const analysisCard = document.createElement('div');
     analysisCard.className = 'structure-card';
     analysisCard.innerHTML = `
@@ -676,13 +665,11 @@ document.getElementById('analyzeStructureBtn').addEventListener('click', () => {
     `;
     out.appendChild(analysisCard);
 
-    // Generate horizontal expansion
     const expansionHeader = document.createElement('div');
     expansionHeader.style.cssText = 'margin:1rem 0 0.5rem;font-size:0.9rem;font-weight:600;color:#f1f5f9;';
     expansionHeader.textContent = `🔄 ${genre}ジャンルに横展開した投稿：`;
     out.appendChild(expansionHeader);
 
-    // Generate 3 variations using the detected structure
     const productName = product || `${genre}のアイテム`;
 
     const variations = [
@@ -704,7 +691,6 @@ document.getElementById('analyzeStructureBtn').addEventListener('click', () => {
         out.appendChild(createPostCard(v.title, v.content, 'buzz', '横展開'));
     });
 
-    // Claude/ChatGPT prompt for deeper analysis
     const aiPromptContent = `以下のバズ投稿の構造を分析し、「${genre}」ジャンル${product ? `（商品: ${product}）` : ''}で同じ構造の投稿を5パターン生成してください。
 
 【分析対象のバズ投稿】
@@ -764,7 +750,6 @@ function generateExpansion(hookType, genre, product, style) {
 // TAB 8: リサーチアシスタント
 // ================================================================
 
-// ----- ネタジェネレーター -----
 const NETA_DB = {
     '美容・コスメ': [
         '1,000円以下で買えるデパコス級コスメBEST5', 'ほうれい線が3日で薄くなる方法があった', 'メイク崩れしない最強下地を発見した',
@@ -899,7 +884,6 @@ document.getElementById('generateNetaBtn').addEventListener('click', () => {
         return;
     }
 
-    // Shuffle and take 30
     const shuffled = [...netas].sort(() => Math.random() - 0.5).slice(0, 30);
     shuffled.forEach((neta, i) => {
         const item = document.createElement('div');
@@ -914,183 +898,8 @@ document.getElementById('generateNetaBtn').addEventListener('click', () => {
     showToast(`💡 ${genre}のネタを${shuffled.length}個生成しました！`);
 });
 
-// ----- パワーワード辞典 -----
 const POWER_WORDS = {
     urgency: ['今日だけ', '期間限定', '在庫わずか', '残りあとわずか', '終了間近', '急いで', '今すぐ', '見逃し厳禁', '再入荷なし', 'ラストチャンス', '本日限り', '先着順', '早い者勝ち', '売り切れ必至', 'タイムセール'],
     social: ['話題の', 'SNSで大反響', '口コミ殺到', '累計100万個', 'ランキング1位', '芸能人愛用', '美容師おすすめ', 'プロ御用達', '楽天1位', 'Amazon高評価', 'インスタで話題', 'TikTokでバズった', '満足度97%', 'リピート率90%', 'モンドセレクション'],
     curiosity: ['え、知ってた？', '実は', '意外と知らない', '誰も教えてくれない', '裏ワザ', '隠れた名品', '衝撃の事実', '99%の人が知らない', '損してた', 'ヤバい', 'まだ知らないの？', 'こっそり教える', 'プロが教える', '業界の闇', '常識を覆す'],
-    emotion: ['感動', '号泣', '鳥肌', '震えた', '人生変わった', '救われた', '衝撃', '最高', '泣ける', '幸せ', 'ありがとう', '感謝', '奇跡', '運命', '一生モノ'],
-    number: ['3選', '5つの方法', 'たった1分', '30秒で', '月1万円', '年間10万', '2倍', '半分以下', '1日30円', '3日で実感', '1週間で変化', '90%の人が', 'TOP10', '100均', 'ワンコイン'],
-    contrast: ['高いけど安い', 'ズボラでもできる', '努力なしで', '我慢しないダイエット', '簡単なのにプロ級', '安いのに高品質', '小さいのに大容量', '地味だけど最強', '誰でもできるのにやらない', '面倒臭がりの', '不器用でもOK', 'センスなくても', '知識ゼロから', '初心者でも失敗しない', '放置するだけ']
-};
-
-const PW_LABELS = { urgency: '緊急性ワード', social: '社会的証明ワード', curiosity: '好奇心ワード', emotion: '感情ワード', number: '数字系ワード', contrast: '対比ワード' };
-
-document.getElementById('showPowerWordsBtn').addEventListener('click', () => {
-    const cat = document.getElementById('pwCategory').value;
-    const words = POWER_WORDS[cat] || [];
-    const out = document.getElementById('powerWordsOutput');
-    out.innerHTML = `<p style="font-size:0.8rem;color:#94a3b8;margin-bottom:0.5rem;">${PW_LABELS[cat]} (クリックでコピー)</p>`;
-
-    words.forEach(w => {
-        const span = document.createElement('span');
-        span.className = 'power-word';
-        span.textContent = w;
-        span.addEventListener('click', () => {
-            navigator.clipboard.writeText(w);
-            showToast(`📋 パワーワードをコピー: ${w}`);
-        });
-        out.appendChild(span);
-    });
-});
-
-// ----- 季節・イベントカレンダー -----
-const SEASONAL_EVENTS = {
-    1: [
-        { date: '1月1日〜7日', event: '🎍 お正月セール', tip: '福袋・時短家電・健康グッズ' },
-        { date: '1月中旬', event: '❄️ 寒さ対策ピーク', tip: '暖房グッズ・靴下・保湿ケア' },
-        { date: '1月下旬', event: '📚 新年の目標', tip: '手帳・副業・学習教材' }
-    ],
-    2: [
-        { date: '2月上旬', event: '💝 バレンタイン準備', tip: 'チョコ・ギフト・コスメ' },
-        { date: '2月14日', event: '💕 バレンタインデー', tip: '美容・自分へのご褒美' },
-        { date: '2月下旬', event: '🌸 春の準備', tip: '花粉対策・春コーデ' }
-    ],
-    3: [
-        { date: '3月上旬', event: '🌸 卒業・入学準備', tip: '文房具・バッグ・スーツ' },
-        { date: '3月14日', event: '🍫 ホワイトデー', tip: 'ギフト・アクセサリー' },
-        { date: '3月下旬', event: '🏠 新生活準備', tip: '家電・収納・引越し' }
-    ],
-    4: [
-        { date: '4月上旬', event: '🌸 新生活スタート', tip: '時短家電・弁当グッズ・通勤' },
-        { date: '4月中旬', event: '🧴 紫外線対策', tip: '日焼け止め・帽子・サングラス' },
-        { date: '4月下旬', event: '🗓️ GW準備', tip: '旅行グッズ・レジャー・BBQ' }
-    ],
-    5: [
-        { date: '5月上旬', event: '🎏 GW・母の日前', tip: '旅行・ギフト・花' },
-        { date: '5月第2日曜', event: '💐 母の日', tip: 'コスメ・家電・癒しグッズ', highlight: true },
-        { date: '5月下旬', event: '☔ 梅雨対策', tip: '除湿器・室内干し・防カビ' }
-    ],
-    6: [
-        { date: '6月上旬', event: '☔ 梅雨本番', tip: '傘・レインブーツ・部屋干し' },
-        { date: '6月中旬', event: '🎁 父の日前', tip: 'ガジェット・お酒・ファッション' },
-        { date: '6月第3日曜', event: '👔 父の日', tip: '家電・健康グッズ・趣味', highlight: true }
-    ],
-    7: [
-        { date: '7月上旬', event: '🏖️ 夏の準備', tip: '日焼け止め・ダイエット・水着' },
-        { date: '7月中旬', event: '🛒 Amazonプライムデー', tip: '家電・ガジェット・日用品', highlight: true },
-        { date: '7月下旬', event: '🌞 夏本番', tip: '冷感グッズ・虫除け・アウトドア' }
-    ],
-    8: [
-        { date: '8月上旬', event: '🍉 お盆準備', tip: '手土産・旅行グッズ・帰省' },
-        { date: '8月中旬', event: '🎐 夏休み', tip: 'レジャー・知育・自由研究' },
-        { date: '8月下旬', event: '📚 新学期準備', tip: '文房具・ランドセル・制服' }
-    ],
-    9: [
-        { date: '9月上旬', event: '🍂 秋の準備', tip: '秋コーデ・乾燥対策' },
-        { date: '9月中旬', event: '🎑 敬老の日', tip: '健康グッズ・食品ギフト' },
-        { date: '9月下旬', event: '🛍️ 楽天スーパーSALE', tip: '家電・日用品まとめ買い', highlight: true }
-    ],
-    10: [
-        { date: '10月上旬', event: '🎃 ハロウィン準備', tip: 'コスメ・仮装・パーティー' },
-        { date: '10月中旬', event: '🍁 秋の味覚', tip: '食品・キッチングッズ' },
-        { date: '10月下旬', event: '❄️ 冬の準備', tip: '暖房・冬コーデ・保湿' }
-    ],
-    11: [
-        { date: '11月上旬', event: '🛒 ブラックフライデー準備', tip: '欲しい物リスト・比較記事' },
-        { date: '11月下旬', event: '🏷️ ブラックフライデー', tip: '家電・ガジェット・コスメ', highlight: true },
-        { date: '11月下旬', event: '🎁 クリスマスギフト準備', tip: 'プレゼント・おもちゃ' }
-    ],
-    12: [
-        { date: '12月上旬', event: '🎄 クリスマス準備', tip: 'ギフト・パーティー・コスメ' },
-        { date: '12月中旬', event: '📦 楽天大感謝祭', tip: 'まとめ買い・日用品', highlight: true },
-        { date: '12月下旬', event: '🎍 年末準備', tip: '大掃除グッズ・おせち・福袋予約' }
-    ]
-};
-
-function renderSeasonalCalendar() {
-    const container = document.getElementById('seasonalCalendar');
-    if (!container) return;
-    const currentMonth = new Date().getMonth() + 1;
-    // Show current month + next 2 months
-    const months = [currentMonth, (currentMonth % 12) + 1, ((currentMonth + 1) % 12) + 1];
-
-    container.innerHTML = '';
-    months.forEach(m => {
-        const events = SEASONAL_EVENTS[m] || [];
-        const monthLabel = document.createElement('div');
-        monthLabel.style.cssText = 'grid-column: 1/-1; font-size:0.85rem; font-weight:600; margin-top:0.5rem; color:#f1f5f9;';
-        monthLabel.textContent = `${m}月`;
-        container.appendChild(monthLabel);
-
-        events.forEach(ev => {
-            const card = document.createElement('div');
-            card.className = `season-card ${ev.highlight ? 'highlight' : ''}`;
-            card.innerHTML = `
-                <div class="season-date">${ev.date}</div>
-                <div class="season-event">${ev.event}</div>
-                <div class="season-tip">狙い目: ${ev.tip}</div>
-            `;
-            container.appendChild(card);
-        });
-    });
-}
-
-// ----- ハッシュタグ生成 -----
-document.getElementById('generateHashBtn').addEventListener('click', () => {
-    const genre = document.getElementById('hashGenre').value.trim();
-    const product = document.getElementById('hashProduct').value.trim();
-    const out = document.getElementById('hashOutput');
-    out.innerHTML = '';
-
-    if (!genre) { showToast('⚠️ ジャンルを入力してください'); return; }
-
-    const baseTags = ['PR', '広告', 'アフィリエイト', '楽天お買い物マラソン', '楽天スーパーセール', '楽天ROOM', 'おすすめ商品'];
-    const genreTags = genre.split(/[・\/、]/).map(g => g.trim()).filter(Boolean);
-    const productTags = product ? product.split(/[\s・]/).map(p => p.trim()).filter(Boolean) : [];
-
-    const contextTags = [
-        `${genre}好きと繋がりたい`,
-        `${genre}おすすめ`,
-        `${genre}レビュー`,
-        `買ってよかった`,
-        `暮らしを整える`,
-        `QOL爆上げ`,
-        `本気でおすすめ`,
-        `愛用品`,
-        `リピ買い`,
-        `コスパ最強`
-    ];
-
-    const allTags = [...new Set([...baseTags, ...genreTags, ...productTags, ...contextTags])];
-
-    const group = document.createElement('div');
-    group.className = 'hashtag-group';
-
-    allTags.forEach(tag => {
-        const item = document.createElement('span');
-        item.className = 'hashtag-item';
-        item.textContent = `#${tag}`;
-        item.addEventListener('click', () => {
-            navigator.clipboard.writeText(`#${tag}`);
-            showToast(`📋 #${tag} をコピーしました`);
-        });
-        group.appendChild(item);
-    });
-
-    out.appendChild(group);
-
-    // Copy all button
-    const copyAllBtn = document.createElement('button');
-    copyAllBtn.className = 'btn btn-sm btn-primary';
-    copyAllBtn.style.marginTop = '0.75rem';
-    copyAllBtn.innerHTML = '<span>📋</span> 全てコピー';
-    copyAllBtn.addEventListener('click', () => {
-        const allText = allTags.map(t => `#${t}`).join(' ');
-        navigator.clipboard.writeText(allText);
-        showToast('📋 全ハッシュタグをコピーしました！');
-    });
-    out.appendChild(copyAllBtn);
-
-    showToast(`#️⃣ ${allTags.length}個のハッシュタグを生成しました！`);
-});
+    emotion: 

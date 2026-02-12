@@ -77,23 +77,17 @@ body {
     animation: float 30s ease-in-out infinite;
 }
 
-/* Old media query removed */
-
 @keyframes float {
-
     0%,
     100% {
         transform: translate(0, 0);
     }
-
     25% {
         transform: translate(30px, -30px);
     }
-
     50% {
         transform: translate(-20px, 20px);
     }
-
     75% {
         transform: translate(20px, 10px);
     }
@@ -159,6 +153,7 @@ body {
     list-style: none;
     padding: 1rem 0;
     flex: 1;
+    overflow-y: auto;
 }
 
 .nav-item {
@@ -246,7 +241,6 @@ body {
         opacity: 0;
         transform: translateY(8px);
     }
-
     to {
         opacity: 1;
         transform: translateY(0);
@@ -913,6 +907,7 @@ textarea {
     width: 28px;
     height: 28px;
     min-width: 28px;
+    flex-shrink: 0;
     background: var(--gradient-1);
     border-radius: 50%;
     display: flex;
@@ -920,6 +915,7 @@ textarea {
     justify-content: center;
     font-size: 0.8rem;
     font-weight: 700;
+    color: #fff;
 }
 
 .flow-step strong {
@@ -931,6 +927,7 @@ textarea {
 .flow-step p {
     font-size: 0.75rem;
     color: var(--text-muted);
+    margin-top: 0.15rem;
 }
 
 /* ===== Toast ===== */
@@ -972,102 +969,6 @@ textarea {
     background: rgba(255, 255, 255, 0.2);
 }
 
-/* ===== Responsive ===== */
-@media (max-width: 1200px) {
-    .generator-layout {
-        grid-template-columns: 1fr;
-    }
-
-    .input-section {
-        position: static;
-    }
-
-    .hooks-layout {
-        grid-template-columns: 1fr;
-    }
-
-    .guide-cards-row {
-        grid-template-columns: 1fr;
-    }
-
-    .roadmap {
-        grid-template-columns: 1fr;
-    }
-}
-
-@media (max-width: 768px) {
-    .sidebar {
-        width: 60px;
-        padding: 1rem 0;
-    }
-
-    .sidebar-header {
-        padding: 0 0.5rem 1rem;
-    }
-
-    .logo div,
-    .nav-item span:not(.nav-icon),
-    .sidebar-footer {
-        display: none;
-    }
-
-    .nav-item {
-        justify-content: center;
-        padding: 0.75rem;
-        border-left: none;
-    }
-
-    .main-content {
-        margin-left: 60px;
-        padding: 1.5rem;
-    }
-
-    .form-row {
-        grid-template-columns: 1fr;
-    }
-
-    .form-row-3 {
-        grid-template-columns: 1fr;
-    }
-}
-
-/* ===== Flow Steps ===== */
-.structure-flow {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-}
-
-.flow-step {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.75rem;
-}
-
-.flow-num {
-    flex-shrink: 0;
-    width: 28px;
-    height: 28px;
-    background: var(--primary);
-    color: #fff;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.75rem;
-    font-weight: 700;
-}
-
-.flow-step strong {
-    font-size: 0.85rem;
-}
-
-.flow-step p {
-    font-size: 0.75rem;
-    color: var(--text-muted);
-    margin-top: 0.15rem;
-}
-
 /* ===== Btn Accent ===== */
 .btn-accent {
     background: linear-gradient(135deg, #f472b6, #e879f9);
@@ -1099,12 +1000,6 @@ textarea {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1.5rem;
-}
-
-@media (max-width: 900px) {
-    .research-grid {
-        grid-template-columns: 1fr;
-    }
 }
 
 .neta-output {
@@ -1363,7 +1258,7 @@ textarea {
 .formula {
     font-size: 1.2rem;
     font-weight: 700;
-    color: var(--text-main);
+    color: var(--text-primary);
     word-break: break-all;
 }
 
@@ -1495,12 +1390,6 @@ textarea {
     font-size: 0.9rem;
 }
 
-@media (max-width: 600px) {
-    .toolguide-grid {
-        grid-template-columns: 1fr;
-    }
-}
-
 /* ===== Login Overlay ===== */
 .login-overlay {
     position: fixed;
@@ -1566,7 +1455,6 @@ textarea {
     border-radius: 12px;
     z-index: 1000;
     display: none;
-    /* Desktop hidden */
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -1578,7 +1466,7 @@ textarea {
 .menu-toggle span {
     width: 22px;
     height: 2px;
-    background: var(--text-main);
+    background: var(--text-primary);
     border-radius: 2px;
     transition: all 0.3s ease;
 }
@@ -1601,15 +1489,11 @@ textarea {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.85);
-    /* 濃くして確実に隠す */
-    z-index: 1900;
-    /* Sidebar(2000)の直下 */
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 99;
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
-    display: block !important;
-    /* display制御を止めてopacity/visibilityで一貫させる */
     transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
@@ -1619,10 +1503,44 @@ textarea {
     pointer-events: auto;
 }
 
-/* Consolidated Mobile Styles */
+/* ==============================================================
+   DESKTOP ONLY – 1200px breakpoint for layout grids
+   ============================================================== */
+@media (max-width: 1200px) {
+    .generator-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .input-section {
+        position: static;
+    }
+
+    .hooks-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .guide-cards-row {
+        grid-template-columns: 1fr;
+    }
+
+    .roadmap {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 900px) {
+    .research-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ==============================================================
+   MOBILE – 1024px以下: サイドバーをスライドイン式に変更
+   PC(1024px超)のスタイルは一切影響しない
+   ============================================================== */
 @media screen and (max-width: 1024px) {
 
-    /* 1. Reset & Layout */
+    /* --- Layout Reset --- */
     .app-container {
         display: block !important;
         position: relative;
@@ -1631,117 +1549,139 @@ textarea {
 
     .main-content {
         margin-left: 0 !important;
-        padding-top: 5rem !important;
+        padding: 4.5rem 1rem 2rem 1rem !important;
         width: 100% !important;
         min-height: 100vh;
     }
 
-    /* 2. Hide Decorative Elements */
+    /* --- Hide decorative orbs for performance --- */
     .bg-orb,
     .bg-orb-1,
     .bg-orb-2,
     .bg-orb-3 {
         display: none !important;
-        visibility: hidden !important;
-        opacity: 0 !important;
-        pointer-events: none !important;
     }
 
-    /* 3. Mobile Sidebar (Nuclear Option) */
+    /* --- Sidebar: 常時非表示、.activeで左からスライドイン --- */
     .sidebar {
         position: fixed !important;
-        top: 0;
-        left: 0;
+        top: 0 !important;
+        left: 0 !important;
         width: 280px !important;
-        min-width: 280px !important;
         height: 100vh !important;
-        background: #0f172a !important;
-        z-index: 9999 !important;
+        background: rgba(10, 14, 26, 0.98) !important;
+        backdrop-filter: blur(20px) !important;
+        -webkit-backdrop-filter: blur(20px) !important;
+        z-index: 10000 !important;
         display: flex !important;
-        flex-direction: column;
-
-        /* State Control */
+        flex-direction: column !important;
+        padding: 1.5rem 0 !important;
         transform: translateX(-100%) !important;
-        transition: transform 0.3s ease-out !important;
-        box-shadow: 10px 0 40px rgba(0, 0, 0, 0.5) !important;
-
-        /* Ensure Clickability */
-        pointer-events: auto !important;
-        visibility: visible !important;
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        box-shadow: 4px 0 30px rgba(0, 0, 0, 0.5) !important;
+        border-right: 1px solid var(--glass-border) !important;
+        overflow-y: auto !important;
     }
 
     .sidebar.active {
         transform: translateX(0) !important;
     }
 
-    /* 4. Nav Items */
+    /* --- Sidebar内の要素を全て表示 --- */
+    .sidebar-header {
+        display: block !important;
+        padding: 0 1.25rem 1.25rem !important;
+    }
+
+    .logo div {
+        display: block !important;
+    }
+
     .nav-menu {
-        padding-top: 5rem !important;
-        overflow-y: auto;
+        padding: 0.5rem 0 !important;
+        flex: 1 !important;
+        overflow-y: auto !important;
     }
 
     .nav-item {
-        padding: 1.25rem 1.5rem !important;
-        width: 100% !important;
         display: flex !important;
         align-items: center !important;
-        font-size: 1.1rem !important;
-        color: #fff !important;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        opacity: 1 !important;
-        visibility: visible !important;
+        gap: 0.75rem !important;
+        padding: 0.85rem 1.25rem !important;
+        font-size: 0.95rem !important;
+        color: var(--text-secondary) !important;
+        border-left: 3px solid transparent !important;
+        border-bottom: none !important;
     }
 
     .nav-item span {
         display: inline-block !important;
     }
 
-    /* 5. Toggle Button */
+    .nav-item.active {
+        color: var(--primary) !important;
+        background: rgba(129, 140, 248, 0.08) !important;
+        border-left-color: var(--primary) !important;
+    }
+
+    .sidebar-footer {
+        display: block !important;
+        padding: 1rem 1.25rem !important;
+        border-top: 1px solid var(--glass-border) !important;
+    }
+
+    /* --- Hamburger Toggle Button --- */
     .menu-toggle {
         display: flex !important;
         position: fixed !important;
-        top: 1rem;
-        left: 1rem;
-        width: 44px;
-        height: 44px;
-        z-index: 10000 !important;
-        /* Sidebarの上 */
-        background: #1e293b !important;
-        border: 1px solid rgba(255, 255, 255, 0.2) !important;
-        border-radius: 8px;
+        top: 0.75rem !important;
+        left: 0.75rem !important;
+        width: 44px !important;
+        height: 44px !important;
+        z-index: 10001 !important;
+        background: rgba(30, 41, 59, 0.9) !important;
+        backdrop-filter: blur(10px) !important;
+        -webkit-backdrop-filter: blur(10px) !important;
+        border: 1px solid rgba(255, 255, 255, 0.15) !important;
+        border-radius: 10px !important;
     }
 
-    /* 6. Overlay */
+    /* --- Sidebar Overlay --- */
     .sidebar-overlay {
         position: fixed !important;
-        top: 0;
-        left: 0;
+        top: 0 !important;
+        left: 0 !important;
         width: 100% !important;
         height: 100% !important;
-        background: rgba(0, 0, 0, 0.8) !important;
-        z-index: 9000 !important;
-        /* Sidebarの下 */
-        visibility: hidden;
+        background: rgba(0, 0, 0, 0.7) !important;
+        z-index: 9999 !important;
         opacity: 0;
-        transition: opacity 0.3s;
+        visibility: hidden;
+        pointer-events: none;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
     }
 
     .sidebar-overlay.active {
-        visibility: visible;
         opacity: 1;
+        visibility: visible;
         pointer-events: auto;
     }
 
-    /* 7. Adjustments */
+    /* --- Grid adjustments for small screens --- */
     .form-row,
-    .form-row-3,
-    .ana-stats,
-    .guide-layout,
-    .roadmap {
+    .form-row-3 {
         grid-template-columns: 1fr !important;
     }
 
-    .hero h1 {
-        font-size: 2rem !important;
+    .toolguide-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    .guide-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    .output-section {
+        max-height: none !important;
     }
 }
