@@ -553,7 +553,68 @@ document.getElementById('showPowerWordsBtn').addEventListener('click',function()
     words.forEach(function(w){var span=document.createElement('span');span.className='power-word';span.textContent=w;span.addEventListener('click',function(){navigator.clipboard.writeText(w);showToast('コピー: '+w);});out.appendChild(span);});
 });
 
-var SEASONAL_EVENTS={1:[{date:'1月1日〜7日',event:'🎍 お正月セール',tip:'福袋・時短家電'},{date:'1月中旬',event:'❄️ 寒さ対策ピーク',tip:'暖房グッズ・保湿'},{date:'1月下旬',event:'📚 新年の目標',tip:'手帳・副業・学習'}],2:[{date:'2月上旬',event:'💝 バレンタイン準備',tip:'チョコ・ギフト・コスメ'},{date:'2月14日',event:'💕 バレンタインデー',tip:'美容・ご褒美'},{date:'2月下旬',event:'🌸 春の準備',tip:'花粉対策・春コーデ'}],3:[{date:'3月上旬',event:'🌸 卒業・入学準備',tip:'文房具・バッグ'},{date:'3月14日',event:'🍫 ホワイトデー',tip:'ギフト・アクセ'},{date:'3月下旬',event:'🏠 新生活準備',tip:'家電・収納・引越し'}],4:[{date:'4月上旬',event:'🌸 新生活スタート',tip:'時短家電・弁当'},{date:'4月中旬',event:'🧴 紫外線対策',tip:'日焼け止め・帽子'},{date:'4月下旬',event:'🗓️ GW準備',tip:'旅行・レジャー'}],5:[{date:'5月上旬',event:'🎏 GW・母の日前',tip:'旅行・ギフト'},{date:'5月第2日曜',event:'💐 母の日',tip:'コスメ・癒しグッズ',highlight:true},{date:'5月下旬',event:'☔ 梅雨対策',tip:'除湿器・室内干し'}],6:[{date:'6月上旬',event:'☔ 梅雨本番',tip:'傘・レインブーツ'},{date:'6月中旬',event:'🎁 父の日前',tip:'ガジェット・お酒'},{date:'6月第3日曜',event:'👔 父の日',tip:'家電・健康グッズ',highlight:true}],7:[{date:'7月上旬',event:'🏖️ 夏の準備',tip:'日焼け止め・水着'},{date:'7月中旬',event:'🛒 プライムデー',tip:'家電・ガジェット',highlight:true},{date:'7月下旬',event:'🌞 夏本番',tip:'冷感グッズ・虫除け'}],8:[{date:'8月上旬',event:'🍉 お盆準備',tip:'手土産・旅行'},{date:'8月中旬',event:'🎐 夏休み',tip:'レジャー・知育'},{date:'8月下旬',event:'📚 新学期準備',tip:'文房具・制服'}],9:[{date:'9月上旬',event:'🍂 秋の準備',tip:'秋コーデ・乾燥対策'},{date:'9月中旬',event:'🎑 敬老の日',tip:'健康グッズ・食品'},{date:'9月下旬',event:'🛍️ 楽天スーパーSALE',tip:'家電・日用品',highlight:true}],10:[{date:'10月上旬',event:'🎃 ハロウィン',tip:'コスメ・仮装'},{date:'10月中旬',event:'🍁 秋の味覚',tip:'食品・キッチン'},{date:'10月下旬',event:'❄️ 冬の準備',tip:'暖房・冬コーデ'}],11:[{date:'11月上旬',event:'🛒 BF準備',tip:'欲しい物リスト'},{date:'11月下旬',event:'🏷️ ブラックフライデー',tip:'家電・コスメ',highlight:true},{date:'11月下旬',event:'🎁 クリスマス準備',tip:'プレゼント'}],12:[{date:'12月上旬',event:'🎄 クリスマス',tip:'ギフト・コスメ'},{date:'12月中旬',event:'📦 楽天大感謝祭',tip:'まとめ買い',highlight:true},{date:'12月下旬',event:'🎍 年末準備',tip:'大掃除・おせち・福袋'}]};
+var SEASONAL_EVENTS = {
+    1: [
+        { date: '1月1日〜7日', event: '🎍 正月太りリセット需要', tip: 'プロテイン・体組成計・冷凍弁当' },
+        { date: '1月中旬', event: '🏋️ 新年の目標「今年こそ痩せる」', tip: 'EMS・ストレッチポール・食事改善', highlight: true },
+        { date: '1月下旬', event: '❄️ 冬の冷え×むくみ対策', tip: '着圧ソックス・マッサージガン' }
+    ],
+    2: [
+        { date: '2月上旬', event: '💝 バレンタイン＝チョコ太り対策', tip: '低糖質チョコ・プロテインバー' },
+        { date: '2月中旬', event: '📊 確定申告デスクワーク激増期', tip: '姿勢矯正クッション・むくみ対策' },
+        { date: '2月下旬', event: '🌸 春の薄着シーズン前準備開始', tip: 'EMS・プロテイン・体組成計', highlight: true }
+    ],
+    3: [
+        { date: '3月上旬', event: '🌸 薄着シーズン駆け込み需要', tip: 'EMSベルト・ダイエット食品', highlight: true },
+        { date: '3月中旬', event: '🏠 新生活準備×デスク環境整備', tip: 'スタンディングデスク・チェア' },
+        { date: '3月下旬', event: '📅 年度末デスクワーク激務期', tip: 'マッサージガン・冷凍弁当' }
+    ],
+    4: [
+        { date: '4月上旬', event: '🏢 新生活スタート×座り仕事開始', tip: '姿勢矯正・体組成計・プロテイン' },
+        { date: '4月中旬', event: '🩺 春の健康診断シーズン開始', tip: '体組成計・ダイエット食品', highlight: true },
+        { date: '4月下旬', event: '🗓️ GW前の追い込み', tip: 'EMS・冷凍弁当・プロテイン' }
+    ],
+    5: [
+        { date: '5月上旬', event: '🏖️ GW明け体重増加リセット', tip: 'オートミール・プロテイン', highlight: true },
+        { date: '5月中旬', event: '🩺 健康診断ピーク期', tip: '体組成計・ダイエットサプリ', highlight: true },
+        { date: '5月下旬', event: '👕 半袖シーズン目前', tip: 'EMSパッド・二の腕対策' }
+    ],
+    6: [
+        { date: '6月上旬', event: '☔ 梅雨×室内ダイエット需要', tip: 'フォームローラー・EMS・宅食' },
+        { date: '6月中旬', event: '👔 クールビズ→体型が目立つ', tip: '姿勢矯正・EMSベルト' },
+        { date: '6月下旬', event: '🏖️ 夏に向けた最終追い込み', tip: 'プロテイン・ダイエット食品', highlight: true }
+    ],
+    7: [
+        { date: '7月上旬', event: '🌞 夏本番×露出シーズン', tip: 'EMS・プロテイン・ナッツ' },
+        { date: '7月中旬', event: '🛒 楽天スーパーSALE / プライムデー', tip: '全商品まとめ買い訴求', highlight: true },
+        { date: '7月下旬', event: '🏖️ 夏休み×在宅ワーク太り', tip: '冷凍弁当・間食対策' }
+    ],
+    8: [
+        { date: '8月上旬', event: '🍉 夏バテ×栄養管理', tip: 'プロテイン・MCTオイル' },
+        { date: '8月中旬', event: '🏠 お盆休み×食べすぎ対策', tip: '低糖質食品・体組成計' },
+        { date: '8月下旬', event: '🍂 秋に向けた体型リセット', tip: 'EMS・オートミール' }
+    ],
+    9: [
+        { date: '9月上旬', event: '🍂 秋の食欲増加シーズン開始', tip: '間食対策・プロテインバー', highlight: true },
+        { date: '9月中旬', event: '🩺 秋の健康診断シーズン', tip: '体組成計・ダイエット食品' },
+        { date: '9月下旬', event: '🛒 楽天スーパーSALE', tip: 'まとめ買い訴求', highlight: true }
+    ],
+    10: [
+        { date: '10月上旬', event: '🍁 食欲の秋×体重管理', tip: 'オートミール・冷凍弁当' },
+        { date: '10月中旬', event: '🏋️ 冬太り予防キャンペーン', tip: 'EMS・プロテイン' },
+        { date: '10月下旬', event: '❄️ 冬の冷え対策準備', tip: 'マッサージガン・温熱グッズ' }
+    ],
+    11: [
+        { date: '11月上旬', event: '🛒 ブラックフライデー準備', tip: '欲しいものリスト投稿' },
+        { date: '11月下旬', event: '🏷️ ブラックフライデー本番', tip: 'ダイエットグッズ全般', highlight: true },
+        { date: '11月下旬', event: '🍗 忘年会シーズン前対策', tip: '冷凍弁当・プロテイン' }
+    ],
+    12: [
+        { date: '12月上旬', event: '🎄 年末の忘年会太り対策', tip: '低糖質食品・MCTオイル', highlight: true },
+        { date: '12月中旬', event: '📦 楽天大感謝祭', tip: 'まとめ買い・高単価グッズ', highlight: true },
+        { date: '12月下旬', event: '🎍 年末年始太り予防', tip: 'プロテイン・体組成計・冷凍弁当' }
+    ]
+};
 
 function renderSeasonalCalendar(){
     var c=document.getElementById('seasonalCalendar');if(!c)return;
@@ -566,21 +627,47 @@ function renderSeasonalCalendar(){
     });
 }
 
-document.getElementById('generateHashBtn').addEventListener('click',function(){
-    var genre=document.getElementById('hashGenre').value.trim(),product=document.getElementById('hashProduct').value.trim(),out=document.getElementById('hashOutput');
-    out.innerHTML='';if(!genre){showToast('ジャンルを入力してください');return;}
-    var tags=['PR','広告','楽天お買い物マラソン','楽天スーパーセール','楽天ROOM','おすすめ商品'];
-    genre.split(/[・\/、]/).forEach(function(g){g=g.trim();if(g)tags.push(g);});
-    if(product)product.split(/[\s・]/).forEach(function(p){p=p.trim();if(p)tags.push(p);});
-    [genre+'好きと繋がりたい',genre+'おすすめ',genre+'レビュー','買ってよかった','暮らしを整える','QOL爆上げ','本気でおすすめ','愛用品','リピ買い','コスパ最強'].forEach(function(t){tags.push(t);});
-    var seen={},unique=[];tags.forEach(function(t){if(!seen[t]){seen[t]=true;unique.push(t);}});
-    var group=document.createElement('div');group.className='hashtag-group';
-    unique.forEach(function(tag){var item=document.createElement('span');item.className='hashtag-item';item.textContent='#'+tag;item.addEventListener('click',function(){navigator.clipboard.writeText('#'+tag);showToast('#'+tag+'をコピー');});group.appendChild(item);});
+document.getElementById('generateHashBtn').addEventListener('click', function(){
+    var genre = document.getElementById('hashGenre').value.trim();
+    var product = document.getElementById('hashProduct').value.trim();
+    var out = document.getElementById('hashOutput');
+    out.innerHTML = '';
+    if(!genre){ showToast('ジャンルを入力してください'); return; }
+
+    var tags = ['PR', '広告', '楽天お買い物マラソン', '楽天スーパーセール', '楽天ROOM', 'ダイエット', 'デスクワーク', '座りっぱなし', '体型管理', 'ながらダイエット'];
+
+    genre.split(/[・\/、]/).forEach(function(g){ g = g.trim(); if(g) tags.push(g); });
+    if(product) product.split(/[\s・]/).forEach(function(p){ p = p.trim(); if(p) tags.push(p); });
+
+    ['在宅ワーク', 'テレワーク', 'プロテイン', '健康診断', 'QOL爆上げ', '買ってよかった', '本気でおすすめ', 'リピ買い', 'コスパ最強', 'ボディメイク', '腸活', '間食やめたい', 'むくみ対策', '体重管理', '筋トレ初心者'].forEach(function(t){ tags.push(t); });
+
+    var seen = {}, unique = [];
+    tags.forEach(function(t){ if(!seen[t]){ seen[t] = true; unique.push(t); } });
+
+    var group = document.createElement('div');
+    group.className = 'hashtag-group';
+    unique.forEach(function(tag){
+        var item = document.createElement('span');
+        item.className = 'hashtag-item';
+        item.textContent = '#' + tag;
+        item.addEventListener('click', function(){
+            navigator.clipboard.writeText('#' + tag);
+            showToast('#' + tag + 'をコピー');
+        });
+        group.appendChild(item);
+    });
     out.appendChild(group);
-    var btn=document.createElement('button');btn.className='btn btn-sm btn-primary';btn.style.marginTop='0.75rem';btn.textContent='📋 全てコピー';
-    btn.addEventListener('click',function(){navigator.clipboard.writeText(unique.map(function(t){return '#'+t;}).join(' '));showToast('全ハッシュタグをコピー！');});
+
+    var btn = document.createElement('button');
+    btn.className = 'btn btn-sm btn-primary';
+    btn.style.marginTop = '0.75rem';
+    btn.textContent = '📋 全てコピー';
+    btn.addEventListener('click', function(){
+        navigator.clipboard.writeText(unique.map(function(t){ return '#' + t; }).join(' '));
+        showToast('全ハッシュタグをコピー！');
+    });
     out.appendChild(btn);
-    showToast(unique.length+'個のハッシュタグを生成しました！');
+    showToast(unique.length + '個のハッシュタグを生成しました！');
 });
 
 // ===== Init =====

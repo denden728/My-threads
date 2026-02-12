@@ -204,26 +204,23 @@
                                 <label for="longGenre">ジャンル</label>
                                 <select id="longGenre">
                                     <option value="">選択してください</option>
-                                    <option value="美容">美容</option>
-                                    <option value="育児">育児</option>
-                                    <option value="ダイエット">ダイエット</option>
-                                    <option value="副業">副業</option>
-                                    <option value="ビジネス">ビジネス</option>
-                                    <option value="健康">健康</option>
-                                    <option value="投資">投資</option>
-                                    <option value="学習">学習</option>
-                                    <option value="SNS運用">SNS運用</option>
-                                    <option value="節約・ポイ活">節約・ポイ活</option>
-                                    <option value="料理・時短">料理・時短</option>
+                                    <option value="デスクワーク太り対策">デスクワーク太り対策</option>
+                                    <option value="座りっぱなし×むくみ">座りっぱなし×むくみ</option>
+                                    <option value="プロテイン・食事改善">プロテイン・食事改善</option>
+                                    <option value="EMS・ながらダイエット">EMS・ながらダイエット</option>
+                                    <option value="間食・食欲コントロール">間食・食欲コントロール</option>
+                                    <option value="姿勢改善・肩こり腰痛">姿勢改善・肩こり腰痛</option>
+                                    <option value="体組成記録・数字管理">体組成記録・数字管理</option>
+                                    <option value="デスクワーカーの朝夜ルーティン">デスクワーカーの朝夜ルーティン</option>
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label for="longTarget">ターゲット</label>
-                                <input type="text" id="longTarget" placeholder="例: 副業初心者、30代ママ">
+                                <input type="text" id="longTarget" placeholder="例: 1日10時間PCの前にいる30代エンジニア">
                             </div>
                             <div class="form-group">
                                 <label for="longTheme">発信したいテーマ（具体的なほど精度UP）</label>
-                                <input type="text" id="longTheme" placeholder="例: 0歳児の寝かしつけで30分以内に寝かせる方法">
+                                <input type="text" id="longTheme" placeholder="例: 座りっぱなしの人が午後の間食を自然にやめる方法">
                             </div>
                             <button id="generateLongPromptBtn" class="btn btn-primary btn-glow"><span>📝</span> プロンプトを生成</button>
                             <p class="hint">※ 生成されたプロンプトをClaude（推奨）またはChatGPTにコピペしてください</p>
@@ -358,19 +355,22 @@
                         <div class="form-row">
                             <div class="form-group"><label for="recordHookType">フックタイプ</label>
                                 <select id="recordHookType">
-                                    <option value="コスパ神型">コスパ神型</option>
-                                    <option value="データ訴求型">データ訴求型</option>
-                                    <option value="今すぐ型">今すぐ型</option>
-                                    <option value="共感獲得型">共感獲得型</option>
-                                    <option value="新発見報告型">新発見報告型</option>
-                                    <option value="比較検証型">比較検証型</option>
-                                    <option value="ビフォーアフター型">ビフォーアフター型</option>
+                                    <option value="コスパ・価格バグ型">コスパ・価格バグ型</option>
+                                    <option value="数字・Before/After型">数字・Before/After型</option>
+                                    <option value="共感・あるある型">共感・あるある型</option>
+                                    <option value="緊急・限定型">緊急・限定型</option>
+                                    <option value="発見・意外性型">発見・意外性型</option>
+                                    <option value="比較・検証型">比較・検証型</option>
+                                    <option value="ながら・時短型">ながら・時短型</option>
+                                    <option value="体験ストーリー型">体験ストーリー型</option>
                                 </select>
                             </div>
                             <div class="form-group"><label for="recordPostType">投稿タイプ</label>
                                 <select id="recordPostType">
-                                    <option value="アフィ投稿">アフィ投稿</option>
+                                    <option value="アフィ投稿（グッズ）">アフィ投稿（グッズ）</option>
+                                    <option value="アフィ投稿（食品）">アフィ投稿（食品）</option>
                                     <option value="有益投稿">有益投稿</option>
+                                    <option value="共感投稿">共感投稿</option>
                                     <option value="自己紹介">自己紹介</option>
                                     <option value="長文投稿">長文投稿</option>
                                 </select>
@@ -403,7 +403,7 @@
             <section class="tab-panel" id="tab-guide">
                 <div class="panel-header">
                     <h2>📖 攻略ガイド & チェックリスト</h2>
-                    <p class="panel-desc">30日ロードマップとNG行動チェック</p>
+                    <p class="panel-desc">「座りっぱなし×体型管理」アカウントの30日ロードマップとNG行動チェック</p>
                 </div>
                 <div class="guide-layout">
                     <div class="card glass-card">
@@ -412,26 +412,28 @@
                             <div class="roadmap-week"><div class="week-badge week-1">Week 1</div><h4>準備期間</h4>
                                 <ul class="checklist" id="week1Checklist">
                                     <li><label><input type="checkbox" data-week="1"> 楽天アフィリエイトに登録</label></li>
-                                    <li><label><input type="checkbox" data-week="1"> Threadsアカウント作成</label></li>
-                                    <li><label><input type="checkbox" data-week="1"> プロフィールを整える</label></li>
-                                    <li><label><input type="checkbox" data-week="1"> 同ジャンルの成功者を5〜10人フォロー</label></li>
-                                    <li><label><input type="checkbox" data-week="1"> ホーム画面を最適化（いいね）</label></li>
+                                    <li><label><input type="checkbox" data-week="1"> Threadsアカウント作成（プロフ：座り仕事×体型管理）</label></li>
+                                    <li><label><input type="checkbox" data-week="1"> 紹介商品リスト作成（高単価グッズ5品＋食品10品）</label></li>
+                                    <li><label><input type="checkbox" data-week="1"> 同ジャンルの成功アカウントを10人フォロー＆分析</label></li>
+                                    <li><label><input type="checkbox" data-week="1"> ホーム画面最適化（ダイエット・健康系にいいね）</label></li>
                                 </ul>
                             </div>
                             <div class="roadmap-week"><div class="week-badge week-2">Week 2-3</div><h4>投稿テスト期間</h4>
                                 <ul class="checklist" id="week2Checklist">
-                                    <li><label><input type="checkbox" data-week="2"> 毎日1投稿を継続</label></li>
-                                    <li><label><input type="checkbox" data-week="2"> 色々なパターンの投稿をテスト</label></li>
-                                    <li><label><input type="checkbox" data-week="2"> 反応が良い投稿をメモ</label></li>
-                                    <li><label><input type="checkbox" data-week="2"> コメントには必ず返信</label></li>
+                                    <li><label><input type="checkbox" data-week="2"> 毎日5〜6投稿を継続（アフィ2〜3、有益2〜3、自己紹介1）</label></li>
+                                    <li><label><input type="checkbox" data-week="2"> グッズ系アフィと食品系アフィを交互にテスト</label></li>
+                                    <li><label><input type="checkbox" data-week="2"> 反応が良いフックタイプを記録（分析タブ活用）</label></li>
+                                    <li><label><input type="checkbox" data-week="2"> コメントには必ず返信する</label></li>
+                                    <li><label><input type="checkbox" data-week="2"> 楽天の料率アップ商品を週1でチェック</label></li>
                                 </ul>
                             </div>
                             <div class="roadmap-week"><div class="week-badge week-4">Week 4</div><h4>改善 & 量産期間</h4>
                                 <ul class="checklist" id="week4Checklist">
-                                    <li><label><input type="checkbox" data-week="4"> 勝ちパターンを特定</label></li>
-                                    <li><label><input type="checkbox" data-week="4"> 勝ちパターンで量産</label></li>
-                                    <li><label><input type="checkbox" data-week="4"> 投稿時間を最適化</label></li>
-                                    <li><label><input type="checkbox" data-week="4"> 複数商品に展開</label></li>
+                                    <li><label><input type="checkbox" data-week="4"> 勝ちパターンを特定（フック×商品カテゴリ）</label></li>
+                                    <li><label><input type="checkbox" data-week="4"> 勝ちパターンで量産開始</label></li>
+                                    <li><label><input type="checkbox" data-week="4"> 投稿時間を最適化（20:00〜22:00中心に）</label></li>
+                                    <li><label><input type="checkbox" data-week="4"> 高単価グッズの投稿を週2〜3回に増やす</label></li>
+                                    <li><label><input type="checkbox" data-week="4"> セール時期に合わせた集中投稿を計画</label></li>
                                 </ul>
                             </div>
                         </div>
@@ -439,37 +441,40 @@
                     <div class="guide-cards-row">
                         <div class="card glass-card card-danger"><h3><span>🚫</span> NG行動チェック</h3>
                             <ul class="ng-list">
-                                <li>❌ 「いいねして！」「コメントして！」の呼びかけ</li>
+                                <li>❌ 「痩せます」「効果あります」の断定表現（薬機法NG）</li>
                                 <li>❌ 1時間以内にアフィリンク3回投稿</li>
                                 <li>❌ 同じ商品を5回連続投稿</li>
                                 <li>❌ PR表記の忘れ（#PR #広告）</li>
-                                <li>❌ 「いいですね！」だけのコメント周り</li>
+                                <li>❌ 「いいねして！」「コメントして！」の呼びかけ</li>
                                 <li>❌ AI臭い投稿のコピペ投稿</li>
+                                <li>❌ 医薬品的な効能を謳う表現</li>
                             </ul>
                         </div>
                         <div class="card glass-card card-success"><h3><span>✅</span> 投稿前チェック</h3>
                             <ul class="ok-list">
                                 <li>✅ 友達口調になっているか（ですます禁止）</li>
-                                <li>✅ 具体的な数字が入っているか</li>
+                                <li>✅ 具体的な数字が入っているか（ウエスト、体重、期間）</li>
                                 <li>✅ PR表記があるか</li>
-                                <li>✅ CTAが自然か（営業感なし）</li>
+                                <li>✅ 「個人の体験」として書いているか（断定NG）</li>
                                 <li>✅ 声に出して読んで自然か</li>
                                 <li>✅ 投稿間隔2〜3時間以上空いてるか</li>
+                                <li>✅ 「座りっぱなし」「デスクワーク」の文脈が入っているか</li>
                             </ul>
                         </div>
                         <div class="card glass-card"><h3><span>⏰</span> 最適投稿時間</h3>
                             <div class="time-slots">
-                                <div class="time-slot"><span class="time">☀️ 7:00〜8:30</span><span class="desc">通勤</span></div>
-                                <div class="time-slot"><span class="time">🍱 12:00〜13:00</span><span class="desc">ランチ</span></div>
+                                <div class="time-slot"><span class="time">☀️ 7:00〜8:30</span><span class="desc">通勤時間帯</span></div>
+                                <div class="time-slot"><span class="time">🍱 12:00〜13:00</span><span class="desc">ランチ休憩</span></div>
                                 <div class="time-slot best"><span class="time">🌙 20:00〜22:00</span><span class="desc">ゴールデン</span></div>
                             </div>
                         </div>
                     </div>
                     <div class="card glass-card"><h3><span>📐</span> 1日の投稿配分（黄金比）</h3>
                         <div class="ratio-bar">
-                            <div class="ratio-segment ratio-affi" style="flex:2.5"><span>💰 アフィ投稿</span><small>2〜3件</small></div>
-                            <div class="ratio-segment ratio-useful" style="flex:2.5"><span>📚 有益投稿</span><small>2〜3件</small></div>
-                            <div class="ratio-segment ratio-intro" style="flex:1"><span>🙋 自己紹介</span><small>1件</small></div>
+                            <div class="ratio-segment ratio-affi" style="flex:1.5"><span>💪 グッズ系アフィ</span><small>1〜2件</small></div>
+                            <div class="ratio-segment ratio-useful" style="flex:1"><span>🍽️ 食品系アフィ</span><small>1件</small></div>
+                            <div class="ratio-segment ratio-useful" style="flex:2"><span>📚 有益・共感投稿</span><small>2〜3件</small></div>
+                            <div class="ratio-segment ratio-intro" style="flex:0.5"><span>🙋 自己紹介</span><small>1件</small></div>
                         </div>
                     </div>
                 </div>
@@ -485,8 +490,8 @@
                         <div class="card glass-card">
                             <h3><span>📋</span> バズ投稿を貼り付け</h3>
                             <div class="form-group"><label for="buzzSample">分析したいバズ投稿を貼り付けてください</label><textarea id="buzzSample" rows="8" placeholder="例: 他ジャンルでバズっている投稿をコピペ"></textarea></div>
-                            <div class="form-group"><label for="myGenre">あなたのジャンル</label><input type="text" id="myGenre" placeholder="例: 美容 / 寝具 / ダイエット"></div>
-                            <div class="form-group"><label for="myProduct">あなたの商品名（任意）</label><input type="text" id="myProduct" placeholder="例: ヒツジのいらない枕"></div>
+                            <div class="form-group"><label for="myGenre">あなたのジャンル</label><input type="text" id="myGenre" placeholder="例: デスクワーカーのダイエット"></div>
+                            <div class="form-group"><label for="myProduct">あなたの商品名（任意）</label><input type="text" id="myProduct" placeholder="例: SIXPAD パワースーツライト"></div>
                             <button id="analyzeStructureBtn" class="btn btn-primary btn-glow"><span>🧬</span> 構造を分析 & 横展開</button>
                         </div>
                         <div class="card glass-card">
@@ -554,35 +559,35 @@
                 </div>
                 <div class="guide-layout">
                     <div class="card glass-card" style="border-left:3px solid var(--primary);">
-                        <h3><span>🧠</span> アフィリエイトの核心マインド</h3>
+                        <h3><span>🧠</span> このアカウントの核心マインド</h3>
                         <div class="mindset-grid">
-                            <div class="mindset-item"><div class="mindset-icon">💬</div><strong>売るな、教えろ</strong><p>「買って！」じゃなく「これ良かったよ」。友達にLINEで教える感覚が正解。営業マンになった瞬間、人は離れる。</p></div>
-                            <div class="mindset-item"><div class="mindset-icon">📊</div><strong>数字で語れ</strong><p>「良い」「最高」は誰でも言える。「入眠20分→7分」「電気代が月3,000円減」が刺さる。体験を数値化せよ。</p></div>
+                            <div class="mindset-item"><div class="mindset-icon">💬</div><strong>売るな、共感しろ</strong><p>「買って！」じゃなく「これ良かったよ」。座り仕事の仲間にLINEで教える感覚が正解。営業マンになった瞬間、人は離れる。</p></div>
+                            <div class="mindset-item"><div class="mindset-icon">📊</div><strong>数字で語れ</strong><p>「良い」「最高」は誰でも言える。「ウエスト-4cm」「間食0回」「体脂肪率-3%」が刺さる。体験を数値化せよ。</p></div>
                             <div class="mindset-item"><div class="mindset-icon">🔄</div><strong>量→改善→質</strong><p>最初から完璧は不可能。まず30投稿してデータを取る。データが勝ちパターンを教えてくれる。</p></div>
-                            <div class="mindset-item"><div class="mindset-icon">🎯</div><strong>1人に届ける</strong><p>「みなさん」ではなく「朝起きると首が痛い30代のあなた」。たった1人に向けて書くから刺さる。</p></div>
+                            <div class="mindset-item"><div class="mindset-icon">🎯</div><strong>座りっぱなしの人だけに届ける</strong><p>「みなさん」ではなく「1日8時間座って腹が出てきた32歳のあなた」。たった1人に向けて書くから刺さる。</p></div>
                             <div class="mindset-item"><div class="mindset-icon">⏰</div><strong>継続が最強の戦略</strong><p>1ヶ月で辞める人が9割。3ヶ月続けるだけで上位10%に入る。才能じゃない、続けた者が勝つ。</p></div>
-                            <div class="mindset-item"><div class="mindset-icon">🚫</div><strong>AI臭を消せ</strong><p>「です・ます」「〜になります」「おすすめです」→全部NG。「まじでこれ良い」「使ってみて」が正解。</p></div>
+                            <div class="mindset-item"><div class="mindset-icon">⚖️</div><strong>薬機法を守れ</strong><p>「痩せます」「効果あります」は絶対NG。「私の場合は-3kgだった」「体感として楽になった」が正解。個人の体験として書く。</p></div>
                         </div>
                     </div>
                     <div class="card glass-card">
                         <h3><span>🔥</span> こんな時どうする？（シチュエーション別）</h3>
                         <div class="faq-list">
-                            <div class="faq-item"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')"><span>😰 投稿しても全然見られない</span><span class="faq-toggle">▼</span></div><div class="faq-a"><ul><li>🎣 フックが弱い → フック&CTAタブで強化</li><li>⏰ 投稿時間がズレてる → 20:00〜22:00に投稿</li><li>🏷️ ハッシュタグが足りない → リサーチタブで生成</li><li>👥 フォロワーとの交流が少ない → 1日5件コメント</li><li>📝 投稿が短すぎる → 長文生成タブを活用</li></ul></div></div>
-                            <div class="faq-item"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')"><span>😭 見られるけどクリックされない</span><span class="faq-toggle">▼</span></div><div class="faq-a"><ul><li>🎯 CTAが弱い → フック&CTAタブで変更</li><li>📊 ベネフィットが曖昧 → 売上特化モードで数字訴求</li><li>🤝 信頼感がない → 体験談を入れる</li><li>🔗 リンクの位置 → コメント欄に貼る</li></ul></div></div>
-                            <div class="faq-item"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')"><span>💀 シャドウバンされた気がする</span><span class="faq-toggle">▼</span></div><div class="faq-a"><ul><li>⏸️ 2〜3日投稿を休む</li><li>🚫 NGチェックリストを確認</li><li>📉 アフィ投稿の比率を下げる</li><li>⏰ 投稿間隔を最低3時間以上空ける</li><li>🔄 復帰時は有益投稿から</li></ul></div></div>
-                            <div class="faq-item"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')"><span>🤔 ネタ切れ</span><span class="faq-toggle">▼</span></div><div class="faq-a"><ul><li>💡 リサーチタブでネタ30個生成</li><li>🧬 バズ設計タブで横展開</li><li>📅 季節カレンダーを活用</li><li>📊 分析タブで勝ちパターン横展開</li></ul></div></div>
-                            <div class="faq-item"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')"><span>😓 フォロワーが増えない</span><span class="faq-toggle">▼</span></div><div class="faq-a"><ul><li>📚 有益投稿の比率を上げる</li><li>🎣 バズ職人タブで拡散型投稿</li><li>📝 長文投稿で滞在時間UP</li><li>💬 価値あるコメントを残す</li></ul></div></div>
-                            <div class="faq-item"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')"><span>💸 収益が出ない</span><span class="faq-toggle">▼</span></div><div class="faq-a"><ul><li>🎯 報酬率8%以上の商品を選ぶ</li><li>💰 単価5,000円以上に切り替え</li><li>📊 クリック率の高いパターンを量産</li><li>🔥 セール期間に集中投稿</li></ul></div></div>
+                            <div class="faq-item"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')"><span>😰 投稿しても全然見られない</span><span class="faq-toggle">▼</span></div><div class="faq-a"><ul><li>🎣 フックが弱い → フック&CTAタブで「共感あるある型」を試す</li><li>⏰ 投稿時間がズレてる → 20:00〜22:00に投稿</li><li>🏷️ ハッシュタグが足りない → リサーチタブで生成</li><li>👥 フォロワーとの交流が少ない → 1日5件コメント</li><li>📝 投稿が短すぎる → 長文生成タブを活用</li></ul></div></div>
+                            <div class="faq-item"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')"><span>😭 見られるけどクリックされない</span><span class="faq-toggle">▼</span></div><div class="faq-a"><ul><li>🎯 CTAが弱い → 「同志型CTA」に変更してみる</li><li>📊 ベネフィットが曖昧 → 売上特化モードで数字訴求</li><li>🤝 信頼感がない → 自分の体験数字を入れる</li><li>🔗 リンクの位置 → コメント欄に貼る方がクリック率UP</li></ul></div></div>
+                            <div class="faq-item"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')"><span>💀 シャドウバンされた気がする</span><span class="faq-toggle">▼</span></div><div class="faq-a"><ul><li>⏸️ 2〜3日投稿を休む</li><li>🚫 NGチェックリストを確認（薬機法表現も）</li><li>📉 アフィ投稿の比率を下げる</li><li>⏰ 投稿間隔を最低3時間以上空ける</li><li>🔄 復帰時は有益投稿から</li></ul></div></div>
+                            <div class="faq-item"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')"><span>🤔 ネタ切れ</span><span class="faq-toggle">▼</span></div><div class="faq-a"><ul><li>💡 リサーチタブでネタ30個生成（8ジャンルあり）</li><li>🧬 バズ設計タブで他ジャンルのバズ投稿を横展開</li><li>📅 季節カレンダーで今月の狙い目を確認</li><li>📊 分析タブで勝ちパターンの切り口を変えて再投稿</li></ul></div></div>
+                            <div class="faq-item"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')"><span>😓 フォロワーが増えない</span><span class="faq-toggle">▼</span></div><div class="faq-a"><ul><li>📚 有益投稿の比率を上げる（デスクワーカーあるある系）</li><li>🎣 バズ職人タブで拡散型投稿を量産</li><li>📝 長文投稿で滞在時間を稼ぐ</li><li>💬 他のデスクワーカー系投稿に価値あるコメント</li></ul></div></div>
+                            <div class="faq-item"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')"><span>💸 収益が出ない</span><span class="faq-toggle">▼</span></div><div class="faq-a"><ul><li>🎯 高単価グッズ（EMS、マッサージガン等）の比率を上げる</li><li>💰 25,000円以上の商品で報酬上限1,000円を狙う</li><li>📊 クリック率の高いパターンをグッズ系で量産</li><li>🔥 楽天セール期間に集中投稿</li><li>📈 料率アップ商品を週1でチェック</li></ul></div></div>
                         </div>
                     </div>
                     <div class="card glass-card" style="border-left:3px solid var(--success);">
                         <h3><span>📈</span> 収益アップの方程式</h3>
                         <div class="formula-box"><div class="formula">収益 = <span class="f-highlight">表示回数</span> × <span class="f-highlight">クリック率</span> × <span class="f-highlight">購入率</span> × <span class="f-highlight">報酬単価</span></div></div>
                         <div class="formula-tips">
-                            <div class="ftip"><strong>表示回数↑</strong> → バズ職人 / 長文投稿 / 最適時間帯</div>
-                            <div class="ftip"><strong>クリック率↑</strong> → フック&CTA / 体験ベース / 数字訴求</div>
+                            <div class="ftip"><strong>表示回数↑</strong> → バズ職人 / 長文投稿 / 20:00〜22:00投稿</div>
+                            <div class="ftip"><strong>クリック率↑</strong> → 共感フック / 数字訴求 / 体験ベース</div>
                             <div class="ftip"><strong>購入率↑</strong> → 高レビュー商品 / セール期間</div>
-                            <div class="ftip"><strong>報酬単価↑</strong> → 高単価商品 / 報酬率8%以上</div>
+                            <div class="ftip"><strong>報酬単価↑</strong> → 25,000円以上の高単価グッズ / 料率アップ商品</div>
                         </div>
                     </div>
                     <div class="card glass-card"><h3><span>💎</span> 忘れちゃいけない鉄則10</h3>
@@ -594,9 +599,9 @@
                             <div class="rule-item"><span class="rule-num">5</span>コメントには必ず返信する</div>
                             <div class="rule-item"><span class="rule-num">6</span>アフィ投稿は全体の半分以下に</div>
                             <div class="rule-item"><span class="rule-num">7</span>リンクはコメント欄に貼る方がクリック率UP</div>
-                            <div class="rule-item"><span class="rule-num">8</span>具体的な数字を入れる（○日で○○になった）</div>
-                            <div class="rule-item"><span class="rule-num">9</span>投稿前に「声に出して読んで」自然か確認</div>
-                            <div class="rule-item"><span class="rule-num">10</span>1日6投稿を30日続けることが最重要</div>
+                            <div class="rule-item"><span class="rule-num">8</span>具体的な数字を入れる（ウエスト、体重、期間）</div>
+                            <div class="rule-item"><span class="rule-num">9</span>「痩せます」「効果あります」は断定NG（薬機法）</div>
+                            <div class="rule-item"><span class="rule-num">10</span>1日5〜6投稿を30日続けることが最重要</div>
                         </div>
                     </div>
                 </div>
@@ -611,7 +616,7 @@
                     <div class="card glass-card" style="border-left:3px solid var(--primary);">
                         <h3><span>🗺️</span> 全体の使い方フロー</h3>
                         <div class="structure-flow">
-                            <div class="flow-step"><div class="flow-num">1</div><div><strong>商品を決める</strong><p>楽天で報酬率8%以上・レビュー高評価の商品を選ぶ</p></div></div>
+                            <div class="flow-step"><div class="flow-num">1</div><div><strong>商品を決める</strong><p>楽天で「ダイエット・健康」「食品」カテゴリの料率4%商品を選ぶ。高単価グッズ（25,000円↑）で柱を作り、食品で件数を稼ぐ</p></div></div>
                             <div class="flow-step"><div class="flow-num">2</div><div><strong>⚡ ポスト生成でドラフト作成</strong><p>商品情報を入力→最大17パターンを一括生成</p></div></div>
                             <div class="flow-step"><div class="flow-num">3</div><div><strong>🎣 フック&CTAで味付け</strong><p>生成された投稿のフックを強化、CTAを差し替え</p></div></div>
                             <div class="flow-step"><div class="flow-num">4</div><div><strong>🔍 リサーチで仕上げ</strong><p>ハッシュタグとパワーワードで最終調整</p></div></div>
@@ -630,12 +635,12 @@
                     <div class="card glass-card" style="border-left:3px solid #fbbf24;">
                         <h3><span>🏆</span> 日々のルーティン（推奨フロー）</h3>
                         <div class="routine-timeline">
-                            <div class="routine-item"><div class="routine-time">朝 7:00</div><div class="routine-action">① 有益投稿を1つ投稿（長文推奨）</div></div>
-                            <div class="routine-item"><div class="routine-time">昼 12:00</div><div class="routine-action">② アフィ投稿を1つ投稿</div></div>
-                            <div class="routine-item"><div class="routine-time">夕 17:00</div><div class="routine-action">③ 有益投稿 or 自己紹介投稿</div></div>
-                            <div class="routine-item"><div class="routine-time">夜 20:00</div><div class="routine-action">④ アフィ投稿（ゴールデンタイム・最重要）</div></div>
+                            <div class="routine-item"><div class="routine-time">朝 7:00</div><div class="routine-action">① 有益投稿を1つ投稿（デスクワーカー向け知識系）</div></div>
+                            <div class="routine-item"><div class="routine-time">昼 12:00</div><div class="routine-action">② 食品系アフィ投稿を1つ（プロテイン・オートミール等）</div></div>
+                            <div class="routine-item"><div class="routine-time">夕 17:00</div><div class="routine-action">③ 共感投稿 or 自己紹介投稿（あるある系）</div></div>
+                            <div class="routine-item"><div class="routine-time">夜 20:00</div><div class="routine-action">④ グッズ系アフィ投稿（ゴールデンタイム・最重要）</div></div>
                             <div class="routine-item"><div class="routine-time">夜 21:30</div><div class="routine-action">⑤ 有益投稿 or バズ狙い投稿</div></div>
-                            <div class="routine-item"><div class="routine-time">寝る前</div><div class="routine-action">⑥ 翌日のネタをリサーチタブで準備</div></div>
+                            <div class="routine-item"><div class="routine-time">寝る前</div><div class="routine-action">⑥ 翌日のネタをリサーチタブで準備 ＆ 楽天の料率アップ商品チェック</div></div>
                         </div>
                     </div>
                 </div>
