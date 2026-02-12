@@ -1140,22 +1140,14 @@
         }
 
         navItems.forEach(function(item){
-            item.addEventListener('click',function(e){
-                e.preventDefault();
-                e.stopPropagation();
-                var t=this.getAttribute('data-tab');
-                if(t)switchTab(t);
-            });
-            item.addEventListener('touchend',function(e){
-                e.preventDefault();
-                var t=this.getAttribute('data-tab');
+            item.addEventListener('click',function(){
+                var t=item.getAttribute('data-tab');
                 if(t)switchTab(t);
             });
         });
 
         if(tb){
-            tb.addEventListener('click',function(e){
-                e.stopPropagation();
+            tb.addEventListener('click',function(){
                 if(sb.classList.contains('active')){
                     sb.classList.remove('active');
                     tb.classList.remove('active');
@@ -1207,7 +1199,6 @@
     })();
     </script>
 
-    <!-- 機能スクリプト -->
-    <script src="script.js?v=3.1"></script>
+    <script src="script.js?v=3.2"></script>
 </body>
 </html>
