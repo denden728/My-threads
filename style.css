@@ -1637,3 +1637,19 @@ textarea {
         grid-template-columns: 1fr !important;
     }
 }
+/* ===== モバイルサイドバー強制上書き ===== */
+@media screen and (max-width: 1024px) {
+    .sidebar-overlay {
+        z-index: 90 !important;
+    }
+    .sidebar {
+        z-index: 999999 !important;
+    }
+    .sidebar .nav-item {
+        z-index: 999999 !important;
+        pointer-events: auto !important;
+    }
+    .menu-toggle {
+        z-index: 9999999 !important;
+    }
+}
