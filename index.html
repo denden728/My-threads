@@ -1127,130 +1127,120 @@
                     </div>
                 </div>
             </section>
-    </main>
-</div>
+        </main>
+    </div>
 
-<div class="toast" id="toast"></div>
+    <div class="toast" id="toast"></div>
 
-<script>
-(function(){
-    // ===== ログイン処理 =====
-    var lo = document.getElementById('loginOverlay');
-    var lbtn = document.getElementById('loginBtn');
-    var pinp = document.getElementById('accessPassword');
-    var lerr = document.getElementById('loginError');
-    var tb = document.getElementById('menuToggle');
+    <script>
+    (function(){
+        var lo = document.getElementById('loginOverlay');
+        var lbtn = document.getElementById('loginBtn');
+        var pinp = document.getElementById('accessPassword');
+        var lerr = document.getElementById('loginError');
+        var sb = document.querySelector('.sidebar');
+        var tb = document.getElementById('menuToggle');
+        var ov = document.getElementById('sidebarOverlay');
+        var navItems = document.querySelectorAll('.nav-item');
+        var tabPanels = document.querySelectorAll('.tab-panel');
 
-    // ログイン前はハンバーガーボタンを隠す
-    function hideMenuButton(){ if(tb) tb.style.display = 'none'; }
-    function showMenuButton(){ if(tb && window.innerWidth <= 1024) tb.style.display = 'flex'; }
-
-    function doLogin(){
-        if(pinp.value === 'threads-conquest'){
-            localStorage.setItem('isAuth','true');
-            lo.style.display = 'none';
-            document.body.style.overflow = 'auto';
-            showMenuButton();
-        } else {
-            lerr.style.display = 'block';
-            pinp.style.border = '1px solid #f87171';
-        }
-    }
-    if(localStorage.getItem('isAuth') === 'true'){
-        lo.style.display = 'none';
-        document.body.style.overflow = 'auto';
-        showMenuButton();
-    } else {
-        hideMenuButton();
-    }
-    if(lbtn) lbtn.addEventListener('click', doLogin);
-    if(pinp) pinp.addEventListener('keypress', function(e){ if(e.key==='Enter') doLogin(); });
-    // ===== サイドバー開閉 =====
-    var sb = document.querySelector('.sidebar');
-    var tb = document.getElementById('menuToggle');
-    var ov = document.getElementById('sidebarOverlay');
-
-    function openSidebar(){
-        sb.classList.add('active');
-        if(tb) tb.classList.add('active');
-        if(ov) ov.classList.add('active');
-        document.body.style.overflow = 'hidden';
-    }
-    function closeSidebar(){
-        sb.classList.remove('active');
-        if(tb) tb.classList.remove('active');
-        if(ov) ov.classList.remove('active');
-        document.body.style.overflow = 'auto';
-    }
-    if(tb){
-        tb.addEventListener('click', function(){
-            if(sb.classList.contains('active')){ closeSidebar(); }
-            else { openSidebar(); }
-        });
-    }
-    if(ov){
-        ov.addEventListener('click', function(){ closeSidebar(); });
-    }
-
-    // ===== ページ切り替え（核心） =====
-    var navItems = document.querySelectorAll('.nav-item');
-    var tabPanels = document.querySelectorAll('.tab-panel');
-
-    function switchTab(tabName){
-        // 全タブを非表示（style.displayで直接制御）
-        for(var i = 0; i < tabPanels.length; i++){
-            tabPanels[i].classList.remove('active');
-            tabPanels[i].style.display = 'none';
-        }
-        // 全ナビの active を外す
-        for(var j = 0; j < navItems.length; j++){
-            navItems[j].classList.remove('active');
-        }
-        // 対象タブを表示
-        var target = document.getElementById('tab-' + tabName);
-        if(target){
-            target.classList.add('active');
-            target.style.display = 'block';
-        }
-        // 対象ナビを active に
-        for(var k = 0; k < navItems.length; k++){
-            if(navItems[k].getAttribute('data-tab') === tabName){
-                navItems[k].classList.add('active');
+        /* ===== ログイン ===== */
+        function doLogin(){
+            if(pinp.value === 'threads-conquest'){
+                localStorage.setItem('isAuth','true');
+                lo.style.display = 'none';
+                lo.style.pointerEvents = 'none';
+                document.body.style.overflow = 'auto';
+                if(tb && window.innerWidth <= 1024) tb.style.display = 'flex';
+            } else {
+                lerr.style.display = 'block';
+                pinp.style.border = '1px solid #f87171';
             }
         }
-        // モバイルならサイドバーを閉じる
-        if(window.innerWidth <= 1024){
-            closeSidebar();
-        }
-        window.scrollTo(0,0);
 
-        // デバッグ用（問題が解決したら削除してOK）
-        console.log('switchTab called: ' + tabName + ', target found: ' + (target ? 'YES' : 'NO'));
-    }
-
-    // 各ナビアイテムにクリックイベント登録
-    for(var n = 0; n < navItems.length; n++){
-        (function(item){
-            item.addEventListener('click', function(){
-                var tabName = item.getAttribute('data-tab');
-                if(tabName){
-                    switchTab(tabName);
-                }
-            });
-        })(navItems[n]);
-    }
-
-    // 初期表示：最初の active タブを style.display でも block に
-    for(var p = 0; p < tabPanels.length; p++){
-        if(tabPanels[p].classList.contains('active')){
-            tabPanels[p].style.display = 'block';
+        if(localStorage.getItem('isAuth') === 'true'){
+            lo.style.display = 'none';
+            lo.style.pointerEvents = 'none';
+            document.body.style.overflow = 'auto';
         } else {
-            tabPanels[p].style.display = 'none';
+            lo.style.display = 'flex';
+            lo.style.pointerEvents = 'auto';
+            if(tb) tb.style.display = 'none';
+            if(sb) sb.style.display = 'none';
+            if(ov) ov.style.display = 'none';
         }
-    }
-})();
-</script>
 
-<script src="script.js?v=4.0"></script>
+        if(lbtn) lbtn.addEventListener('click', doLogin);
+        if(pinp) pinp.addEventListener('keypress', function(e){ if(e.key==='Enter') doLogin(); });
+
+        /* ===== サイドバー開閉 ===== */
+        function openSidebar(){
+            sb.style.display = 'flex';
+            sb.classList.add('active');
+            if(tb) tb.classList.add('active');
+            if(ov){ ov.style.display = 'block'; ov.classList.add('active'); }
+            document.body.style.overflow = 'hidden';
+        }
+        function closeSidebar(){
+            sb.classList.remove('active');
+            if(tb) tb.classList.remove('active');
+            if(ov){ ov.classList.remove('active'); }
+            document.body.style.overflow = 'auto';
+        }
+
+        if(tb){
+            tb.addEventListener('click', function(){
+                if(sb.classList.contains('active')) closeSidebar();
+                else openSidebar();
+            });
+        }
+        if(ov){
+            ov.addEventListener('click', function(){ closeSidebar(); });
+        }
+
+        /* ===== ページ切り替え ===== */
+        function switchTab(tabName){
+            for(var i = 0; i < tabPanels.length; i++){
+                tabPanels[i].classList.remove('active');
+                tabPanels[i].style.display = 'none';
+            }
+            for(var j = 0; j < navItems.length; j++){
+                navItems[j].classList.remove('active');
+            }
+            var target = document.getElementById('tab-' + tabName);
+            if(target){
+                target.classList.add('active');
+                target.style.display = 'block';
+            }
+            for(var k = 0; k < navItems.length; k++){
+                if(navItems[k].getAttribute('data-tab') === tabName){
+                    navItems[k].classList.add('active');
+                }
+            }
+            if(window.innerWidth <= 1024) closeSidebar();
+            window.scrollTo(0,0);
+        }
+
+        for(var n = 0; n < navItems.length; n++){
+            (function(item){
+                item.addEventListener('click', function(){
+                    var t = item.getAttribute('data-tab');
+                    if(t) switchTab(t);
+                });
+            })(navItems[n]);
+        }
+
+        /* 初期表示 */
+        for(var p = 0; p < tabPanels.length; p++){
+            if(tabPanels[p].classList.contains('active')){
+                tabPanels[p].style.display = 'block';
+            } else {
+                tabPanels[p].style.display = 'none';
+            }
+        }
+    })();
+    </script>
+
+    <script src="script.js?v=5.0"></script>
 </body>
 </html>
