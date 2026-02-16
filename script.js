@@ -42,17 +42,156 @@ document.getElementById('generateSalesBtn').addEventListener('click', function()
     var d = getGeneratorInputs(); if(!d) return; generateAllPosts(d, true);
 });
 
-function getGeneratorInputs() {
-    var pn = document.getElementById('productName').value.trim();
-    if (!pn) { showToast('商品名を入力してください'); return null; }
-    return {
-        name: pn,
-        price: document.getElementById('price').value.trim() || '（価格未入力）',
-        category: document.getElementById('category').value || 'おすすめ商品',
-        target: document.getElementById('target').value.trim() || 'みんな',
-        benefits: document.getElementById('benefits').value.split('\n').filter(function(b){return b.trim();}),
-        url: document.getElementById('affiliateUrl').value.trim()
-    };
+function generateAllPosts(d, salesFocus) {
+    var out = document.getElementById('generatorOutput');
+    out.innerHTML = '';
+
+    // ===== ヘッダー =====
+    var hd = document.createElement('div');
+    hd.style.cssText = 'margin-bottom:1.5rem;padding:1rem;background:rgba(129,140,248,0.05);border-radius:12px;border:1px solid rgba(129,140,248,0.15);';
+    hd.innerHTML = '<p style="font-size:0.85rem;color:#94a3b8;">📦 <strong style="color:#f1f5f9;">' + escapeHtml(d.name) + '</strong> | ' + escapeHtml(d.price) + ' | ' + escapeHtml(d.category) + ' | 🎯 ' + escapeHtml(d.target) + '</p>';
+    out.appendChild(hd);
+
+    var b1 = d.benefits[0] || '体感として変化があった';
+    var b2 = d.benefits[1] || '続けやすいのが良い';
+    var b3 = d.benefits[2] || '座り仕事の人にちょうどいい';
+    var urlLine = d.url ? '\n→ ' + d.url + '\n#PR' : '\n#PR';
+
+    // ===== アフィリエイト投稿 =====
+    var affiLabel = document.createElement('div');
+    affiLabel.style.cssText = 'font-size:0.85rem;font-weight:700;color:#818cf8;margin-bottom:0.5rem;padding:0.5rem 0;border-bottom:1px solid rgba(129,140,248,0.15);';
+    affiLabel.textContent = '💰 アフィリエイト投稿（' + (salesFocus ? '売上特化モード' : '通常モード') + '）';
+    out.appendChild(affiLabel);
+
+    var affiPosts;
+
+    if (salesFocus) {
+        affiPosts = [
+            {
+                t: '【売上特化1】悩み共感→解決型',
+                c: '座りっぱなしで ' + b1.split('→')[0] + ' が気になってた。\n\n色々試したけど続かなくて、\n最後にたどり着いたのが ' + d.name + '。\n\n使い始めてから ' + b1 + '。\n正直、もっと早く知りたかった。\n\n' + d.price + 'で買えるうちに見てみて' + urlLine
+            },
+            {
+                t: '【売上特化2】価格バグ型',
+                c: 'ジム月1万×12ヶ月＝年間12万。\n' + d.name + '、' + d.price + '。\n\nしかも座ったまま使えて、\n' + b1 + '。\n\n1日換算したら缶コーヒーより安いのに\nジムより続いてるの笑う' + urlLine
+            },
+            {
+                t: '【売上特化3】Before/After数字型',
+                c: d.name + '使い始めて3週間。\n\n' + b1 + '\n' + b2 + '\n' + b3 + '\n\n座り仕事の人で同じ悩みある人、\nこれは試す価値あると思う。\n\nリンク貼っとくね' + urlLine
+            },
+            {
+                t: '【売上特化4】口コミ・目撃型',
+                c: '会社で隣の席の人が使ってて気になって聞いたら\n' + d.name + 'だった。\n\n「' + b1 + '」って言ってて、\n帰り道に調べたらレビューえぐかった。\n\n座り仕事の人は見てみて' + urlLine
+            },
+            {
+                t: '【売上特化5】緊急・限定型',
+                c: '今日だけ言わせて。\n\n' + d.name + '、今' + d.price + 'で買える。\nこれ、座りっぱなしの人には刺さるやつ。\n\n' + b1 + '\n' + b2 + '\n\n在庫なくなる前に見て' + urlLine
+            }
+        ];
+    } else {
+        affiPosts = [
+            {
+                t: '【アフィ1】悩み共感→変化型',
+                c: 'デスクワーク歴長いと ' + b1.split('→')[0] + ' って気になるよね。\n\n' + d.name + ' 使い始めてから\n' + b1 + '。\n\n座り仕事の仲間に教えたくて書いてる' + urlLine
+            },
+            {
+                t: '【アフィ2】Before→After型',
+                c: '3週間前の自分に教えたい。\n\n' + d.name + ' を使う前と後で\n' + b1 + '\n' + b2 + '\n\nデスクワーカーのBefore/Afterって\n地味だけど確実に変わる' + urlLine
+            },
+            {
+                t: '【アフィ3】意外性・発見型',
+                c: '正直ナメてた。\n' + d.name + '、' + d.price + 'だし\nどうせ気休めだろって。\n\n使ってみたら ' + b1 + '。\nこれは良い意味で裏切られた。\n\n座り仕事で同じ悩みの人は見てみて' + urlLine
+            },
+            {
+                t: '【アフィ4】会話・口コミ型',
+                c: '同僚に「最近なんか変わった？」って聞かれた。\n\n変えたのは ' + d.name + ' だけ。\n' + b1 + '\n' + b2 + '\n\n地味だけどこういうのが続くんだよね' + urlLine
+            },
+            {
+                t: '【アフィ5】コスパ訴求型',
+                c: d.name + '、' + d.price + '。\n1日換算したら数十円。\n\nそれで ' + b1 + ' は\nコスパおかしいって。\n\nジム行くより現実的だし、\n座ったまま使えるのがデカい' + urlLine
+            }
+        ];
+    }
+
+    affiPosts.forEach(function(p) {
+        out.appendChild(createPostCard(p.t, p.c, 'affiliate', 'アフィ'));
+    });
+
+    // 売上特化モードはアフィ投稿のみ
+    if (salesFocus) {
+        // フック2行投稿を追加
+        var hookLabel = document.createElement('div');
+        hookLabel.style.cssText = 'font-size:0.85rem;font-weight:700;color:#f472b6;margin:1rem 0 0.5rem;padding:0.5rem 0;border-bottom:1px solid rgba(244,114,182,0.15);';
+        hookLabel.textContent = '🎣 2行フック投稿（画像用テキスト）';
+        out.appendChild(hookLabel);
+
+        var hookPosts = [
+            { t: '【フック1】共感型', c: '座りっぱなしで腹出てきた人だけ見て。\n' + d.name + 'がその悩み、解決するかも →' },
+            { t: '【フック2】数字型', c: d.price + 'で' + b1 + '。\nデスクワーカーはこれ見て →' }
+        ];
+
+        hookPosts.forEach(function(p) {
+            out.appendChild(createPostCard(p.t, p.c, 'buzz', 'フック'));
+        });
+
+        showToast('売上特化7パターン生成完了！');
+        incrementPostCount(7);
+        return;
+    }
+
+    // ===== 非アフィ投稿（通常モードのみ） =====
+    var nonAffiLabel = document.createElement('div');
+    nonAffiLabel.style.cssText = 'font-size:0.85rem;font-weight:700;color:#34d399;margin:1rem 0 0.5rem;padding:0.5rem 0;border-bottom:1px solid rgba(52,211,153,0.15);';
+    nonAffiLabel.textContent = '📚 非アフィリエイト投稿（ファン化・有益系）';
+    out.appendChild(nonAffiLabel);
+
+    var nonAffiPosts = [
+        {
+            t: '【有益】座りっぱなし知識系',
+            c: '座り時間が1日8時間超えると\n代謝が最大50%落ちるって知ってた？\n\nしかもまとめて運動しても\n座りっぱなしのダメージは帳消しにならない。\n\n大事なのは「1時間に1回立つ」こと。\nたったこれだけで血糖値の処理能力が変わる。\n\nデスクワーカーは知っておいて損ない。'
+        },
+        {
+            t: '【自己紹介】キャラ設定型',
+            c: 'デスクワーク歴○年、\nジムは3回で辞めた、\n座りっぱなしで腹だけ育った人間です。\n\n「運動しなきゃ」って思いながら\n結局何もせず3年経った。\n\nそんな自分が食事とグッズで\n体型管理始めた記録をここに残してく。\n\n同じ状況の人、一緒に頑張ろ。'
+        },
+        {
+            t: '【あるある共感】',
+            c: '座り仕事の人あるある\n\n・健康診断の腹囲で毎年ヒヤッとする\n・夕方になると靴がきつい\n・椅子から立つ時「よいしょ」って言う\n・「今日こそ運動する」→しない\n・気づいたらベルトの穴が1つズレてる\n\n全部当てはまった人、仲間です。'
+        },
+        {
+            t: '【問いかけ】エンゲージメント型',
+            c: 'デスクワーカーに聞きたい。\n\n座りっぱなしで一番困ってることって何？\n\n①腹が出てきた\n②腰がバキバキ\n③夕方の脚のむくみ\n④午後の眠気と間食\n⑤全部\n\n私は⑤です。\nコメントで教えて。'
+        },
+        {
+            t: '【まとめ・保存版】',
+            c: '座りっぱなしの人が今日からできること。\n\n1時間に1回立つ。\n昼飯のタンパク質を意識する。\n午後の間食をナッツに変える。\n寝る前に3分だけストレッチする。\n\nどれか1つでいいから始めてみて。\n全部やらなくていい。\n1つ続けるだけで3ヶ月後に変わる。'
+        }
+    ];
+
+    nonAffiPosts.forEach(function(p) {
+        out.appendChild(createPostCard(p.t, p.c, 'non-affiliate', '非アフィ'));
+    });
+
+    // ===== 画像テキスト用1行投稿 =====
+    var oneLineLabel = document.createElement('div');
+    oneLineLabel.style.cssText = 'font-size:0.85rem;font-weight:700;color:#fbbf24;margin:1rem 0 0.5rem;padding:0.5rem 0;border-bottom:1px solid rgba(251,191,36,0.15);';
+    oneLineLabel.textContent = '🖼️ 画像用テキスト（1〜2行）';
+    out.appendChild(oneLineLabel);
+
+    var oneLinePosts = [
+        { t: '【1行】共感系', c: '座りっぱなしで腹が出てきた全人類に届け' },
+        { t: '【1行】数字系', c: '1日8時間座る人の代謝、立ってる人の半分' },
+        { t: '【1行】問いかけ系', c: '「明日から運動する」って何回言った？' },
+        { t: '【1行】発見系', c: d.name + 'の存在を早く知りたかった人生だった' },
+        { t: '【1行】保存系', c: 'デスクワーカーが買うべきもの、本気で考えた結果→' }
+    ];
+
+    oneLinePosts.forEach(function(p) {
+        out.appendChild(createPostCard(p.t, p.c, 'longform', '画像用'));
+    });
+
+    showToast('全15パターン生成完了！');
+    incrementPostCount(15);
 }
 
 // ================================================================
