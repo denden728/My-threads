@@ -41,7 +41,18 @@ document.getElementById('generateAllBtn').addEventListener('click', function(){
 document.getElementById('generateSalesBtn').addEventListener('click', function(){
     var d = getGeneratorInputs(); if(!d) return; generateAllPosts(d, true);
 });
-
+function getGeneratorInputs() {
+    var pn = document.getElementById('productName').value.trim();
+    if (!pn) { showToast('商品名を入力してください'); return null; }
+    return {
+        name: pn,
+        price: document.getElementById('price').value.trim() || '（価格未入力）',
+        category: document.getElementById('category').value || 'おすすめ商品',
+        target: document.getElementById('target').value.trim() || 'みんな',
+        benefits: document.getElementById('benefits').value.split('\n').filter(function(b){return b.trim();}),
+        url: document.getElementById('affiliateUrl').value.trim()
+    };
+}
 function generateAllPosts(d, salesFocus) {
     var out = document.getElementById('generatorOutput');
     out.innerHTML = '';
